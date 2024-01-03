@@ -1,37 +1,34 @@
 ﻿using _3._Scripts.FSM.Base;
+using UnityEngine;
 
 namespace _3._Scripts.Game.AI.FSM.States
 {
     public class BotRunState : State
     {
-        private readonly AINavMeshAgent _navMeshAgent;
+        private Transform _transform;
 
-        public BotRunState(AINavMeshAgent navMeshAgent)
+        public BotRunState(Transform transform)
         {
-            _navMeshAgent = navMeshAgent;
+            _transform = transform;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            var pos = _navMeshAgent.GetRandomTargetPosition(5, 25, 5, 25);
-            _navMeshAgent.Start(pos);
         }
 
         public override void Update()
         {
-            _navMeshAgent.OnMove();
+            _transform.position = Vector3.MoveTowards(_transform.position, _transform.forward, 1 * Time.deltaTime);
         }
 
         public override void FixedUpdate()
         {
-            
         }
 
         public override void OnExit()
         {
             base.OnExit();
-            _navMeshAgent.Stop();
         }
     }
 }
