@@ -8,68 +8,60 @@ using UnityEngine;
 
 namespace ToonyColorsPro
 {
-	namespace Demo
-	{
-		[ExecuteInEditMode]
-		public class TCP2_Demo_GammaLinear : MonoBehaviour
-		{
-			[Serializable]
-			public class LightSettings
-			{
-				public Light light;
-				public float gammaIntensity;
-				public float linearIntensity;
-			}
+    namespace Demo
+    {
+        [ExecuteInEditMode]
+        public class TCP2_Demo_GammaLinear : MonoBehaviour
+        {
+            public LightSettings[] lights;
+            public MaterialSettings[] materials;
+            private ColorSpace lastColorSpace;
 
-			[Serializable]
-			public class MaterialSettings
-			{
-				public Material material;
-				public Color gammaColor;
-				public Color linearColor;
-			}
+            [Serializable]
+            public class LightSettings
+            {
+                public Light light;
+                public float gammaIntensity;
+                public float linearIntensity;
+            }
 
-			public LightSettings[] lights;
-			public MaterialSettings[] materials;
-			ColorSpace lastColorSpace;
+            [Serializable]
+            public class MaterialSettings
+            {
+                public Material material;
+                public Color gammaColor;
+                public Color linearColor;
+            }
 
 #if UNITY_EDITOR
-			void Awake()
-			{
-				lastColorSpace = QualitySettings.activeColorSpace;
-				UpdateLighting();
-			}
+            private void Awake()
+            {
+                lastColorSpace = QualitySettings.activeColorSpace;
+                UpdateLighting();
+            }
 
-			void Update()
-			{
-				if (lastColorSpace != QualitySettings.activeColorSpace)
-				{
-					lastColorSpace = QualitySettings.activeColorSpace;
-					UpdateLighting();
-				}
-			}
+            private void Update()
+            {
+                if (lastColorSpace != QualitySettings.activeColorSpace)
+                {
+                    lastColorSpace = QualitySettings.activeColorSpace;
+                    UpdateLighting();
+                }
+            }
 
-			void UpdateLighting()
-			{
-				var isLinear = (QualitySettings.activeColorSpace == ColorSpace.Linear);
+            private void UpdateLighting()
+            {
+                var isLinear = QualitySettings.activeColorSpace == ColorSpace.Linear;
 
-				if (lights != null)
-				{
-					foreach (var ls in lights)
-					{
-						ls.light.intensity = isLinear ? ls.linearIntensity : ls.gammaIntensity;
-					}
-				}
+                if (lights != null)
+                    foreach (var ls in lights)
+                        ls.light.intensity = isLinear ? ls.linearIntensity : ls.gammaIntensity;
 
-				if (lights != null)
-				{
-					foreach (var mat in materials)
-					{
-						mat.material.color = isLinear ? mat.linearColor : mat.gammaColor;
-					}
-				}
-			}
+                if (lights != null)
+                    foreach (var mat in materials)
+                        mat.material.color = isLinear ? mat.linearColor : mat.gammaColor;
+            }
 #endif
-		}
-	}
+        }
+    }
 }

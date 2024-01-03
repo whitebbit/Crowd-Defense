@@ -1154,8 +1154,9 @@
         </member>
         <member name="T:DG.DemiEditor.DeScrollView">
             <summary>
-                Returns by<see
-                    cref="M:DG.DemiEditor.DeGUI.BeginScrollView(UnityEngine.Rect,DG.DemiEditor.DeScrollView,System.Boolean)"/>
+                Returns by
+                <see
+                        cref="M:DG.DemiEditor.DeGUI.BeginScrollView(UnityEngine.Rect,DG.DemiEditor.DeScrollView,System.Boolean)"/>
                 .
                 Contains properties and methods to manage non-layout scrollview better.
                 <para/>

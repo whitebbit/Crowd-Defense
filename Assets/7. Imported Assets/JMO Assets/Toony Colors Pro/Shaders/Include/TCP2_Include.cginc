@@ -2,93 +2,95 @@
 // (c) 2014-2019 Jean Moreno
 
 #ifndef TOONYCOLORS_INCLUDED
-	#define TOONYCOLORS_INCLUDED
-	
-	#if TCP2_RAMPTEXT
-		//Lighting Ramp
-		sampler2D _Ramp;
-	#else
+#define TOONYCOLORS_INCLUDED
+
+#if TCP2_RAMPTEXT
+//Lighting Ramp
+sampler2D _Ramp;
+#else
 		float _RampThreshold;
 		float _RampSmooth;
-	#endif
-	
-	#if TCP2_SPEC_TOON
-		fixed _SpecSmooth;
-	#endif
-	
-	//Highlight/Shadow Colors
-	fixed4 _HColor;
-	fixed4 _SColor;
-	
+#endif
+
+#if TCP2_SPEC_TOON
+fixed _SpecSmooth;
+#endif
+
+//Highlight/Shadow Colors
+fixed4 _HColor;
+fixed4 _SColor;
+
 #endif
 
 //================================================================================================================================
 // FORWARD PATH
 //--------------------------------------------------------------------------------------------------------------------------------
 // TOONY COLORS -- REGULAR
-inline half4 LightingToonyColors (SurfaceOutput s, half3 lightDir, half atten)
+inline half4 LightingToonyColors(SurfaceOutput s, half3 lightDir, half atten)
 {
-#if TCP2_DISABLE_WRAPPED_LIGHT
-	fixed ndl = max(0, dot(s.Normal, lightDir));
-#else
+    #if TCP2_DISABLE_WRAPPED_LIGHT
+    fixed ndl = max(0, dot(s.Normal, lightDir));
+    #else
 	fixed ndl = max(0, dot(s.Normal, lightDir)*0.5 + 0.5);
-#endif
-#if TCP2_RAMPTEXT
-	fixed3 ramp = tex2D(_Ramp, fixed2(ndl,ndl));
-#else
+    #endif
+    #if TCP2_RAMPTEXT
+    fixed3 ramp = tex2D(_Ramp, fixed2(ndl, ndl));
+    #else
 	fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, ndl);
-#endif
-#if !(POINT) && !(SPOT)
-	ramp *= atten;
-#endif
-	_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
-	ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
-	fixed4 c;
-	c.rgb = s.Albedo * _LightColor0.rgb * ramp;
-#if (POINT || SPOT)
+    #endif
+    #if !(POINT) && !(SPOT)
+    ramp *= atten;
+    #endif
+    _SColor = lerp(_HColor, _SColor, _SColor.a); //Shadows intensity through alpha
+    ramp = lerp(_SColor.rgb, _HColor.rgb, ramp);
+    fixed4 c;
+    c.rgb = s.Albedo * _LightColor0.rgb * ramp;
+    #if (POINT || SPOT)
 	c.rgb *= atten;
-#endif
-	c.a = s.Alpha;
-	return c;
+    #endif
+    c.a = s.Alpha;
+    return c;
 }
+
 //--------------------------------------------------------------------------------------------------------------------------------
 // TOONY COLORS -- REGULAR + SPECULAR
-inline half4 LightingToonyColorsSpec (SurfaceOutput s, half3 lightDir, half3 viewDir, half atten)
+inline half4 LightingToonyColorsSpec(SurfaceOutput s, half3 lightDir, half3 viewDir, half atten)
 {
-	s.Normal = normalize(s.Normal);
-#if TCP2_DISABLE_WRAPPED_LIGHT
-	fixed ndl = max(0, dot(s.Normal, lightDir));
-#else
+    s.Normal = normalize(s.Normal);
+    #if TCP2_DISABLE_WRAPPED_LIGHT
+    fixed ndl = max(0, dot(s.Normal, lightDir));
+    #else
 	fixed ndl = max(0, dot(s.Normal, lightDir)*0.5 + 0.5);
-#endif
-#if TCP2_RAMPTEXT
-	fixed3 ramp = tex2D(_Ramp, fixed2(ndl,ndl));
-#else
+    #endif
+    #if TCP2_RAMPTEXT
+    fixed3 ramp = tex2D(_Ramp, fixed2(ndl, ndl));
+    #else
 	fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, ndl);
-#endif
-#if !(POINT) && !(SPOT)
-	ramp *= atten;
-#endif
-	_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
-	ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
-	//Specular
-	half3 h = normalize(lightDir + viewDir);
-	float ndh = max(0, dot(s.Normal, h));
-	float spec = pow(ndh, s.Specular*128.0) * s.Gloss * 2.0;
-#if TCP2_SPEC_TOON
-	spec = smoothstep(0.5-_SpecSmooth*0.5, 0.5+_SpecSmooth*0.5, spec);
-#endif
-	spec *= atten;
-	fixed4 c;
-	c.rgb = s.Albedo * _LightColor0.rgb * ramp;
-#if (POINT || SPOT)
+    #endif
+    #if !(POINT) && !(SPOT)
+    ramp *= atten;
+    #endif
+    _SColor = lerp(_HColor, _SColor, _SColor.a); //Shadows intensity through alpha
+    ramp = lerp(_SColor.rgb, _HColor.rgb, ramp);
+    //Specular
+    half3 h = normalize(lightDir + viewDir);
+    float ndh = max(0, dot(s.Normal, h));
+    float spec = pow(ndh, s.Specular * 128.0) * s.Gloss * 2.0;
+    #if TCP2_SPEC_TOON
+    spec = smoothstep(0.5 - _SpecSmooth * 0.5, 0.5 + _SpecSmooth * 0.5, spec);
+    #endif
+    spec *= atten;
+    fixed4 c;
+    c.rgb = s.Albedo * _LightColor0.rgb * ramp;
+    #if (POINT || SPOT)
 	c.rgb *= atten;
-#endif
-	c.rgb += _LightColor0.rgb * _SpecColor.rgb * spec;
-	c.a = s.Alpha + _LightColor0.a * _SpecColor.a * spec;
-	
-	return c;
+    #endif
+    c.rgb += _LightColor0.rgb * _SpecColor.rgb * spec;
+    c.a = s.Alpha + _LightColor0.a * _SpecColor.a * spec;
+
+    return c;
 }
+
 //--------------------------------------------------------------------------------------------------------------------------------
 // TOONY COLORS -- REGULAR LIGHTMAPS
 #if TCP2_LIGHTMAP
@@ -97,11 +99,11 @@ inline half4 LightingToonyColorsSpec (SurfaceOutput s, half3 lightDir, half3 vie
 		half3 lm = DecodeLightmap(color);
 		
 		float lum = Luminance(lm);
-	#if TCP2_RAMPTEXT
+#if TCP2_RAMPTEXT
 		fixed3 ramp = tex2D(_Ramp, fixed2(lum,lum));
-	#else
+#else
 		fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, lum);
-	#endif
+#endif
 		_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
 		ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
 		lm *= ramp * 2;
@@ -114,11 +116,11 @@ inline half4 LightingToonyColorsSpec (SurfaceOutput s, half3 lightDir, half3 vie
 		half3 lm = lerp(DecodeLightmap(indirectOnlyColor), DecodeLightmap(totalColor), indirectFade);
 		
 		float lum = Luminance(lm);
-	#if TCP2_RAMPTEXT
+#if TCP2_RAMPTEXT
 		fixed3 ramp = tex2D(_Ramp, fixed2(lum,lum));
-	#else
+#else
 		fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, lum);
-	#endif
+#endif
 		_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
 		ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
 		lm *= ramp * 2;
@@ -134,11 +136,11 @@ inline half4 LightingToonyColorsSpec (SurfaceOutput s, half3 lightDir, half3 vie
 		half3 lm = DirLightmapDiffuse(unity_DirBasis, color, scale, s.Normal, surfFuncWritesNormal, scalePerBasisVector);
 		
 		float lum = Luminance(lm);
-	#if TCP2_RAMPTEXT
+#if TCP2_RAMPTEXT
 		fixed3 ramp = tex2D(_Ramp, fixed2(lum,lum));
-	#else
+#else
 		fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, lum);
-	#endif
+#endif
 		_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
 		ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
 		lm *= ramp * 2;
@@ -154,11 +156,11 @@ inline half4 LightingToonyColorsSpec (SurfaceOutput s, half3 lightDir, half3 vie
 		half3 lm = DecodeLightmap(color);
 		
 		float lum = Luminance(lm);
-	#if TCP2_RAMPTEXT
+#if TCP2_RAMPTEXT
 		fixed3 ramp = tex2D(_Ramp, fixed2(lum,lum));
-	#else
+#else
 		fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, lum);
-	#endif
+#endif
 		_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
 		ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
 		lm *= ramp * 2;
@@ -171,11 +173,11 @@ inline half4 LightingToonyColorsSpec (SurfaceOutput s, half3 lightDir, half3 vie
 		half3 lm = lerp(DecodeLightmap(indirectOnlyColor), DecodeLightmap(totalColor), indirectFade);
 		
 		float lum = Luminance(lm);
-	#if TCP2_RAMPTEXT
+#if TCP2_RAMPTEXT
 		fixed3 ramp = tex2D(_Ramp, fixed2(lum,lum));
-	#else
+#else
 		fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, lum);
-	#endif
+#endif
 		_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
 		ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
 		lm *= ramp * 2;
@@ -200,11 +202,11 @@ inline half4 LightingToonyColorsSpec (SurfaceOutput s, half3 lightDir, half3 vie
 		specColor = lm * _SpecColor.rgb * s.Gloss * spec;
 		
 		float lum = Luminance(lm);
-	#if TCP2_RAMPTEXT
+#if TCP2_RAMPTEXT
 		fixed3 ramp = tex2D(_Ramp, fixed2(lum,lum));
-	#else
+#else
 		fixed3 ramp = smoothstep(_RampThreshold-_RampSmooth*0.5, _RampThreshold+_RampSmooth*0.5, lum);
-	#endif
+#endif
 		_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
 		ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
 		lm *= ramp * 2;

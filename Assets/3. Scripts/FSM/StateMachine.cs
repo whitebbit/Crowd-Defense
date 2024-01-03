@@ -10,8 +10,8 @@ namespace _3._Scripts.FSM
     public class StateMachine
     {
         private StateNode _current;
-        private Dictionary<Type, StateNode> _nodes = new();
-        private HashSet<ITransition> _anyTransitions = new();
+        private readonly Dictionary<Type, StateNode> _nodes = new();
+        private readonly HashSet<ITransition> _anyTransitions = new();
 
         public void Update()
         {
@@ -33,7 +33,7 @@ namespace _3._Scripts.FSM
             _current.State?.OnEnter();
         }
 
-        public void ChangeState(IState state)
+        private void ChangeState(IState state)
         {
             if (state == _current.State) return;
 

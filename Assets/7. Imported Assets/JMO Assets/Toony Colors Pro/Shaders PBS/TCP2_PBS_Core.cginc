@@ -11,50 +11,55 @@
 
 half4 fragForwardBaseInternal_TCP2(VertexOutputForwardBase i)
 {
-	FRAGMENT_SETUP(s)
-#if UNITY_OPTIMIZE_TEXCUBELOD
+    FRAGMENT_SETUP(s)
+    #if UNITY_OPTIMIZE_TEXCUBELOD
 		s.reflUVW = i.reflUVW;
-#endif
+    #endif
 
-#if UNITY_VERSION >= 550
-	UnityLight mainLight = MainLight();
-#else
+    #if UNITY_VERSION >= 550
+    UnityLight mainLight = MainLight();
+    #else
 	UnityLight mainLight = MainLight(s.normalWorld);
-#endif
+    #endif
 
-#if UNITY_VERSION >= 560
-	UNITY_LIGHT_ATTENUATION(atten, i, s.posWorld);
-#else
+    #if UNITY_VERSION >= 560
+    UNITY_LIGHT_ATTENUATION(atten, i, s.posWorld);
+    #else
 	half atten = SHADOW_ATTENUATION(i);
-#endif
+    #endif
 
-	half occlusion = Occlusion(i.tex.xy);
-	UnityGI gi = FragmentGI(s, occlusion, i.ambientOrLightmapUV, 1, mainLight);	//TCP2: replaced atten with 1, atten is done in BRDF now
+    half occlusion = Occlusion(i.tex.xy);
+    UnityGI gi = FragmentGI(s, occlusion, i.ambientOrLightmapUV, 1, mainLight);
+    //TCP2: replaced atten with 1, atten is done in BRDF now
 
-#if UNITY_VERSION >= 550
-	half4 c = TCP2_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec, gi.light, gi.indirect,
-		/* TCP2 Params */	_RampThreshold, _RampSmooth, _HColor, _SColor, _SpecSmooth, _SpecBlend, fixed3(_RimMin, _RimMax, _RimStrength), atten);
-	c.rgb += UNITY_BRDF_GI(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec, occlusion, gi);
-#else
+    #if UNITY_VERSION >= 550
+    half4 c = TCP2_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec,
+                            gi.light, gi.indirect,
+                            /* TCP2 Params */ _RampThreshold, _RampSmooth, _HColor, _SColor, _SpecSmooth, _SpecBlend,
+                            fixed3(_RimMin, _RimMax, _RimStrength), atten);
+    c.rgb += UNITY_BRDF_GI(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec,
+                           occlusion, gi);
+    #else
 	half4 c = TCP2_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.oneMinusRoughness, s.normalWorld, -s.eyeVec, gi.light, gi.indirect,
 		/* TCP2 Params */	_RampThreshold, _RampSmooth, _HColor, _SColor, _SpecSmooth, _SpecBlend, fixed3(_RimMin, _RimMax, _RimStrength), atten);
 	c.rgb += UNITY_BRDF_GI(s.diffColor, s.specColor, s.oneMinusReflectivity, s.oneMinusRoughness, s.normalWorld, -s.eyeVec, occlusion, gi);
-#endif
-	c.rgb += Emission(i.tex.xy);
+    #endif
+    c.rgb += Emission(i.tex.xy);
 
-#if UNITY_VERSION >= 201820
+    #if UNITY_VERSION >= 201820
     UNITY_EXTRACT_FOG_FROM_EYE_VEC(i);
     UNITY_APPLY_FOG(_unity_fogCoord, c.rgb);
-#else
+    #else
 	UNITY_APPLY_FOG(i.fogCoord, c.rgb);
-#endif
+    #endif
 
-	return OutputForward(c, s.alpha);
+    return OutputForward(c, s.alpha);
 }
 
-half4 fragForwardBase_TCP2(VertexOutputForwardBase i) : SV_Target	// backward compatibility (this used to be the fragment entry function)
+half4 fragForwardBase_TCP2(VertexOutputForwardBase i) : SV_Target
+// backward compatibility (this used to be the fragment entry function)
 {
-	return fragForwardBaseInternal(i);
+    return fragForwardBaseInternal(i);
 }
 
 // ------------------------------------------------------------------
@@ -64,39 +69,42 @@ half4 fragForwardBase_TCP2(VertexOutputForwardBase i) : SV_Target	// backward co
 
 half4 fragForwardAddInternal_TCP2(VertexOutputForwardAdd i)
 {
-	FRAGMENT_SETUP_FWDADD(s)
+    FRAGMENT_SETUP_FWDADD(s)
 
-#if UNITY_VERSION >= 560
-	UNITY_LIGHT_ATTENUATION(atten, i, s.posWorld)
-	UnityLight light = AdditiveLight(IN_LIGHTDIR_FWDADD(i), atten);
-#elif UNITY_VERSION >= 550
+    #if UNITY_VERSION >= 560
+    UNITY_LIGHT_ATTENUATION(atten, i, s.posWorld)
+    UnityLight light = AdditiveLight(IN_LIGHTDIR_FWDADD(i), atten);
+    #elif UNITY_VERSION >= 550
 	UnityLight light = AdditiveLight(IN_LIGHTDIR_FWDADD(i), LIGHT_ATTENUATION(i));
-#else
+    #else
 	UnityLight light = AdditiveLight(s.normalWorld, IN_LIGHTDIR_FWDADD(i), LIGHT_ATTENUATION(i));
-#endif
-	UnityIndirect noIndirect = ZeroIndirect();
+    #endif
+    UnityIndirect noIndirect = ZeroIndirect();
 
-#if UNITY_VERSION >= 550
-	half4 c = TCP2_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec, light, noIndirect,
-		/* TCP2 Params */	_RampThreshold, _RampSmoothAdd, _HColor, _SColor, _SpecSmooth, _SpecBlend, fixed3(_RimMin, _RimMax, _RimStrength), 1);
-#else
+    #if UNITY_VERSION >= 550
+    half4 c = TCP2_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec,
+                            light, noIndirect,
+                            /* TCP2 Params */ _RampThreshold, _RampSmoothAdd, _HColor, _SColor, _SpecSmooth, _SpecBlend,
+                            fixed3(_RimMin, _RimMax, _RimStrength), 1);
+    #else
 	half4 c = TCP2_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.oneMinusRoughness, s.normalWorld, -s.eyeVec, light, noIndirect,	
 		/* TCP2 Params */	_RampThreshold, _RampSmoothAdd, _HColor, _SColor, _SpecSmooth, _SpecBlend, fixed3(_RimMin, _RimMax, _RimStrength), 1);
-#endif
+    #endif
 
-#if UNITY_VERSION >= 201820
+    #if UNITY_VERSION >= 201820
     UNITY_EXTRACT_FOG_FROM_EYE_VEC(i);
     UNITY_APPLY_FOG_COLOR(_unity_fogCoord, c.rgb, half4(0,0,0,0)); // fog towards black in additive pass
-#else
+    #else
     UNITY_APPLY_FOG_COLOR(i.fogCoord, c.rgb, half4(0, 0, 0, 0)); // fog towards black in additive pass
-#endif
+    #endif
 
-	return OutputForward(c, s.alpha);
+    return OutputForward(c, s.alpha);
 }
 
-half4 fragForwardAdd_TCP2(VertexOutputForwardAdd i) : SV_Target		// backward compatibility (this used to be the fragment entry function)
+half4 fragForwardAdd_TCP2(VertexOutputForwardAdd i) : SV_Target
+// backward compatibility (this used to be the fragment entry function)
 {
-	return fragForwardAddInternal(i);
+    return fragForwardAddInternal(i);
 }
 
 // ------------------------------------------------------------------

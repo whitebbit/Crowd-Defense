@@ -5,7 +5,7 @@ namespace _3._Scripts.Game.AI.FSM.States
 {
     public class BotRunState : State
     {
-        private Transform _transform;
+        private readonly Transform _transform;
 
         public BotRunState(Transform transform)
         {
@@ -19,7 +19,7 @@ namespace _3._Scripts.Game.AI.FSM.States
 
         public override void Update()
         {
-            _transform.position = Vector3.MoveTowards(_transform.position, _transform.forward, 1 * Time.deltaTime);
+            _transform.position = Vector3.MoveTowards(_transform.position, _transform.forward * 50, 1 * Time.deltaTime);
         }
 
         public override void FixedUpdate()

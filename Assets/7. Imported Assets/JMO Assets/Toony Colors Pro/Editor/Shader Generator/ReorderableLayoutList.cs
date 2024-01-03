@@ -5,304 +5,273 @@ using UnityEngine;
 
 public class ReorderableLayoutList
 {
-	const float DRAG_WIDTH = 20;
+    public delegate void NeedRepaint();
 
-	int bufferedDraggedElement = -1;
-	int draggedElement = -1;
-	Vector2 mouseDragOrigin;
-	float mouseDragOffset;
-	Rect[] elementRects;
+    private const float DRAG_WIDTH = 20;
+    private const float kSwappedElementDuration = 0.2f;
+    private static GUIStyle _dragHandle;
+    private static readonly int hash_dragHandle = "RL DragHandle".GetHashCode();
 
-	float yOffset;
-	float lastSwappedHeight;    //last swapped element height
-	float draggedHeight;        //currently dragged element height
+    private int bufferedDraggedElement = -1;
+    private int draggedElement = -1;
+    private float draggedHeight; //currently dragged element height
+    private Rect[] elementRects;
+    private float lastSwappedHeight; //last swapped element height
+    private float mouseDragOffset;
+    private Vector2 mouseDragOrigin;
 
-	int swappedElementAnimation = -1;
-	float swappedElementPosOffset = 0f;
-	float swappedElementOffset = 0f;
-	float swappedElementAnimationTime = 0f;
-	const float kSwappedElementDuration = 0.2f;
-	bool pendingReorderChange;
+    private Vector2 mousePosition;
+    private bool pendingReorderChange;
 
-	public delegate void NeedRepaint();
-	public static event NeedRepaint OnNeedRepaint;
+    private int swappedElementAnimation = -1;
+    private float swappedElementAnimationTime;
+    private float swappedElementOffset;
+    private float swappedElementPosOffset;
 
-	private static void Repaint()
-	{
-		if(OnNeedRepaint != null)
-			OnNeedRepaint();
-	}
+    private float yOffset;
 
-	public bool DoLayoutList(Action<int, float> DrawElement, IList list, float dragWidth = DRAG_WIDTH)
-	{
-		return DoLayoutList(DrawElement, list, new RectOffset(0, 0, 0, 0), dragWidth);
-	}
+    private static GUIStyle dragHandle
+    {
+        get
+        {
+            if (_dragHandle == null) _dragHandle = "RL DragHandle";
+            return _dragHandle;
+        }
+    }
 
-	Vector2 mousePosition;
-	static GUIStyle _dragHandle;
-	static GUIStyle dragHandle
-	{
-		get
-		{
-			if(_dragHandle == null)
-			{
-				_dragHandle = "RL DragHandle";
-			}
-			return _dragHandle;
-		}
-	}
-	static readonly int hash_dragHandle = "RL DragHandle".GetHashCode();
+    public static event NeedRepaint OnNeedRepaint;
 
-	// Returns 'true' when elements have been reordered
-	public bool DoLayoutList(Action<int, float> DrawElement, IList list, RectOffset padding, float dragWidth = DRAG_WIDTH)
-	{
-		bool canBeDragged = list != null && list.Count > 1;
+    private static void Repaint()
+    {
+        if (OnNeedRepaint != null)
+            OnNeedRepaint();
+    }
 
-		if(Event.current.type != EventType.Layout)
-			mousePosition = Event.current.mousePosition;
+    public bool DoLayoutList(Action<int, float> DrawElement, IList list, float dragWidth = DRAG_WIDTH)
+    {
+        return DoLayoutList(DrawElement, list, new RectOffset(0, 0, 0, 0), dragWidth);
+    }
 
-		var guiColor = GUI.color;
+    // Returns 'true' when elements have been reordered
+    public bool DoLayoutList(Action<int, float> DrawElement, IList list, RectOffset padding,
+        float dragWidth = DRAG_WIDTH)
+    {
+        var canBeDragged = list != null && list.Count > 1;
 
-		if(elementRects == null || elementRects.Length != list.Count)
-		{
-			elementRects = new Rect[list.Count];
-		}
+        if (Event.current.type != EventType.Layout)
+            mousePosition = Event.current.mousePosition;
 
-		//lambda function so that we can reorder drawing when one is selected
-		Action<int> DrawListItem = i =>
-		{
-			float mouseDelta = 0;
+        var guiColor = GUI.color;
 
-			if(draggedElement == i)
-			{
-				//offset ui drawing based on mouse delta
-				mouseDelta = mouseDragOrigin.y + mouseDragOffset - mousePosition.y;
+        if (elementRects == null || elementRects.Length != list.Count) elementRects = new Rect[list.Count];
 
-				//block at the top/bottom of the ui
-				float yMax = mouseDragOffset;
-				float yMin = 0;
-				for(var j = 0; j < list.Count; j++)
-				{
-					if(j < i)
-						yMax += elementRects[j].height;
-					else if(j > i)
-						yMin -= elementRects[j].height;
-				}
-				mouseDelta = Mathf.Clamp(mouseDelta, yMin, yMax);
+        //lambda function so that we can reorder drawing when one is selected
+        Action<int> DrawListItem = i =>
+        {
+            float mouseDelta = 0;
 
-				//negative space to offset the ui freely
-				GUILayout.Space(-mouseDelta);
-			}
-			else if(swappedElementAnimation == i)
-			{
-				//swapped element animation: slide towards target position
-				float delta = Mathf.Clamp01((Time.realtimeSinceStartup - swappedElementAnimationTime) / kSwappedElementDuration);
-				//simple easing animation (ease out quad)
-				System.Func<float, float> animationEasing = (x) => { return -1f * x * (x-2); };
-				swappedElementOffset = Mathf.Lerp(swappedElementPosOffset, 0, animationEasing(delta));
-				GUILayout.Space(-swappedElementOffset);
-			}
+            if (draggedElement == i)
+            {
+                //offset ui drawing based on mouse delta
+                mouseDelta = mouseDragOrigin.y + mouseDragOffset - mousePosition.y;
 
-			//get dragging rect
-			var dragRect = EditorGUILayout.BeginVertical();
-			{
-				if (draggedElement == i)
-				{
-					var c = EditorGUIUtility.isProSkin ? 0.2f : 0.75f;
-					GUI.color *=  new Color(c, c, c, 0.85f);
-					EditorGUI.DrawRect(dragRect, Color.white);
-					GUI.color = guiColor;
-				}
+                //block at the top/bottom of the ui
+                var yMax = mouseDragOffset;
+                float yMin = 0;
+                for (var j = 0; j < list.Count; j++)
+                    if (j < i)
+                        yMax += elementRects[j].height;
+                    else if (j > i)
+                        yMin -= elementRects[j].height;
+                mouseDelta = Mathf.Clamp(mouseDelta, yMin, yMax);
 
-				//build array of draggable rectangle zones
-				if (draggedElement < 0 && Event.current.type == EventType.Repaint)
-				{
-					elementRects[i] = dragRect;
-				}
+                //negative space to offset the ui freely
+                GUILayout.Space(-mouseDelta);
+            }
+            else if (swappedElementAnimation == i)
+            {
+                //swapped element animation: slide towards target position
+                var delta = Mathf.Clamp01((Time.realtimeSinceStartup - swappedElementAnimationTime) /
+                                          kSwappedElementDuration);
+                //simple easing animation (ease out quad)
+                Func<float, float> animationEasing = x => { return -1f * x * (x - 2); };
+                swappedElementOffset = Mathf.Lerp(swappedElementPosOffset, 0, animationEasing(delta));
+                GUILayout.Space(-swappedElementOffset);
+            }
 
-				dragRect.xMin += padding.left;
-				dragRect.width = dragWidth - 2;
-				dragRect.xMax -= padding.right;
-				dragRect.yMin += padding.top;
-				dragRect.yMax -= padding.bottom;
+            //get dragging rect
+            var dragRect = EditorGUILayout.BeginVertical();
+            {
+                if (draggedElement == i)
+                {
+                    var c = EditorGUIUtility.isProSkin ? 0.2f : 0.75f;
+                    GUI.color *= new Color(c, c, c, 0.85f);
+                    EditorGUI.DrawRect(dragRect, Color.white);
+                    GUI.color = guiColor;
+                }
 
-				//dragging zone UI
-				var drawRect = dragRect;
-				drawRect.yMin += 7;
-				drawRect.yMax -= 4;
+                //build array of draggable rectangle zones
+                if (draggedElement < 0 && Event.current.type == EventType.Repaint) elementRects[i] = dragRect;
 
-				//draw drag handle icons
-				if (Event.current.type == EventType.Repaint)
-				{
-					//ui color to indicate we are dragging this implementation
-					if (!canBeDragged)
-					{
-						GUI.color *= new Color(1, 1, 1, .25f);
-					}
-					if (draggedElement == i)
-					{
-						GUI.color *= new Color(.8f, .8f, .8f);
-					}
+                dragRect.xMin += padding.left;
+                dragRect.width = dragWidth - 2;
+                dragRect.xMax -= padding.right;
+                dragRect.yMin += padding.top;
+                dragRect.yMax -= padding.bottom;
 
-					const float dragHeight = 6;
-					var count = Mathf.FloorToInt(drawRect.height / dragHeight);
-					var margin = drawRect.height - count*dragHeight;
-					for (var j = 0; j < count; j++)
-					{
-						var dragIconRect = drawRect;
-						dragIconRect.xMin += 5;
-						dragIconRect.xMax -= 5;
-						dragIconRect.height = dragHeight;
-						dragIconRect.y = drawRect.y + (j*dragHeight) + margin/2f;
-						dragHandle.Draw(dragIconRect, GUIContent.none, hash_dragHandle);
-					}
+                //dragging zone UI
+                var drawRect = dragRect;
+                drawRect.yMin += 7;
+                drawRect.yMax -= 4;
 
-					GUI.color = guiColor;
-				}
+                //draw drag handle icons
+                if (Event.current.type == EventType.Repaint)
+                {
+                    //ui color to indicate we are dragging this implementation
+                    if (!canBeDragged) GUI.color *= new Color(1, 1, 1, .25f);
+                    if (draggedElement == i) GUI.color *= new Color(.8f, .8f, .8f);
 
-				//change cursor when over drag zone
-				if (canBeDragged)
-				{
-					if (draggedElement > -1)
-						EditorGUIUtility.AddCursorRect(dragRect, MouseCursor.Pan);
-					else
-						EditorGUIUtility.AddCursorRect(dragRect, MouseCursor.MoveArrow);
-				}
+                    const float dragHeight = 6;
+                    var count = Mathf.FloorToInt(drawRect.height / dragHeight);
+                    var margin = drawRect.height - count * dragHeight;
+                    for (var j = 0; j < count; j++)
+                    {
+                        var dragIconRect = drawRect;
+                        dragIconRect.xMin += 5;
+                        dragIconRect.xMax -= 5;
+                        dragIconRect.height = dragHeight;
+                        dragIconRect.y = drawRect.y + j * dragHeight + margin / 2f;
+                        dragHandle.Draw(dragIconRect, GUIContent.none, hash_dragHandle);
+                    }
 
-				//callback to GUI drawing, including margin
-				DrawElement(i, dragWidth + 2);
-			}
-			EditorGUILayout.EndVertical();
+                    GUI.color = guiColor;
+                }
 
-			//listen to mouse drag events
-			if (canBeDragged)
-			{
-				if (Event.current.type == EventType.MouseDown && dragRect.Contains(mousePosition))
-				{
-					bufferedDraggedElement = i;
-					mouseDragOrigin = mousePosition;
-					lastSwappedHeight = elementRects[i].height;
-					draggedHeight = elementRects[i].height;
-					GUIUtility.keyboardControl = 0;
-					GUIUtility.hotControl = 0;
-					Repaint();
-				}
-			}
+                //change cursor when over drag zone
+                if (canBeDragged)
+                {
+                    if (draggedElement > -1)
+                        EditorGUIUtility.AddCursorRect(dragRect, MouseCursor.Pan);
+                    else
+                        EditorGUIUtility.AddCursorRect(dragRect, MouseCursor.MoveArrow);
+                }
 
-			if(draggedElement == i)
-			{
-				//compensate offset
-				GUILayout.Space(mouseDelta);
-			}
-			else if(swappedElementAnimation == i)
-			{
-				//swapped element animation: slide towards target position
-				GUILayout.Space(swappedElementOffset);
-				Repaint();
-			}
-		};
+                //callback to GUI drawing, including margin
+                DrawElement(i, dragWidth + 2);
+            }
+            EditorGUILayout.EndVertical();
 
-		// catch stop dragging events now before they could be used
-		bool stopDrag = false;
-		if (Event.current.type == EventType.MouseUp || Event.current.rawType == EventType.MouseUp)
-		{
-			stopDrag = true;
-		}
+            //listen to mouse drag events
+            if (canBeDragged)
+                if (Event.current.type == EventType.MouseDown && dragRect.Contains(mousePosition))
+                {
+                    bufferedDraggedElement = i;
+                    mouseDragOrigin = mousePosition;
+                    lastSwappedHeight = elementRects[i].height;
+                    draggedHeight = elementRects[i].height;
+                    GUIUtility.keyboardControl = 0;
+                    GUIUtility.hotControl = 0;
+                    Repaint();
+                }
 
-		for (var i = 0; i < list.Count; i++)
-		{
-			if(draggedElement == i)
-			{
-				//leave space for dragged imp: will be drawn last
-				GUILayout.Space(draggedHeight);
-				if (Event.current.type == EventType.Layout)
-				{
-					yOffset = 0;
-				}
-			}
-			else
-			{
-				DrawListItem(i);
+            if (draggedElement == i)
+            {
+                //compensate offset
+                GUILayout.Space(mouseDelta);
+            }
+            else if (swappedElementAnimation == i)
+            {
+                //swapped element animation: slide towards target position
+                GUILayout.Space(swappedElementOffset);
+                Repaint();
+            }
+        };
 
-				if (Event.current.type == EventType.Layout)
-				{
-					yOffset += elementRects[i].height;
-				}
-			}
-		}
+        // catch stop dragging events now before they could be used
+        var stopDrag = false;
+        if (Event.current.type == EventType.MouseUp || Event.current.rawType == EventType.MouseUp) stopDrag = true;
 
-		//draw the dragged imp last so that it is in front of the other ones
-		if(draggedElement > -1)
-		{
-			GUILayout.Space(-(yOffset + draggedHeight));
-			DrawListItem(draggedElement);
-			GUILayout.Space(yOffset);
-		}
+        for (var i = 0; i < list.Count; i++)
+            if (draggedElement == i)
+            {
+                //leave space for dragged imp: will be drawn last
+                GUILayout.Space(draggedHeight);
+                if (Event.current.type == EventType.Layout) yOffset = 0;
+            }
+            else
+            {
+                DrawListItem(i);
 
-		//need to apply the dragged imp after the loop to prevent gui layout mismatch errors
-		if(Event.current.isMouse)
-		{
-			draggedElement = bufferedDraggedElement;
-		}
+                if (Event.current.type == EventType.Layout) yOffset += elementRects[i].height;
+            }
 
-		//mouse drag event: swap the implementations if mouse is inside a particular imp rect
-		if(draggedElement > -1 && Event.current.type == EventType.MouseDrag)
-		{
-			//repaint window
-			Repaint();
+        //draw the dragged imp last so that it is in front of the other ones
+        if (draggedElement > -1)
+        {
+            GUILayout.Space(-(yOffset + draggedHeight));
+            DrawListItem(draggedElement);
+            GUILayout.Space(yOffset);
+        }
 
-			for(var i = 0; i < elementRects.Length; i++)
-			{
-				if(elementRects[i].Contains(mousePosition) && draggedElement != i)
-				{
-					//swap the list items
-					var tmp = list[i];
-					list[i] = list[draggedElement];
-					list[draggedElement] = tmp;
+        //need to apply the dragged imp after the loop to prevent gui layout mismatch errors
+        if (Event.current.isMouse) draggedElement = bufferedDraggedElement;
 
-					//compensate y diff for mouseOrigin
-					var diff = elementRects[i].y - elementRects[draggedElement].y;
-					mouseDragOrigin.y += diff;
+        //mouse drag event: swap the implementations if mouse is inside a particular imp rect
+        if (draggedElement > -1 && Event.current.type == EventType.MouseDrag)
+        {
+            //repaint window
+            Repaint();
 
-					//compensate size difference between swapped implementations
-					var heightDiff = lastSwappedHeight - elementRects[i].height;
-					lastSwappedHeight = elementRects[i].height;
-					mouseDragOffset -= heightDiff;
+            for (var i = 0; i < elementRects.Length; i++)
+                if (elementRects[i].Contains(mousePosition) && draggedElement != i)
+                {
+                    //swap the list items
+                    var tmp = list[i];
+                    list[i] = list[draggedElement];
+                    list[draggedElement] = tmp;
 
-					//set the animated swapped element
-					swappedElementAnimation = draggedElement;
-					swappedElementAnimationTime = Time.realtimeSinceStartup;
-					//going up
-					if((draggedElement > i))
-						swappedElementPosOffset = -mouseDragOffset - diff;
-					//going down
-					else
-						swappedElementPosOffset = mouseDragOffset - elementRects[i].height;
+                    //compensate y diff for mouseOrigin
+                    var diff = elementRects[i].y - elementRects[draggedElement].y;
+                    mouseDragOrigin.y += diff;
 
-					//swap current dragged imp
-					bufferedDraggedElement = i;
-					draggedElement = i;
+                    //compensate size difference between swapped implementations
+                    var heightDiff = lastSwappedHeight - elementRects[i].height;
+                    lastSwappedHeight = elementRects[i].height;
+                    mouseDragOffset -= heightDiff;
 
-					pendingReorderChange = true;
-				}
-			}
-		}
+                    //set the animated swapped element
+                    swappedElementAnimation = draggedElement;
+                    swappedElementAnimationTime = Time.realtimeSinceStartup;
+                    //going up
+                    if (draggedElement > i)
+                        swappedElementPosOffset = -mouseDragOffset - diff;
+                    //going down
+                    else
+                        swappedElementPosOffset = mouseDragOffset - elementRects[i].height;
 
-		// stop dragging : needs to be at the end to prevent GUI mismatch errors
-		if(stopDrag)
-		{
-			bufferedDraggedElement = -1;
-			draggedElement = -1;
-			mouseDragOffset = 0f;
-			Repaint();
+                    //swap current dragged imp
+                    bufferedDraggedElement = i;
+                    draggedElement = i;
 
-			if(pendingReorderChange)
-			{
-				pendingReorderChange = false;
-				return true;
-			}
-		}
+                    pendingReorderChange = true;
+                }
+        }
 
-		return false;
-	}
+        // stop dragging : needs to be at the end to prevent GUI mismatch errors
+        if (stopDrag)
+        {
+            bufferedDraggedElement = -1;
+            draggedElement = -1;
+            mouseDragOffset = 0f;
+            Repaint();
+
+            if (pendingReorderChange)
+            {
+                pendingReorderChange = false;
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

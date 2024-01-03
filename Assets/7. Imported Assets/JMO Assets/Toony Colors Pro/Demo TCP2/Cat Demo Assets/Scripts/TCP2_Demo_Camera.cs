@@ -5,153 +5,155 @@ using UnityEngine;
 
 namespace ToonyColorsPro
 {
-	namespace Demo
-	{
-		public class TCP2_Demo_Camera : MonoBehaviour
-		{
-			//--------------------------------------------------------------------------------------------------
-			// PUBLIC INSPECTOR PROPERTIES
+    namespace Demo
+    {
+        public class TCP2_Demo_Camera : MonoBehaviour
+        {
+            private const float XMax = 60;
 
-			public Transform Pivot;
-			[Header("Orbit")]
-			public float OrbitStrg = 3f;
-			public float OrbitClamp = 50f;
-			[Header("Panning")]
-			public float PanStrgMin = 0.1f;
-			public float PanStrgMax = 0.5f;
-			[Header("Zooming")]
-			public float ZoomStrg = 40f;
-			public float ZoomClamp = 30f;
-			public float ZoomDistMin = 1f;
-			public float ZoomDistMax = 2f;
-			[Header("Misc")]
-			public float Decceleration = 8f;
-			public RectTransform ignoreMouseRect;
+            private const float XMin = 300;
+            //--------------------------------------------------------------------------------------------------
+            // PUBLIC INSPECTOR PROPERTIES
 
-			//--------------------------------------------------------------------------------------------------
-			// PRIVATE PROPERTIES
+            public Transform Pivot;
 
-			private Vector3 mouseDelta;
-			private Vector3 orbitAcceleration;
-			private Vector3 panAcceleration;
-			private Vector3 moveAcceleration;
-			private float zoomAcceleration;
-			private float zoomDistance;
-			private const float XMax = 60;
-			private const float XMin = 300;
+            [Header("Orbit")] public float OrbitStrg = 3f;
 
-			private Vector3 mResetCamPos, mResetPivotPos, mResetCamRot, mResetPivotRot;
+            public float OrbitClamp = 50f;
 
-			bool leftMouseHeld;
-			bool rightMouseHeld;
-			bool middleMouseHeld;
+            [Header("Panning")] public float PanStrgMin = 0.1f;
 
-			//--------------------------------------------------------------------------------------------------
-			// UNITY EVENTS
+            public float PanStrgMax = 0.5f;
 
-			void Awake()
-			{
-				mResetCamPos = transform.position;
-				mResetCamRot = transform.eulerAngles;
-				mResetPivotPos = Pivot.position;
-				mResetPivotRot = Pivot.eulerAngles;
-			}
+            [Header("Zooming")] public float ZoomStrg = 40f;
 
-			void OnEnable()
-			{
-				mouseDelta = Input.mousePosition;
-			}
+            public float ZoomClamp = 30f;
+            public float ZoomDistMin = 1f;
+            public float ZoomDistMax = 2f;
 
-			void Update()
-			{
-				mouseDelta = Input.mousePosition - mouseDelta;
-				mouseDelta.x = Mathf.Clamp(mouseDelta.x, -150f, 150f);
-				mouseDelta.y = Mathf.Clamp(mouseDelta.y, -150f, 150f);
+            [Header("Misc")] public float Decceleration = 8f;
 
-				var ignoreMouse = ignoreMouseRect.rect.Contains(Input.mousePosition);
+            public RectTransform ignoreMouseRect;
 
-				if (Input.GetMouseButtonDown(0))
-					leftMouseHeld = !ignoreMouse;
-				else if (Input.GetMouseButtonUp(0) || !Input.GetMouseButton(0))
-					leftMouseHeld = false;
+            private bool leftMouseHeld;
+            private bool middleMouseHeld;
 
-				if (Input.GetMouseButtonDown(1))
-					rightMouseHeld = !ignoreMouse;
-				else if (Input.GetMouseButtonUp(1) || !Input.GetMouseButton(1))
-					rightMouseHeld = false;
+            //--------------------------------------------------------------------------------------------------
+            // PRIVATE PROPERTIES
 
-				if (Input.GetMouseButtonDown(2))
-					middleMouseHeld = !ignoreMouse;
-				else if (Input.GetMouseButtonUp(2) || !Input.GetMouseButton(2))
-					middleMouseHeld = false;
+            private Vector3 mouseDelta;
+            private Vector3 moveAcceleration;
 
-				//Left Button held
-				if (leftMouseHeld)
-				{
-					orbitAcceleration.x += Mathf.Clamp(mouseDelta.x * OrbitStrg, -OrbitClamp, OrbitClamp);
-					orbitAcceleration.y += Mathf.Clamp(-mouseDelta.y * OrbitStrg, -OrbitClamp, OrbitClamp);
-				}
-				//Middle/Right Button held
-				else if (middleMouseHeld || rightMouseHeld)
-				{
-					var str = Mathf.Lerp(PanStrgMin, PanStrgMax, Mathf.Clamp01((zoomDistance-ZoomDistMin)/(ZoomDistMax-ZoomDistMin)));
-					panAcceleration.x = -mouseDelta.x * str;
-					panAcceleration.y = -mouseDelta.y * str;
-				}
+            private Vector3 mResetCamPos, mResetPivotPos, mResetCamRot, mResetPivotRot;
+            private Vector3 orbitAcceleration;
+            private Vector3 panAcceleration;
+            private bool rightMouseHeld;
+            private float zoomAcceleration;
+            private float zoomDistance;
 
-				//Keyboard support
-				//orbitAcceleration.x += Input.GetKey(KeyCode.LeftArrow) ? 15 : (Input.GetKey(KeyCode.RightArrow) ? -15 : 0);
-				//orbitAcceleration.y += Input.GetKey(KeyCode.UpArrow) ? 15 : (Input.GetKey(KeyCode.DownArrow) ? -15 : 0);
+            //--------------------------------------------------------------------------------------------------
+            // UNITY EVENTS
 
-				if (Input.GetKeyDown(KeyCode.R))
-				{
-					ResetView();
-				}
+            private void Awake()
+            {
+                mResetCamPos = transform.position;
+                mResetCamRot = transform.eulerAngles;
+                mResetPivotPos = Pivot.position;
+                mResetPivotRot = Pivot.eulerAngles;
+            }
 
-				//X Angle Clamping
-				var angle = transform.localEulerAngles;
-				if (angle.x < 180 && angle.x >= XMax && orbitAcceleration.y > 0) orbitAcceleration.y = 0;
-				if (angle.x > 180 && angle.x <= XMin && orbitAcceleration.y < 0) orbitAcceleration.y = 0;
+            private void Update()
+            {
+                mouseDelta = Input.mousePosition - mouseDelta;
+                mouseDelta.x = Mathf.Clamp(mouseDelta.x, -150f, 150f);
+                mouseDelta.y = Mathf.Clamp(mouseDelta.y, -150f, 150f);
 
-				//Rotate
-				transform.RotateAround(Pivot.position, transform.right, orbitAcceleration.y * Time.deltaTime);
-				transform.RotateAround(Pivot.position, Vector3.up, orbitAcceleration.x * Time.deltaTime);
+                var ignoreMouse = ignoreMouseRect.rect.Contains(Input.mousePosition);
 
-				//Pan
-				Pivot.Translate(panAcceleration * Time.deltaTime, transform);
-				transform.Translate(panAcceleration * Time.deltaTime, transform);
+                if (Input.GetMouseButtonDown(0))
+                    leftMouseHeld = !ignoreMouse;
+                else if (Input.GetMouseButtonUp(0) || !Input.GetMouseButton(0))
+                    leftMouseHeld = false;
 
-				//Zoom
-				var scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-				zoomAcceleration += scrollWheel * ZoomStrg;
-				zoomAcceleration = Mathf.Clamp(zoomAcceleration, -ZoomClamp, ZoomClamp);
-				zoomDistance = Vector3.Distance(transform.position, Pivot.position);
-				if ((zoomDistance >= ZoomDistMin && zoomAcceleration > 0) || (zoomDistance <= ZoomDistMax && zoomAcceleration < 0))
-				{
-					transform.Translate(Vector3.forward * zoomAcceleration * Time.deltaTime, Space.Self);
-				}
+                if (Input.GetMouseButtonDown(1))
+                    rightMouseHeld = !ignoreMouse;
+                else if (Input.GetMouseButtonUp(1) || !Input.GetMouseButton(1))
+                    rightMouseHeld = false;
 
-				//Decelerate
-				orbitAcceleration = Vector3.Lerp(orbitAcceleration, Vector3.zero, Decceleration * Time.deltaTime);
-				panAcceleration = Vector3.Lerp(panAcceleration, Vector3.zero, Decceleration * Time.deltaTime);
-				zoomAcceleration = Mathf.Lerp(zoomAcceleration, 0, Decceleration * Time.deltaTime);
-				moveAcceleration = Vector3.Lerp(moveAcceleration, Vector3.zero, Decceleration * Time.deltaTime);
+                if (Input.GetMouseButtonDown(2))
+                    middleMouseHeld = !ignoreMouse;
+                else if (Input.GetMouseButtonUp(2) || !Input.GetMouseButton(2))
+                    middleMouseHeld = false;
 
-				mouseDelta = Input.mousePosition;
-			}
+                //Left Button held
+                if (leftMouseHeld)
+                {
+                    orbitAcceleration.x += Mathf.Clamp(mouseDelta.x * OrbitStrg, -OrbitClamp, OrbitClamp);
+                    orbitAcceleration.y += Mathf.Clamp(-mouseDelta.y * OrbitStrg, -OrbitClamp, OrbitClamp);
+                }
+                //Middle/Right Button held
+                else if (middleMouseHeld || rightMouseHeld)
+                {
+                    var str = Mathf.Lerp(PanStrgMin, PanStrgMax,
+                        Mathf.Clamp01((zoomDistance - ZoomDistMin) / (ZoomDistMax - ZoomDistMin)));
+                    panAcceleration.x = -mouseDelta.x * str;
+                    panAcceleration.y = -mouseDelta.y * str;
+                }
 
-			public void ResetView()
-			{
-				moveAcceleration = Vector3.zero;
-				orbitAcceleration = Vector3.zero;
-				panAcceleration = Vector3.zero;
-				zoomAcceleration = 0f;
+                //Keyboard support
+                //orbitAcceleration.x += Input.GetKey(KeyCode.LeftArrow) ? 15 : (Input.GetKey(KeyCode.RightArrow) ? -15 : 0);
+                //orbitAcceleration.y += Input.GetKey(KeyCode.UpArrow) ? 15 : (Input.GetKey(KeyCode.DownArrow) ? -15 : 0);
 
-				transform.position = mResetCamPos;
-				transform.eulerAngles = mResetCamRot;
-				Pivot.position = mResetPivotPos;
-				Pivot.eulerAngles = mResetPivotRot;
-			}
-		}
-	}
+                if (Input.GetKeyDown(KeyCode.R)) ResetView();
+
+                //X Angle Clamping
+                var angle = transform.localEulerAngles;
+                if (angle.x < 180 && angle.x >= XMax && orbitAcceleration.y > 0) orbitAcceleration.y = 0;
+                if (angle.x > 180 && angle.x <= XMin && orbitAcceleration.y < 0) orbitAcceleration.y = 0;
+
+                //Rotate
+                transform.RotateAround(Pivot.position, transform.right, orbitAcceleration.y * Time.deltaTime);
+                transform.RotateAround(Pivot.position, Vector3.up, orbitAcceleration.x * Time.deltaTime);
+
+                //Pan
+                Pivot.Translate(panAcceleration * Time.deltaTime, transform);
+                transform.Translate(panAcceleration * Time.deltaTime, transform);
+
+                //Zoom
+                var scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+                zoomAcceleration += scrollWheel * ZoomStrg;
+                zoomAcceleration = Mathf.Clamp(zoomAcceleration, -ZoomClamp, ZoomClamp);
+                zoomDistance = Vector3.Distance(transform.position, Pivot.position);
+                if ((zoomDistance >= ZoomDistMin && zoomAcceleration > 0) ||
+                    (zoomDistance <= ZoomDistMax && zoomAcceleration < 0))
+                    transform.Translate(Vector3.forward * zoomAcceleration * Time.deltaTime, Space.Self);
+
+                //Decelerate
+                orbitAcceleration = Vector3.Lerp(orbitAcceleration, Vector3.zero, Decceleration * Time.deltaTime);
+                panAcceleration = Vector3.Lerp(panAcceleration, Vector3.zero, Decceleration * Time.deltaTime);
+                zoomAcceleration = Mathf.Lerp(zoomAcceleration, 0, Decceleration * Time.deltaTime);
+                moveAcceleration = Vector3.Lerp(moveAcceleration, Vector3.zero, Decceleration * Time.deltaTime);
+
+                mouseDelta = Input.mousePosition;
+            }
+
+            private void OnEnable()
+            {
+                mouseDelta = Input.mousePosition;
+            }
+
+            public void ResetView()
+            {
+                moveAcceleration = Vector3.zero;
+                orbitAcceleration = Vector3.zero;
+                panAcceleration = Vector3.zero;
+                zoomAcceleration = 0f;
+
+                transform.position = mResetCamPos;
+                transform.eulerAngles = mResetCamRot;
+                Pivot.position = mResetPivotPos;
+                Pivot.eulerAngles = mResetPivotRot;
+            }
+        }
+    }
 }

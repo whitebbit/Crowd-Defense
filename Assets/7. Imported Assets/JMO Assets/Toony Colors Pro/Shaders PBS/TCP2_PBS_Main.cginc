@@ -34,20 +34,20 @@ fixed _RimMax;
 #if !defined (TCP2_BRDF_PBS) // allow to explicitly override BRDF in custom shader
 // still add safe net for low shader models, otherwise we might end up with shaders failing to compile
 // the only exception is WebGL in 5.3 - it will be built with shader target 2.0 but we want it to get rid of constraints, as it is effectively desktop
-	#if SHADER_TARGET < 30
+#if SHADER_TARGET < 30
+#define TCP2_BRDF_PBS BRDF3_TCP2_PBS
+#elif UNITY_PBS_USE_BRDF3
 		#define TCP2_BRDF_PBS BRDF3_TCP2_PBS
-	#elif UNITY_PBS_USE_BRDF3
-		#define TCP2_BRDF_PBS BRDF3_TCP2_PBS
-	#elif UNITY_PBS_USE_BRDF2
+#elif UNITY_PBS_USE_BRDF2
 		#define TCP2_BRDF_PBS BRDF2_TCP2_PBS
-	#elif UNITY_PBS_USE_BRDF1
+#elif UNITY_PBS_USE_BRDF1
 		#define TCP2_BRDF_PBS BRDF1_TCP2_PBS
-	#elif defined(SHADER_TARGET_SURFACE_ANALYSIS)
+#elif defined(SHADER_TARGET_SURFACE_ANALYSIS)
 		// we do preprocess pass during shader analysis and we dont actually care about brdf as we need only inputs/outputs
 		#define TCP2_BRDF_PBS BRDF1_TCP2_PBS
-	#else
+#else
 		#error something broke in auto-choosing BRDF
-	#endif
+#endif
 #endif
 
 #include "UnityStandardCore.cginc"
@@ -72,8 +72,8 @@ fixed _RimMax;
 #include "TCP2_PBS_Core.cginc"
 VertexOutputForwardBase vertBase(VertexInput v) { return vertForwardBase(v); }
 VertexOutputForwardAdd vertAdd(VertexInput v) { return vertForwardAdd(v); }
-half4 fragBase(VertexOutputForwardBase i) : SV_Target{ return fragForwardBaseInternal_TCP2(i); }
-half4 fragAdd(VertexOutputForwardAdd i) : SV_Target{ return fragForwardAddInternal_TCP2(i); }
+half4 fragBase(VertexOutputForwardBase i) : SV_Target { return fragForwardBaseInternal_TCP2(i); }
+half4 fragAdd(VertexOutputForwardAdd i) : SV_Target { return fragForwardAddInternal_TCP2(i); }
 //#endif
 //================================================================================================================================
 
