@@ -1,0 +1,33 @@
+Thanks for buying the Auto Quality Chooser Package. Here's some info to help get you started.
+
+== What it does? ==
+If someone is playing your game, he wants the highest possible quality, unless his machine is not good enough to handle it. And this plugin is intended to guarantee exactly that.
+ * At default it sets quality to highest possible.
+ * If player's machine is handle this quality with decent framerate, it does nothing.
+ * If however player's machine is too slow, it will decrease quality up to point when FPS will be good enough.
+
+== How to use it? ==
+Drag "AutoQualityChooser" script on any (exactly one) gameobject in hierarchy. If you use one camera in your game, it is good choice. If you have multiple cameras, you can create empty gameobject and attach "AutoQualityChooser" script to it.
+
+== How to set possible quality variants ==
+To choose details of quality settings for your project, please click Edit -> Project Settings -> Quality from top menu.
+Documentation for this tool is available here: http://docs.unity3d.com/Manual/class-QualitySettings.html
+This is standard Unity tool for defining quality setting for your project. AutoQualityChooser is not intended to replace it, but to work with it. Unity tool itself is able to assign *one* quality to particular device. AutoQualityChooser is able to select best quality option particular machine is able to handle from all options available.
+
+== Why cannot I set minimal framerate to more than 50 FPS? ==
+This slider is minimal acceptable framerate, not desired framerate. Your game still can work with more FPS than that.
+Since start of game, AutoQualityChooser checks current framerate. If it is good enough, it will do nothing, just keep best quality set. But if for longer than 5 seconds FPS will be lower than whatever you set on slider, it will decrease quality. 
+I have set this limit to 50, because I believe that if your game is running with 50FPS there is no point in decreasing quality. If you however have very specific demands and want to change this value, limit is set in AutoQualityChooserInspector.cs file.
+
+== How does it work? ==
+If game will run with framerate lower than minimal acceptable value set in configuration for 5 seconds, quality will automatically decrease.
+
+== How to choose minimal acceptable FPS rate? ==
+Select gameobject with AutoQualityChooser script attached. In inspector expand Settings. You'll have slider to select minimal acceptable FPS there.
+
+== How to trigger custom behaviour on quality change? ==
+Select gameobject with AutoQualityChooser script attached. In inspector expand Settings. Drag gameobject with script you want to trigger into "On Quality Change" field.
+Select exact function from droplist. Alternatively you can do same from code by writing "AutoQualityChooser.Instance.onQualityChange.AddListener(FunctionToTrigger);"
+
+== What if I have more questions or feature requests? ==
+Just mail me at kris@krej.net
