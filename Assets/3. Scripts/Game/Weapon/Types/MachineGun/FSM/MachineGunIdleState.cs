@@ -1,5 +1,6 @@
 ﻿using _3._Scripts.FSM.Base;
 using _3._Scripts.Game.Weapon.Scriptable;
+using UnityEngine;
 
 namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
 {
@@ -18,7 +19,7 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
 
         public override void Update()
         {
-
+ 
         }
 
         public override void FixedUpdate()

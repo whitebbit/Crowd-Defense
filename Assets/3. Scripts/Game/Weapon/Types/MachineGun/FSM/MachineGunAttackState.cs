@@ -8,24 +8,30 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
     {
         private readonly WeaponConfig _config;
         private float _attackTime;
-        private int _currentBulletCount;
+        public int CurrentBulletCount { get; private set; }
 
         public MachineGunAttackState(WeaponConfig config)
         {
             _config = config;
-            _currentBulletCount = _config.GetInteger("bulletCount");
+            CurrentBulletCount = _config.GetInteger("bulletCount");
         }
         
         public override void Update()
         {
             _attackTime -= Time.deltaTime;
 
-            if (_currentBulletCount <= 0) return;
             if (!(_attackTime <= 0)) return;
 
+            Shoot();
+        }
+
+        public void ResetBulletsCount() => CurrentBulletCount = _config.GetInteger("bulletCount");
+        
+        private void Shoot()
+        {
             Debug.Log("Shoot");
             _attackTime = _config.GetFloat("attackTime");
-            _currentBulletCount = Mathf.Clamp(_currentBulletCount - 1, 0, _config.GetInteger("bulletCount"));
+            CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, _config.GetInteger("bulletCount"));
         }
         
         

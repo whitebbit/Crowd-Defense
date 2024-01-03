@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c378e05a5dc140718e22db7844f58fb4, type: 3}
-  m_Name: WeaponConfig
+  m_Name: MachineGun
   m_EditorClassIdentifier: 
   floatVariables:
   - <ID>k__BackingField: attackTime
-    <Value>k__BackingField: 0.01
+    <Value>k__BackingField: 1
+  - <ID>k__BackingField: reloadTime
+    <Value>k__BackingField: 1
   integerVariables:
   - <ID>k__BackingField: bulletCount
-    <Value>k__BackingField: 1000
+    <Value>k__BackingField: 200
   stringVariables: []

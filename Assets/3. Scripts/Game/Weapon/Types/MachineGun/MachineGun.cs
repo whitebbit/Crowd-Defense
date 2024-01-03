@@ -11,9 +11,13 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun
         {
             var idle = new MachineGunIdleState();
             var attack = new MachineGunAttackState(config);
+            var reload = new MachineGunReloadState(config, attack.ResetBulletsCount);
 
-            AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0)));
-            AddTransition(attack, new FuncPredicate(() => Input.GetMouseButton(0)));
+            AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
+            AddTransition(attack,
+                new FuncPredicate(() =>
+                    Input.GetMouseButton(0) && attack.CurrentBulletCount > 0 && !reload.Reloading));
+            AddTransition(reload, new FuncPredicate(() => attack.CurrentBulletCount <= 0 && !reload.Reloading));
 
             StateMachine.SetState(idle);
         }
