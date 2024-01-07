@@ -12,12 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c378e05a5dc140718e22db7844f58fb4, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  floatVariables:
-  - <ID>k__BackingField: attackTime
-    <Value>k__BackingField: 1
-  - <ID>k__BackingField: reloadTime
-    <Value>k__BackingField: 1
-  integerVariables:
-  - <ID>k__BackingField: bulletCount
-    <Value>k__BackingField: 200
-  stringVariables: []
+  floats:
+    <Holder>k__BackingField:
+    - <Key>k__BackingField: spreadFactor
+      <Value>k__BackingField: 50
+    - <Key>k__BackingField: attackTime
+      <Value>k__BackingField: 0.1
+  integers:
+    <Holder>k__BackingField:
+    - <Key>k__BackingField: shoutCount
+      <Value>k__BackingField: 50
+    - <Key>k__BackingField: bulletCount
+      <Value>k__BackingField: 1000
+  bools:
+    <Holder>k__BackingField:
+    - <Key>k__BackingField: useSpread
+      <Value>k__BackingField: 1

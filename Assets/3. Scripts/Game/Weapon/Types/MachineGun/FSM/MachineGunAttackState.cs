@@ -1,4 +1,5 @@
 ﻿using _3._Scripts.FSM.Base;
+using _3._Scripts.Game.Units.Interfaces;
 using _3._Scripts.Game.Weapon.Scriptable;
 using UnityEngine;
 
@@ -8,12 +9,14 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
     {
         private readonly WeaponConfig _config;
         private float _attackTime;
+        private Camera _camera;
         public int CurrentBulletCount { get; private set; }
-
+        
         public MachineGunAttackState(WeaponConfig config)
         {
+            _camera = Camera.main;
             _config = config;
-            CurrentBulletCount = _config.GetInteger("bulletCount");
+            CurrentBulletCount = _config.Get<int>("bulletCount");
         }
         
         public override void Update()
@@ -25,15 +28,57 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
             Shoot();
         }
 
-        public void ResetBulletsCount() => CurrentBulletCount = _config.GetInteger("bulletCount");
+        public void ResetBulletsCount() => CurrentBulletCount = _config.Get<int>("bulletCount");
         
         private void Shoot()
         {
-            Debug.Log("Shoot");
-            _attackTime = _config.GetFloat("attackTime");
-            CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, _config.GetInteger("bulletCount"));
+            PerformShot();
+            
+            CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, _config.Get<int>("bulletCount"));
+            _attackTime = _config.Get<float>("attackTime");
         }
         
+        private void PerformShot()
+        { 
+            for (var i = 0; i < _config.Get<int>("shoutCount"); i++)
+            {
+                PerformRaycast();
+            }
+        }
         
+        private void PerformRaycast()
+        {
+            var mousePosition = Input.mousePosition;
+            var direction = _config.Get<bool>("useSpread") ? 
+                mousePosition + CalculateSpread() : mousePosition;
+            var ray = _camera.ScreenPointToRay(direction);
+            
+            if (Physics.Raycast(ray, out var hit))
+            {
+                ScanHit(hit);
+            }
+            
+            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red);
+        }
+        
+        private void ScanHit(RaycastHit hit)
+        {
+            var hitCollider = hit.collider;
+            if (hitCollider.TryGetComponent(out IWeaponVisitor visitor))
+            {
+                Accept(visitor, hit);
+            }
+        }
+        
+        private void Accept(IWeaponVisitor visitor, RaycastHit hit)
+        {
+            visitor?.Visit(_config);
+        }
+        
+        private Vector3 CalculateSpread()
+        {
+            var spreadFactor = _config.Get<float>("spreadFactor");
+            return Random.insideUnitCircle * spreadFactor;
+        }
     }
 }

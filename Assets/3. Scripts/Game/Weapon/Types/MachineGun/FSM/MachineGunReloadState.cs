@@ -21,7 +21,7 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
         public override void OnEnter()
         {
             Reloading = true;
-            _reloadTime = _config.GetFloat("reloadTime");
+            _reloadTime = _config.Get<float>("reloadTime");
         }
 
         public override void Update()
