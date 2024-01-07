@@ -1,6 +1,7 @@
 ﻿using _3._Scripts.FSM.Base;
 using _3._Scripts.Game.AI.FSM.States;
 using _3._Scripts.Game.Units.Animations;
+using _3._Scripts.Game.Units.Health;
 using _3._Scripts.Game.Units.Interfaces;
 using UnityEngine;
 
@@ -8,11 +9,11 @@ namespace _3._Scripts.Game.AI
 {
     public class BotFSM : FSMHandler
     {
-        public BotFSM(Transform transform, IAnimator animator)
+        public BotFSM(Transform transform, IAnimator animator, UnitHealth health, IDying dying)
         {
             var idle = new BotIdleState(transform, animator);
             var run = new BotRunState(transform, animator);
-            var death = new BotDeathState(transform);
+            var death = new BotDeathState(transform, animator, dying);
             var attack = new BotAttackState(transform);
 
 
@@ -20,10 +21,10 @@ namespace _3._Scripts.Game.AI
                 new FuncPredicate(() => false));
 
             AddTransition(run,
-                new FuncPredicate(() => false));
+                new FuncPredicate(() => health.Health > 0));
 
             AddTransition(death,
-                new FuncPredicate(() => Input.GetKeyDown(KeyCode.D)));
+                new FuncPredicate(() => health.Health <= 0 && !death.IsDead));
 
             AddTransition(attack,
                 new FuncPredicate(() => Input.GetKeyDown(KeyCode.A)));

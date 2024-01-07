@@ -14,12 +14,14 @@ namespace _3._Scripts.Game.Units
         {
             OnAwake();
             
-            SetHealth();
-            SetDamageable();
+        }
+
+        private void Start()
+        {
+            OnStart();
         }
 
         protected virtual void OnAwake(){}
-        protected abstract void SetHealth();
-        protected abstract void SetDamageable();
+        protected virtual void OnStart(){}
     }
 }

@@ -19,42 +19,27 @@ namespace _3._Scripts.Game.AI
         [SerializeField] private MeshAnimationsHolder animations;
         private BotFSM _botFsm;
         private IAnimator _animator;
-
-        protected override void OnAwake()
+        
+        protected override void OnStart()
         {
             _animator = new BotAnimations(animator, animations);
             
-        }
-
-        private void Start()
-        {
-            _botFsm = new BotFSM(transform, _animator);
-        }
-
-        protected override void SetHealth()
-        {
             var ragdoll = new Ragdoll(transform);
             var dying = new BotRagdollDying(ragdoll, _animator);
-
-            Health = new UnitHealth(dying, 100);
-        }
-
-        protected override void SetDamageable()
-        {
+            
+            Health = new UnitHealth(100);
             Damageable = new UnitDamageable(Health);
+            
+            _botFsm = new BotFSM(transform, _animator, Health, dying);
         }
 
         private void Update()
         {
-            if (Health.Health <= 0) return;
-
             _botFsm.Update();
         }
 
         private void FixedUpdate()
         {
-            if (Health.Health <= 0) return;
-
             _botFsm.FixedUpdate();
         }
         

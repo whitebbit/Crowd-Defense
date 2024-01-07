@@ -48,9 +48,9 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
         
         private void PerformRaycast()
         {
-            var mousePosition = Input.mousePosition;
+            var screenCenter = new Vector3(Screen.width / 2, Screen.height / 2);
             var direction = _config.Get<bool>("useSpread") ? 
-                mousePosition + CalculateSpread() : mousePosition;
+                screenCenter + CalculateSpread() : screenCenter;
             var ray = _camera.ScreenPointToRay(direction);
             
             if (Physics.Raycast(ray, out var hit))

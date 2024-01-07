@@ -15,16 +15,16 @@ MonoBehaviour:
   floats:
     <Holder>k__BackingField:
     - <Key>k__BackingField: spreadFactor
-      <Value>k__BackingField: 50
+      <Value>k__BackingField: 100
     - <Key>k__BackingField: attackTime
-      <Value>k__BackingField: 0.1
+      <Value>k__BackingField: 0.01
   integers:
     <Holder>k__BackingField:
     - <Key>k__BackingField: shoutCount
       <Value>k__BackingField: 50
     - <Key>k__BackingField: bulletCount
-      <Value>k__BackingField: 1000
+      <Value>k__BackingField: 400
   bools:
     <Holder>k__BackingField:
     - <Key>k__BackingField: useSpread
-      <Value>k__BackingField: 1
+      <Value>k__BackingField: 0
