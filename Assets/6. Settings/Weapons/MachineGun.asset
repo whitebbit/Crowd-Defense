@@ -13,18 +13,26 @@ MonoBehaviour:
   m_Name: MachineGun
   m_EditorClassIdentifier: 
   floats:
-    <Holder>k__BackingField:
-    - <Key>k__BackingField: spreadFactor
-      <Value>k__BackingField: 100
-    - <Key>k__BackingField: attackTime
-      <Value>k__BackingField: 0.01
+    m_keys:
+    - attackTime
+    - spreadFactor
+    - reloadTime
+    m_values:
+    - 0.01
+    - 100
+    - 1
   integers:
-    <Holder>k__BackingField:
-    - <Key>k__BackingField: shoutCount
-      <Value>k__BackingField: 50
-    - <Key>k__BackingField: bulletCount
-      <Value>k__BackingField: 400
+    m_keys:
+    - bulletCount
+    - shoutCount
+    m_values: 9001000019000000
   bools:
-    <Holder>k__BackingField:
-    - <Key>k__BackingField: useSpread
-      <Value>k__BackingField: 0
+    m_keys:
+    - useSpread
+    m_values: 01
+  layerMasks:
+    m_keys:
+    - attackMask
+    m_values:
+    - serializedVersion: 2
+      m_Bits: 64

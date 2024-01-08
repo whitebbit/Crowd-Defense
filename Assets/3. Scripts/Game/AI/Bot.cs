@@ -1,5 +1,4 @@
-﻿using System;
-using _3._Scripts.Game.Units;
+﻿using _3._Scripts.Game.Units;
 using _3._Scripts.Game.Units.Animations;
 using _3._Scripts.Game.Units.Damageable;
 using _3._Scripts.Game.Units.Dying;
@@ -7,8 +6,8 @@ using _3._Scripts.Game.Units.Health;
 using _3._Scripts.Game.Units.Interfaces;
 using _3._Scripts.Game.Units.Scriptable.Animations;
 using FSG.MeshAnimator;
-using FSG.MeshAnimator.Snapshot;
 using UnityEngine;
+
 
 
 namespace _3._Scripts.Game.AI

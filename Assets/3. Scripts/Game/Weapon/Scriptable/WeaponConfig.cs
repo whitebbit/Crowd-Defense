@@ -1,5 +1,4 @@
 ﻿using System;
-using _3._Scripts.Extensions;
 using UnityEngine;
 
 namespace _3._Scripts.Game.Weapon.Scriptable
@@ -7,9 +6,10 @@ namespace _3._Scripts.Game.Weapon.Scriptable
     [CreateAssetMenu(menuName = "Configs/Weapons", fileName = "WeaponConfig")]
     public class WeaponConfig : ScriptableObject
     {
-        [Header("Float")] [SerializeField] private KeyValueHolder<float> floats;
-        [Header("Integer")] [SerializeField] private KeyValueHolder<int> integers;
-        [Header("Bool")] [SerializeField] private KeyValueHolder<bool> bools;
+        [Header("Float")] [SerializeField] private SerializableDictionary<string, float> floats;
+        [Header("Integer")] [SerializeField] private SerializableDictionary<string, int> integers;
+        [Header("Bool")] [SerializeField] private SerializableDictionary<string, bool> bools;
+        [Header("LayerMask")] [SerializeField] private SerializableDictionary<string, LayerMask> layerMasks;
 
 
         public T Get<T>(string id)
@@ -29,6 +29,12 @@ namespace _3._Scripts.Game.Weapon.Scriptable
                 if (bools.TryGetValue(id, out var value))
                     return (T)Convert.ChangeType(value, typeof(T));
             }
+            else if (typeof(T) == typeof(LayerMask))
+            {
+                if (layerMasks.TryGetValue(id, out var value))
+                    return (T)Convert.ChangeType(value, typeof(T));
+            }
+
             return default;
         }
     }
