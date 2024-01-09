@@ -9,13 +9,13 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon.FSM
     {
         private readonly WeaponConfig _config;
         private readonly Missile _cannonball;
-        private readonly Transform _point;
+        private readonly WeaponObject _weaponObject;
         public int CurrentBulletCount { get; private set; }
-        public CannonAttackState(WeaponConfig config, Missile cannonball, Transform point)
+        public CannonAttackState(WeaponConfig config, Missile cannonball, WeaponObject weaponObject)
         {
             _config = config;
             _cannonball = cannonball;
-            _point = point;
+            _weaponObject = weaponObject;
             
             CurrentBulletCount = _config.Get<int>("bulletCount");
         }
@@ -35,8 +35,8 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon.FSM
 
         private void PerformShot()
         {
-            var cannonball = Object.Instantiate(_cannonball, _point.position, _point.rotation);
-            cannonball.Launch(_point, _config);
+            var cannonball = Object.Instantiate(_cannonball, _weaponObject.Point.position, _weaponObject.Point.rotation);
+            cannonball.Launch(_weaponObject.Point, _config);
         }
     }
 }

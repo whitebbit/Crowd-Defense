@@ -6,18 +6,19 @@ namespace _3._Scripts.Game.Weapon
     public abstract class WeaponFSM: FSMHandler
     {
         protected WeaponConfig Config;
-        
-        protected WeaponFSM(WeaponConfig config)
+        private readonly WeaponObject _weaponObject;
+        protected WeaponFSM(WeaponConfig config, WeaponObject weaponObject)
         {
             Config = config;
+            _weaponObject = weaponObject;
         }
-
-        public virtual void Update()
+        
+        public void Update()
         {
             StateMachine.Update();
         }
 
-        public virtual void FixedUpdate()
+        public  void FixedUpdate()
         {
             StateMachine.FixedUpdate();
         }

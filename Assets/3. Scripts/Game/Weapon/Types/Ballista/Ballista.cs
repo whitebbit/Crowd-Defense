@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace _3._Scripts.Game.Weapon.Types.Ballista
 {
-    public class Ballista: WeaponFSM
+    public class Ballista : WeaponFSM
     {
-        public Ballista(WeaponConfig config, Missile cannonball, Transform point) : base(config)
+        public Ballista(WeaponConfig config, WeaponObject weaponObject, Missile arrow) : base(
+            config, weaponObject)
         {
             var idle = new BallistaIdleState();
-            var attack = new BallistaAttackState(config, cannonball, point);
+            var attack = new BallistaAttackState(config, arrow, weaponObject);
             var reload = new BallistaReloadState(config, attack.ResetBulletsCount);
 
             AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
@@ -21,6 +22,5 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista
 
             StateMachine.SetState(idle);
         }
-        
     }
 }

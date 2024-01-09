@@ -7,7 +7,7 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun
 {
     public class MachineGun : WeaponFSM
     {
-        public MachineGun(WeaponConfig config) : base(config)
+        public MachineGun(WeaponConfig config, WeaponObject weaponObject) : base(config, weaponObject)
         {
             var idle = new MachineGunIdleState();
             var attack = new MachineGunAttackState(config);

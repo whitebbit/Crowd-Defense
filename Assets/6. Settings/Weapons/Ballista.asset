@@ -19,7 +19,7 @@ MonoBehaviour:
     - explosionRadius
     m_values:
     - 1.5
-    - 200
+    - 100
     - 2.5
   integers:
     m_keys:

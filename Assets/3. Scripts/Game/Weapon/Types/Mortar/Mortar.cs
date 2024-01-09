@@ -1,6 +1,5 @@
 ﻿using _3._Scripts.FSM.Base;
 using _3._Scripts.Game.Weapon.Scriptable;
-using _3._Scripts.Game.Weapon.Types.Ballista.FSM;
 using _3._Scripts.Game.Weapon.Types.Mortar.FSM;
 using UnityEngine;
 
@@ -8,10 +7,10 @@ namespace _3._Scripts.Game.Weapon.Types.Mortar
 {
     public class Mortar: WeaponFSM
     {
-        public Mortar(WeaponConfig config, Missile explosiveShells, Transform point) : base(config)
+        public Mortar(WeaponConfig config, WeaponObject weaponObject, Missile explosiveShells) : base(config, weaponObject)
         {
             var idle = new MortarIdleState();
-            var attack = new MortarAttackState(config, explosiveShells, point);
+            var attack = new MortarAttackState(config, explosiveShells, weaponObject);
             var reload = new MortarReloadState(config, attack.ResetBulletsCount);
 
             AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));

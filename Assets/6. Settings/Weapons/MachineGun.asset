@@ -19,8 +19,8 @@ MonoBehaviour:
     - reloadTime
     m_values:
     - 0.01
-    - 100
-    - 1
+    - 50
+    - 2
   integers:
     m_keys:
     - bulletCount

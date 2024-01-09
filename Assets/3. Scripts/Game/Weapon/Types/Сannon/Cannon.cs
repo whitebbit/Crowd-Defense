@@ -7,10 +7,11 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon
 {
     public class Cannon : WeaponFSM
     {
-        public Cannon(WeaponConfig config, Missile cannonball, Transform point) : base(config)
+        public Cannon(WeaponConfig config, WeaponObject weaponObject, Missile cannonball) : base(
+            config, weaponObject)
         {
             var idle = new CannonIdleState();
-            var attack = new CannonAttackState(config, cannonball, point);
+            var attack = new CannonAttackState(config, cannonball, weaponObject);
             var reload = new CannonReloadState(config, attack.ResetBulletsCount);
 
             AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));

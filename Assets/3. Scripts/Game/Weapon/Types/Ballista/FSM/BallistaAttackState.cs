@@ -8,13 +8,13 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
     {
         private readonly WeaponConfig _config;
         private readonly Missile _arrow;
-        private readonly Transform _point;
+        private readonly WeaponObject _weaponObject;
         public int CurrentBulletCount { get; private set; }
-        public BallistaAttackState(WeaponConfig config, Missile arrow, Transform point)
+        public BallistaAttackState(WeaponConfig config, Missile arrow, WeaponObject weaponObject)
         {
             _config = config;
             _arrow = arrow;
-            _point = point;
+            _weaponObject = weaponObject;
             
             CurrentBulletCount = _config.Get<int>("bulletCount");
         }
@@ -34,8 +34,8 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
 
         private void PerformShot()
         {
-            var arrow = Object.Instantiate(_arrow, _point.position, _point.rotation);
-            arrow.Launch(_point, _config);
+            var arrow = Object.Instantiate(_arrow, _weaponObject.Point.position, _weaponObject.Point.rotation);
+            arrow.Launch(_weaponObject.Point, _config);
         }
     }
 }

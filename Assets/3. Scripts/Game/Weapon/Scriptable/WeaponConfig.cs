@@ -34,8 +34,8 @@ namespace _3._Scripts.Game.Weapon.Scriptable
                 if (layerMasks.TryGetValue(id, out var value))
                     return (T)Convert.ChangeType(value, typeof(T));
             }
-
-            return default;
+            
+            throw new Exception($"{typeof(T)} object with id '{id}' not found");
         }
     }
 }

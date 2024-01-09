@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using _3._Scripts.Game.Weapon;
 using _3._Scripts.Game.Weapon.Scriptable;
 using _3._Scripts.Game.Weapon.Types;
@@ -12,24 +13,8 @@ namespace _3._Scripts.Game
 {
     public class Tester: MonoBehaviour
     {
-        [SerializeField] private WeaponConfig config;
-        [SerializeField] private Missile missile;
-        [SerializeField] private Transform point;
-        private WeaponFSM _weapon;
+        [SerializeField] private List<WeaponBehaviour> weapons = new();
+        private WeaponBehaviour _currentWeapon;
         
-        private void Awake()
-        {
-            _weapon = new Mortar(config, missile, point);
-        }
-
-        private void Update()
-        {
-            _weapon.Update();
-        }
-
-        private void FixedUpdate()
-        {
-            _weapon.FixedUpdate();
-        }
     }
 }
