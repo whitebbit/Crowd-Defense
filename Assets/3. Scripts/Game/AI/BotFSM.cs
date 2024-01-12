@@ -1,5 +1,6 @@
 ﻿using _3._Scripts.FSM.Base;
 using _3._Scripts.Game.AI.FSM.States;
+using _3._Scripts.Game.Main;
 using _3._Scripts.Game.Units.Animations;
 using _3._Scripts.Game.Units.Health;
 using _3._Scripts.Game.Units.Interfaces;
@@ -15,13 +16,12 @@ namespace _3._Scripts.Game.AI
             var run = new BotRunState(transform, animator);
             var death = new BotDeathState(transform, animator, dying);
             var attack = new BotAttackState(transform);
-
-
+            
             AddTransition(idle,
-                new FuncPredicate(() => false));
+                new FuncPredicate(() => !Level.Instance.LevelInProgress && health.Health > 0));
 
             AddTransition(run,
-                new FuncPredicate(() => health.Health > 0));
+                new FuncPredicate(() => Level.Instance.LevelInProgress && health.Health > 0));
 
             AddTransition(death,
                 new FuncPredicate(() => health.Health <= 0 && !death.IsDead));
@@ -29,7 +29,7 @@ namespace _3._Scripts.Game.AI
             AddTransition(attack,
                 new FuncPredicate(() => Input.GetKeyDown(KeyCode.A)));
 
-            StateMachine.SetState(run);
+            StateMachine.SetState(idle);
         }
 
         public void Update()

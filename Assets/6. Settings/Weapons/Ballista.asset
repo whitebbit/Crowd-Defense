@@ -18,16 +18,21 @@ MonoBehaviour:
     - ballistaForce
     - explosionRadius
     m_values:
-    - 1.5
+    - 0.25
     - 100
     - 2.5
   integers:
     m_keys:
     - bulletCount
-    m_values: 03000000
+    m_values: 01000000
   bools:
     m_keys: []
     m_values: 
+  strings:
+    m_keys:
+    - id
+    m_values:
+    - ballista
   layerMasks:
     m_keys:
     - explosionMask

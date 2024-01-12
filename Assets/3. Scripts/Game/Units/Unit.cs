@@ -13,7 +13,6 @@ namespace _3._Scripts.Game.Units
         private void Awake()
         {
             OnAwake();
-            
         }
 
         private void Start()

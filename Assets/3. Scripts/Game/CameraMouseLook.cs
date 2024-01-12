@@ -14,11 +14,11 @@ namespace _3._Scripts.Game
 
         private void Update()
         {
-            LockCursor();
+            //LockCursor();
             
             Rotate();
             
-            UnlockCursor();
+            //UnlockCursor();
         }
 
         private void Rotate()

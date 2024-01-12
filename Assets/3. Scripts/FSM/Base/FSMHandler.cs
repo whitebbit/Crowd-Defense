@@ -4,7 +4,7 @@ namespace _3._Scripts.FSM.Base
 {
     public abstract class FSMHandler
     {
-        protected readonly StateMachine StateMachine = new();
+        public readonly StateMachine StateMachine = new();
         
         protected void AddTransition(IState from, IState to, IPredicate condition) =>
             StateMachine.AddTransition(from, to, condition);

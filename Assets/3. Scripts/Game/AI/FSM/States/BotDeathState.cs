@@ -1,4 +1,5 @@
 ﻿using _3._Scripts.FSM.Base;
+using _3._Scripts.Game.Main;
 using _3._Scripts.Game.Units.Interfaces;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace _3._Scripts.Game.AI.FSM.States
             base.OnEnter();
             IsDead = true;
             _dying.Dead();
+            Level.Instance.KillBot();
         }
 
         public override void Update()

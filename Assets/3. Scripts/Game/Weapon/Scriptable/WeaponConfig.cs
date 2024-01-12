@@ -9,6 +9,7 @@ namespace _3._Scripts.Game.Weapon.Scriptable
         [Header("Float")] [SerializeField] private SerializableDictionary<string, float> floats;
         [Header("Integer")] [SerializeField] private SerializableDictionary<string, int> integers;
         [Header("Bool")] [SerializeField] private SerializableDictionary<string, bool> bools;
+        [Header("Bool")] [SerializeField] private SerializableDictionary<string, string> strings;
         [Header("LayerMask")] [SerializeField] private SerializableDictionary<string, LayerMask> layerMasks;
 
 
@@ -32,6 +33,11 @@ namespace _3._Scripts.Game.Weapon.Scriptable
             else if (typeof(T) == typeof(LayerMask))
             {
                 if (layerMasks.TryGetValue(id, out var value))
+                    return (T)Convert.ChangeType(value, typeof(T));
+            }
+            else if (typeof(T) == typeof(string))
+            {
+                if (strings.TryGetValue(id, out var value))
                     return (T)Convert.ChangeType(value, typeof(T));
             }
             

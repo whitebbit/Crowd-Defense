@@ -3,5 +3,6 @@
     public enum UIState
     {
         None,
+        Play
     }
 }

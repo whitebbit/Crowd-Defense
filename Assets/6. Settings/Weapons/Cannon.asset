@@ -28,6 +28,11 @@ MonoBehaviour:
   bools:
     m_keys: []
     m_values: 
+  strings:
+    m_keys:
+    - id
+    m_values:
+    - cannon
   layerMasks:
     m_keys:
     - explosionMask

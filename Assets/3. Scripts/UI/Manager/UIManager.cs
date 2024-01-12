@@ -13,7 +13,7 @@ namespace _3._Scripts.UI.Manager
     public class UIManager : Singleton<UIManager>
     {
         [SerializeField] private UIState startState;
-
+        [Space] [SerializeField] private UIPanel playPanel;
         private bool _onTransition;
 
         public UIState CurrentState
@@ -49,6 +49,8 @@ namespace _3._Scripts.UI.Manager
         protected override void OnAwake()
         {
             _currentState = UIState.None;
+            
+            _panels.Add(UIState.Play, playPanel);
         }
 
         private void Start()
