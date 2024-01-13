@@ -7,7 +7,7 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista
         [SerializeField] private Missile arrow;
         protected override WeaponFSM GetWeaponFSM()
         {
-            return new Ballista(config, weaponObject, arrow);
+            return new Ballista(Config, weaponObject, arrow);
         }
     }
 }

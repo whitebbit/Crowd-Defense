@@ -24,7 +24,8 @@ MonoBehaviour:
   integers:
     m_keys:
     - bulletCount
-    m_values: 01000000
+    - damage
+    m_values: 0100000001000000
   bools:
     m_keys: []
     m_values: 

@@ -7,7 +7,7 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon
         [SerializeField] private Missile cannonball;
         protected override WeaponFSM GetWeaponFSM()
         {
-            return new Cannon(config, weaponObject, cannonball);
+            return new Cannon(Config, weaponObject, cannonball);
         }
     }
 }

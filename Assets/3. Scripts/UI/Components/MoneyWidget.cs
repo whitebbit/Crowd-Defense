@@ -6,16 +6,8 @@ using UnityEngine;
 
 namespace _3._Scripts.UI.Components
 {
-    [RequireComponent(typeof(TextMeshProUGUI))]
-    public class MoneyWidget: MonoBehaviour
+    public class MoneyWidget: TextWidget
     {
-        private TextMeshProUGUI _text;
-
-        private void Awake()
-        {
-            _text = GetComponent<TextMeshProUGUI>();
-        }
-
         private void Start()
         {
             OnChange(MoneyManager.MoneyCount, MoneyManager.MoneyCount);
@@ -31,9 +23,9 @@ namespace _3._Scripts.UI.Components
             MoneyManager.OnChanged -= OnChange;
         }
 
-        private void OnChange(int oldValue, int newValue)
+        protected override void OnChange(int oldValue, int newValue)
         {
-            _text.DOCounter(oldValue, newValue, 0.15f);
+            Text.DOCounter(oldValue, newValue, 0.15f);
         }
         
     }

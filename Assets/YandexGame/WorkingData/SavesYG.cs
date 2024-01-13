@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine.Serialization;
 
 namespace YG
@@ -15,9 +16,11 @@ namespace YG
 
         // Ваши сохранения
         public int money;                       
+        public int health = 100;                       
         public string currentWeapon = "machine_gun";
         public string secondWeapon = "";
-        
+        public Dictionary<string, int> weaponsLevel = new ();
+
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 

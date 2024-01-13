@@ -20,7 +20,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private Timer _timer;
         private void Start()
         {
-            _timer = new Timer(timerImage, timerText);
+            _timer = new Timer(timerImage, timerText, Level.Instance.CompleteLevel);
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)

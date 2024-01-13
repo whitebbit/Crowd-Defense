@@ -8,7 +8,7 @@ namespace _3._Scripts.Game.Weapon.Types.Mortar
 
         protected override WeaponFSM GetWeaponFSM()
         {
-            return new Mortar(config, weaponObject, explosiveShells);
+            return new Mortar(Config, weaponObject, explosiveShells);
         }
     }
 }

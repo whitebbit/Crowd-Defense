@@ -26,18 +26,22 @@ MonoBehaviour:
   integers:
     m_keys:
     - bulletCount
-    m_values: 01000000
-  bools:
-    m_keys: []
-    m_values: 
+    - damage
+    m_values: 0100000001000000
   strings:
     m_keys:
     - id
     m_values:
     - mortar
+  bools:
+    m_keys: []
+    m_values: 
   layerMasks:
     m_keys:
     - explosionMask
     m_values:
     - serializedVersion: 2
       m_Bits: 64
+  weaponVisuals:
+    m_keys: []
+    m_values: []

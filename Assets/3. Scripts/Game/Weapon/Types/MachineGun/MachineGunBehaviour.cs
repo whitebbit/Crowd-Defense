@@ -4,7 +4,7 @@
     {
         protected override WeaponFSM GetWeaponFSM()
         {
-            return new MachineGun(config, weaponObject);
+            return new MachineGun(Config, weaponObject);
         }
     }
 }

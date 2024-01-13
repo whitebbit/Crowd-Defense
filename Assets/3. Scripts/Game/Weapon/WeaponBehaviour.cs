@@ -6,15 +6,16 @@ namespace _3._Scripts.Game.Weapon
 {
     public abstract class WeaponBehaviour : MonoBehaviour
     {
-        public string ID => config.Get<string>("id");
+        public string ID => id;
 
-        [SerializeField] protected WeaponConfig config;
+        [SerializeField] protected string id;
         [SerializeField] protected WeaponObject weaponObject;
+        protected WeaponConfig Config;
 
         private WeaponFSM _weaponFsm;
-
         private void Awake()
         {
+            Config = Configuration.Instance.WeaponConfigs.Find(w => w.Get<string>("id") == id);
             _weaponFsm = GetWeaponFSM();
         }
 

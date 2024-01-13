@@ -1,9 +1,10 @@
 {
-    "idSave": 3986,
+    "idSave": 6798,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "money": 3986,
+    "money": 5392,
+    "health": 0,
     "currentWeapon": "machine_gun",
     "secondWeapon": ""
 }

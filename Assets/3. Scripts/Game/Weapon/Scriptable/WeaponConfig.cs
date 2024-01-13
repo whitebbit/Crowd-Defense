@@ -3,14 +3,19 @@ using UnityEngine;
 
 namespace _3._Scripts.Game.Weapon.Scriptable
 {
-    [CreateAssetMenu(menuName = "Configs/Weapons", fileName = "WeaponConfig")]
+    [CreateAssetMenu(menuName = "Configs/Weapons/Weapon Config", fileName = "WeaponConfig")]
     public class WeaponConfig : ScriptableObject
     {
-        [Header("Float")] [SerializeField] private SerializableDictionary<string, float> floats;
-        [Header("Integer")] [SerializeField] private SerializableDictionary<string, int> integers;
-        [Header("Bool")] [SerializeField] private SerializableDictionary<string, bool> bools;
-        [Header("Bool")] [SerializeField] private SerializableDictionary<string, string> strings;
-        [Header("LayerMask")] [SerializeField] private SerializableDictionary<string, LayerMask> layerMasks;
+        [SerializeField] private WeaponVisual weaponVisual;
+        [SerializeField] private WeaponImprovements weaponImprovements;
+        [Header("Parameters ")]
+        [SerializeField] private SerializableDictionary<string, float> floats;
+        [SerializeField] private SerializableDictionary<string, int> integers;
+        [Space]
+        [SerializeField] private SerializableDictionary<string, string> strings;
+        [SerializeField] private SerializableDictionary<string, bool> bools;
+        [Space]
+        [SerializeField] private SerializableDictionary<string, LayerMask> layerMasks;
 
 
         public T Get<T>(string id)
@@ -40,7 +45,7 @@ namespace _3._Scripts.Game.Weapon.Scriptable
                 if (strings.TryGetValue(id, out var value))
                     return (T)Convert.ChangeType(value, typeof(T));
             }
-            
+
             throw new Exception($"{typeof(T)} object with id '{id}' not found");
         }
     }
