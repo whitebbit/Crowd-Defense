@@ -1,6 +1,8 @@
-﻿using _3._Scripts.FSM.Base;
+﻿using System;
+using _3._Scripts.FSM.Base;
 using _3._Scripts.Game.Weapon.Scriptable;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
 {
@@ -9,14 +11,20 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
         private readonly WeaponConfig _config;
         private readonly Missile _arrow;
         private readonly WeaponObject _weaponObject;
+        private event Action<int> OnAttack;
         public int CurrentBulletCount { get; private set; }
-        public BallistaAttackState(WeaponConfig config, Missile arrow, WeaponObject weaponObject)
+        
+        private int BulletsCount => _config.Get<int>("bulletCount") +
+                                    _config.Improvements.GetAmmoImprovement(_config.Get<string>("id"));
+        
+        public BallistaAttackState(WeaponConfig config, Missile arrow, WeaponObject weaponObject,
+            Action<int> onAttack)
         {
             _config = config;
             _arrow = arrow;
             _weaponObject = weaponObject;
             
-            CurrentBulletCount = _config.Get<int>("bulletCount");
+            CurrentBulletCount = BulletsCount;
         }
         
         public override void OnExit()
@@ -24,12 +32,13 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
             Shoot();
         }
         
-        public void ResetBulletsCount() => CurrentBulletCount = _config.Get<int>("bulletCount");
+        public void ResetBulletsCount() => CurrentBulletCount = BulletsCount;
         
         private void Shoot()
         {
             PerformShot();
-            CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, _config.Get<int>("bulletCount"));
+            CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, BulletsCount);
+            OnAttack?.Invoke(CurrentBulletCount);
         }
 
         private void PerformShot()

@@ -5,6 +5,6 @@ namespace _3._Scripts.Game.Units.Interfaces
 {
     public interface IWeaponVisitor
     {
-        public void Visit(WeaponConfig config);
+        public void Visit(float damage);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using YG;
 
 namespace _3._Scripts.Game.Weapon.Scriptable
 {
@@ -17,7 +18,8 @@ namespace _3._Scripts.Game.Weapon.Scriptable
         [Space]
         [SerializeField] private SerializableDictionary<string, LayerMask> layerMasks;
 
-
+        public WeaponImprovements Improvements => weaponImprovements;
+        public WeaponVisual Visual => weaponVisual;
         public T Get<T>(string id)
         {
             if (typeof(T) == typeof(float))

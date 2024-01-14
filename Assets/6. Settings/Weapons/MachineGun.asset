@@ -22,13 +22,13 @@ MonoBehaviour:
     m_values:
     - 0.01
     - 25
-    - 2
+    - 5
   integers:
     m_keys:
     - bulletCount
     - shoutCount
     - damage
-    m_values: 900100003200000001000000
+    m_values: 900100000a00000001000000
   strings:
     m_keys:
     - id

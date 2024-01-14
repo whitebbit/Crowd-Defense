@@ -11,10 +11,12 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon
             config, weaponObject)
         {
             var idle = new CannonIdleState();
-            var attack = new CannonAttackState(config, cannonball, weaponObject);
-            var reload = new CannonReloadState(config, attack.ResetBulletsCount);
+            var attack = new CannonAttackState(config, cannonball, weaponObject, OnAttack);
+            var reload = new CannonReloadState(config, attack.ResetBulletsCount, OnReloadStart);
 
-            AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
+            AddTransition(idle,
+                new FuncPredicate(() =>
+                    !Input.GetMouseButton(0) && !reload.Reloading && attack.CurrentBulletCount > 0));
             AddTransition(attack,
                 new FuncPredicate(() =>
                     Input.GetMouseButtonDown(0) && attack.CurrentBulletCount > 0 && !reload.Reloading));

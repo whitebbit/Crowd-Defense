@@ -11,8 +11,8 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista
             config, weaponObject)
         {
             var idle = new BallistaIdleState();
-            var attack = new BallistaAttackState(config, arrow, weaponObject);
-            var reload = new BallistaReloadState(config, attack.ResetBulletsCount);
+            var attack = new BallistaAttackState(config, arrow, weaponObject, OnAttack);
+            var reload = new BallistaReloadState(config, attack.ResetBulletsCount, OnReloadStart);
 
             AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
             AddTransition(attack,

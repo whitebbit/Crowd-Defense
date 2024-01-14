@@ -14,6 +14,6 @@ namespace _3._Scripts.Game.Units.HitBoxes
             Collider = GetComponent<Collider>();
         }
 
-        public abstract void Visit(WeaponConfig config);
+        public abstract void Visit(float damage);
     }
 }

@@ -7,5 +7,7 @@ namespace _3._Scripts.Game.Weapon
         [SerializeField] private Transform point;
 
         public Transform Point => point;
+
+        public void SetState(bool state) => gameObject.SetActive(state);
     }
 }

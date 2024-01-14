@@ -30,7 +30,7 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista
             foreach (var c in colliders)
             {
                 if (c.gameObject.TryGetComponent(out IWeaponVisitor visitor))
-                    visitor.Visit(Config);
+                    visitor.Visit(Damage);
             }
 
             collider.enabled = false;

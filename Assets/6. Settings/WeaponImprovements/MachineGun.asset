@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf9661cbbe4547bda98493fad5140a74, type: 3}
-  m_Name: MashineGun
+  m_Name: MachineGun
   m_EditorClassIdentifier: 
   ammoImprovements:
-    m_keys: 010000000200000003000000
-    m_values:
-    - 1
-    - 1.25
-    - 1.5
+    m_keys: 00000000010000000200000003000000
+    m_values: 00000000320000006400000096000000
   damageImprovements:
-    m_keys: 010000000200000003000000
+    m_keys: 00000000010000000200000003000000
     m_values:
     - 1
+    - 1.15
     - 1.25
     - 1.5
   reloadImprovements:
-    m_keys: 010000000200000003000000
+    m_keys: 00000000010000000200000003000000
     m_values:
     - 1
+    - 0.99
     - 0.95
     - 0.9

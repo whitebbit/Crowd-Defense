@@ -18,12 +18,17 @@ namespace YG
         public int money;                       
         public int health = 100;                       
         public string currentWeapon = "machine_gun";
-        public string secondWeapon = "";
+        public string secondWeapon = "cannon";
+        public int currentLevel = 1;
+        public int completedLevelsCount = 0;
         public Dictionary<string, int> weaponsLevel = new ();
 
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
-
+        public int GetWeaponLevel(string id)
+        {
+            return weaponsLevel.TryGetValue(id, out var level) ? level : 0;
+        }
 
         // Вы можете выполнить какие то действия при загрузке сохранений
     }

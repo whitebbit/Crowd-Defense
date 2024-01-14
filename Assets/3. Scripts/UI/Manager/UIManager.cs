@@ -14,6 +14,7 @@ namespace _3._Scripts.UI.Manager
     {
         [SerializeField] private UIState startState;
         [Space] [SerializeField] private UIPanel playPanel;
+        [SerializeField] private UIPanel winPanel;
         private bool _onTransition;
 
         public UIState CurrentState
@@ -51,6 +52,7 @@ namespace _3._Scripts.UI.Manager
             _currentState = UIState.None;
             
             _panels.Add(UIState.Play, playPanel);
+            _panels.Add(UIState.Win, winPanel);
         }
 
         private void Start()

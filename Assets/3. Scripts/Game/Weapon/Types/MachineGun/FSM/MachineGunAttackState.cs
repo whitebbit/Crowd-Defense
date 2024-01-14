@@ -1,7 +1,9 @@
-﻿using _3._Scripts.FSM.Base;
+﻿using System;
+using _3._Scripts.FSM.Base;
 using _3._Scripts.Game.Units.Interfaces;
 using _3._Scripts.Game.Weapon.Scriptable;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
 {
@@ -10,13 +12,23 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
         private readonly WeaponConfig _config;
         private float _attackTime;
         private readonly Camera _camera;
+        private event Action<int> OnAttack;
+
+        private float Damage => _config.Get<int>("damage") *
+                                _config.Improvements.GetDamageImprovement(_config.Get<string>("id"));
+
+        private int BulletsCount => _config.Get<int>("bulletCount") +
+                                _config.Improvements.GetAmmoImprovement(_config.Get<string>("id"));
+        
         public int CurrentBulletCount { get; private set; }
 
-        public MachineGunAttackState(WeaponConfig config)
+        public MachineGunAttackState(WeaponConfig config, Action<int> onAttack)
         {
             _camera = Camera.main;
             _config = config;
-            CurrentBulletCount = _config.Get<int>("bulletCount");
+            CurrentBulletCount = BulletsCount;
+
+            OnAttack += onAttack;
         }
 
         public override void Update()
@@ -28,14 +40,15 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
             Shoot();
         }
 
-        public void ResetBulletsCount() => CurrentBulletCount = _config.Get<int>("bulletCount");
+        public void ResetBulletsCount() => CurrentBulletCount = BulletsCount;
 
         private void Shoot()
         {
             PerformShot();
 
-            CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, _config.Get<int>("bulletCount"));
+            CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, BulletsCount);
             _attackTime = _config.Get<float>("attackTime");
+            OnAttack?.Invoke(CurrentBulletCount);
         }
 
         private void PerformShot()
@@ -71,7 +84,7 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
 
         private void Accept(IWeaponVisitor visitor, RaycastHit hit)
         {
-            visitor?.Visit(_config);
+            visitor?.Visit(Damage);
         }
 
         private Vector3 CalculateSpread()

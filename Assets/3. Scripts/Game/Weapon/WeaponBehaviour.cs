@@ -1,4 +1,5 @@
 ﻿using System;
+using _3._Scripts.Game.Main;
 using _3._Scripts.Game.Weapon.Scriptable;
 using UnityEngine;
 
@@ -12,19 +13,28 @@ namespace _3._Scripts.Game.Weapon
         [SerializeField] protected WeaponObject weaponObject;
         protected WeaponConfig Config;
 
-        private WeaponFSM _weaponFsm;
+        public WeaponFSM WeaponFsm { get; private set; }
+        private bool _active;
         private void Awake()
         {
             Config = Configuration.Instance.WeaponConfigs.Find(w => w.Get<string>("id") == id);
-            _weaponFsm = GetWeaponFSM();
+            WeaponFsm = GetWeaponFSM();
         }
 
         private void Update()
         {
-            _weaponFsm.Update();
+            if (!Level.Instance.LevelInProgress) return;
+
+            if(!_active) return;
+            
+            WeaponFsm.Update();
         }
 
-        public void SetState(bool state) => gameObject.SetActive(state);
+        public void SetState(bool state)
+        {
+            _active = state;
+            weaponObject.SetState(state);
+        }
 
 
         protected abstract WeaponFSM GetWeaponFSM();

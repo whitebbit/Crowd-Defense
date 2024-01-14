@@ -10,8 +10,8 @@ namespace _3._Scripts.Game.Weapon.Types.Mortar
         public Mortar(WeaponConfig config, WeaponObject weaponObject, Missile explosiveShells) : base(config, weaponObject)
         {
             var idle = new MortarIdleState();
-            var attack = new MortarAttackState(config, explosiveShells, weaponObject);
-            var reload = new MortarReloadState(config, attack.ResetBulletsCount);
+            var attack = new MortarAttackState(config, explosiveShells, weaponObject, OnAttack);
+            var reload = new MortarReloadState(config, attack.ResetBulletsCount, OnReloadStart);
 
             AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
             AddTransition(attack,

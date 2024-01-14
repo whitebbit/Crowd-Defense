@@ -10,8 +10,8 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun
         public MachineGun(WeaponConfig config, WeaponObject weaponObject) : base(config, weaponObject)
         {
             var idle = new MachineGunIdleState();
-            var attack = new MachineGunAttackState(config);
-            var reload = new MachineGunReloadState(config, attack.ResetBulletsCount);
+            var attack = new MachineGunAttackState(config, OnAttack);
+            var reload = new MachineGunReloadState(config, attack.ResetBulletsCount, OnReloadStart);
 
             AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
             AddTransition(attack,
