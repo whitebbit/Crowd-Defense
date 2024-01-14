@@ -13,7 +13,9 @@ namespace _3._Scripts.UI.Manager
     public class UIManager : Singleton<UIManager>
     {
         [SerializeField] private UIState startState;
-        [Space] [SerializeField] private UIPanel playPanel;
+        [Space] 
+        [SerializeField] private UIPanel mainPanel;
+        [SerializeField] private UIPanel playPanel;
         [SerializeField] private UIPanel winPanel;
         private bool _onTransition;
 
@@ -51,6 +53,7 @@ namespace _3._Scripts.UI.Manager
         {
             _currentState = UIState.None;
             
+            _panels.Add(UIState.Main, mainPanel);
             _panels.Add(UIState.Play, playPanel);
             _panels.Add(UIState.Win, winPanel);
         }

@@ -14,7 +14,7 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
         private readonly Camera _camera;
         private event Action<int> OnAttack;
 
-        private float Damage => _config.Get<int>("damage") *
+        private float Damage => _config.Get<float>("damage") *
                                 _config.Improvements.GetDamageImprovement(_config.Get<string>("id"));
 
         private int BulletsCount => _config.Get<int>("bulletCount") +

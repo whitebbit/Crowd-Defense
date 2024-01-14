@@ -9,27 +9,32 @@ using FSG.MeshAnimator;
 using UnityEngine;
 
 
-
 namespace _3._Scripts.Game.AI
 {
     public class Bot : Unit
     {
-        [SerializeField] private MeshAnimatorBase animator;
+        [Header("Parameters")] [SerializeField]
+        private int health = 100;
+
+        [SerializeField] private float speed = 3;
+        [SerializeField] private bool defaultBot = true;
+        [Header("Settings")] [SerializeField] private MeshAnimatorBase animator;
         [SerializeField] private MeshAnimationsHolder animations;
+
         private BotFSM _botFsm;
         private IAnimator _animator;
-        
-        protected override void OnStart()
+
+        protected override void OnAwake()
         {
             _animator = new BotAnimations(animator, animations);
-            
+
             var ragdoll = new Ragdoll(transform);
-            var dying = new BotRagdollDying(ragdoll, _animator);
-            
-            Health = new UnitHealth(100);
+            var dying = new BotRagdollDying(ragdoll, _animator, defaultBot, () => Destroy(gameObject, 3));
+
+            Health = new UnitHealth(health);
             Damageable = new UnitDamageable(Health);
-            
-            _botFsm = new BotFSM(transform, _animator, Health, dying);
+
+            _botFsm = new BotFSM(transform, speed, _animator, Health, dying, () => Destroy(gameObject, 3));
         }
 
         private void Update()
@@ -41,6 +46,5 @@ namespace _3._Scripts.Game.AI
         {
             _botFsm.FixedUpdate();
         }
-        
     }
 }

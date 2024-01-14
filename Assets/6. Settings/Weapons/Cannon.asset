@@ -19,15 +19,16 @@ MonoBehaviour:
     - reloadTime
     - cannonForce
     - explosionRadius
+    - damage
     m_values:
     - 5
     - 50
     - 5
+    - 5
   integers:
     m_keys:
     - bulletCount
-    - damage
-    m_values: 0100000001000000
+    m_values: 01000000
   strings:
     m_keys:
     - id

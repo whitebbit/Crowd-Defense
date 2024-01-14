@@ -6,9 +6,11 @@ namespace _3._Scripts.Game.Units.Health
 {
     public class UnitHealth
     {
+        public event Action<float, float> OnHealthChanged;
+
         private readonly float _maxHealth;
         private float _currentHealth;
-        
+
         public float Health
         {
             get => _currentHealth;
@@ -23,14 +25,11 @@ namespace _3._Scripts.Game.Units.Health
 
         private void SetHealth(float value)
         {
-            if(Health <= 0)
-                return;
-            
-            if(value == 0)
+            if (Health <= 0)
                 return;
             
             _currentHealth = Math.Clamp(value, 0, _maxHealth);
-            
+            OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
         }
     }
 }

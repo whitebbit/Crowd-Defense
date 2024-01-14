@@ -1,4 +1,5 @@
-﻿using _3._Scripts.Game.Main;
+﻿using _3._Scripts.Game;
+using _3._Scripts.Game.Main;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
 using DG.Tweening;
@@ -39,22 +40,21 @@ namespace _3._Scripts.UI.Manager.Panels
         private void InitializeProgress()
         {
             progressTable.SetLevel(YandexGame.savesData.currentLevel);
-            progressTable.SetBossIcon(null);
+            progressTable.SetBossIcon(Configuration.Instance.CurrentBoss.Icon);
         }
 
         private void SetKillsCount()
         {
-            killsCount.text = $"{Level.Instance.KillsCount}/{Level.Instance.BotsCount}";
+            killsCount.text = $"{LevelManager.Instance.CurrentLevel.KillsCount}/{LevelManager.Instance.CurrentLevel.BotsCount}";
         }
 
         private void Continue()
         {
+            if(bonusReward.Blocked) return;
+            
             bonusReward.Blocked = true;
-            Transition.Instance.Close(0.25f).OnComplete(() =>
-            {
-                UIManager.Instance.CurrentState = UIState.Play;
-                Transition.Instance.Open(0.5f);
-            });
+            Transition.Instance.Close(0.3f);
+            
             //TODO: open main scene
         }
         
@@ -71,10 +71,9 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             YandexGame.savesData.completedLevelsCount += 1;
             YandexGame.savesData.currentLevel += 1;
+            YandexGame.SaveProgress();
             
             levelNumberText.additionalText = $" {YandexGame.savesData.completedLevelsCount}";
-            
-            YandexGame.SaveProgress();
         }
     }
 }

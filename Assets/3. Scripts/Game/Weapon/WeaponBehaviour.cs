@@ -23,7 +23,7 @@ namespace _3._Scripts.Game.Weapon
 
         private void Update()
         {
-            if (!Level.Instance.LevelInProgress) return;
+            if (!LevelManager.Instance.CurrentLevel.LevelInProgress) return;
 
             if(!_active) return;
             

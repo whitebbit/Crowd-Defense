@@ -13,21 +13,21 @@ using YG;
 
 namespace _3._Scripts.Game.Main
 {
-    public class Level : Singleton<Level>
+    public class Level : MonoBehaviour
     {
         public int KillsCount { get; private set; }
         public bool LevelInProgress { get; private set; }
         public int BotsCount { get; private set; }
+        private int _attackedBotCount;
+
         public event Action<int> OnKill;
+
+        public Player Player { get; private set; }
 
         private void Awake()
         {
+            Player = GetComponentInChildren<Player>();
             BotsCount = new List<Bot>(transform.GetComponentsInChildren<Bot>()).Count;
-        }
-
-        private void Start()
-        {
-            StartLevel();
         }
 
         public void StartLevel()
@@ -46,6 +46,22 @@ namespace _3._Scripts.Game.Main
         {
             KillsCount += 1;
             OnKill?.Invoke(KillsCount);
+
+            if (NoMoreBots())
+                CompleteLevel();
+        }
+
+        public void BotAttacked()
+        {
+            _attackedBotCount += 1;
+            
+            if (NoMoreBots())
+                CompleteLevel();
+        }
+
+        private bool NoMoreBots()
+        {
+            return BotsCount - KillsCount - _attackedBotCount <= 0;
         }
 
         private IEnumerator DelayComplete()

@@ -8,9 +8,10 @@ namespace _3._Scripts.UI.Components
 {
     public class Timer
     {
+        public event Action OnTime;
+        
         private readonly Image _timerImage;
         private readonly TextMeshProUGUI _timerText;
-        private event Action OnTime;
         private bool _completed;
         private readonly List<Tween> _tweens = new();
         
@@ -18,7 +19,7 @@ namespace _3._Scripts.UI.Components
         {
             _timerImage = image;
             _timerText = text;
-            OnTime = onTime;
+            OnTime += onTime;
         }
 
         public void StartTimer(int time)

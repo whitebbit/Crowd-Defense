@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b53974642c47889528c66d05513e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openedOnStart: 0
+  openedOnStart: 1
   background: {fileID: 7891127472222699475}
   opener: {fileID: 8292768390511281291}
   canvasScaler: {fileID: 0}

@@ -31,7 +31,7 @@ namespace _3._Scripts.UI.Components
 
             var distance = Vector3.Distance(pathPoints[0].position, pathPoints[1].position);
 
-            var deviceSpeed = YandexGame.EnvironmentData.isMobile ? 25 : 50;
+            var deviceSpeed = YandexGame.EnvironmentData.isMobile ? 25 : 100;
             var speed = distance / deviceSpeed;
             indicator.position = Vector3.MoveTowards(indicator.position, position, speed);
 

@@ -1,6 +1,8 @@
-﻿using _3._Scripts.Game.Units.Animations;
+﻿using System;
+using _3._Scripts.Game.Units.Animations;
 using _3._Scripts.Game.Units.Interfaces;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _3._Scripts.Game.Units.Dying
 {
@@ -8,21 +10,30 @@ namespace _3._Scripts.Game.Units.Dying
     {
         private readonly Ragdoll _ragdoll;
         private readonly IAnimator _animator;
-        
-        public BotRagdollDying(Ragdoll ragdoll, IAnimator animator)
+        private readonly bool _punchOnDeath;
+        private event Action OnDead;
+
+        public BotRagdollDying(Ragdoll ragdoll, IAnimator animator, bool punchOnDeath = true, Action onDead = null)
         {
             _ragdoll = ragdoll;
             _animator = animator;
+
+            _punchOnDeath = punchOnDeath;
+            OnDead += onDead;
         }
 
         public void Dead()
         {
             _animator.PlayRandom("death");
+
+            if (_punchOnDeath)
+            {
+                _ragdoll.RigidbodiesState(true);
+                Punch();
+            }
             
-            _ragdoll.RigidbodiesState(true);
             _ragdoll.CollidersState(false);
-            
-            Punch();
+            OnDead?.Invoke();
         }
 
         private void Punch()

@@ -20,7 +20,6 @@ namespace _3._Scripts.Game.Units.Damageable
             if(!DamageNotNull(damage))
                 return;
             
-            
             _health.Health -= damage;
             OnDamageAppliedEvent(damage);
         }

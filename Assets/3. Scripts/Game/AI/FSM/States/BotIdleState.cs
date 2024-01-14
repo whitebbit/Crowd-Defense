@@ -6,12 +6,11 @@ namespace _3._Scripts.Game.AI.FSM.States
 {
     public class BotIdleState: State
     {
-        private readonly Transform _transform;
         private readonly IAnimator _animator;
 
-        public BotIdleState(Transform transform, IAnimator animator)
+        public BotIdleState(IAnimator animator)
         {
-            _transform = transform;
+
             _animator = animator;
         }
 

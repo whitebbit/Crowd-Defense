@@ -1,4 +1,5 @@
-﻿using _3._Scripts.FSM.Base;
+﻿using System;
+using _3._Scripts.FSM.Base;
 using _3._Scripts.Game.AI.FSM.States;
 using _3._Scripts.Game.Main;
 using _3._Scripts.Game.Units.Animations;
@@ -10,24 +11,24 @@ namespace _3._Scripts.Game.AI
 {
     public class BotFSM : FSMHandler
     {
-        public BotFSM(Transform transform, IAnimator animator, UnitHealth health, IDying dying)
+        public BotFSM(Transform transform, float speed, IAnimator animator, UnitHealth health, IDying dying, Action onDisable = null)
         {
-            var idle = new BotIdleState(transform, animator);
-            var run = new BotRunState(transform, animator);
-            var death = new BotDeathState(transform, animator, dying);
-            var attack = new BotAttackState(transform);
-            
+            var idle = new BotIdleState(animator);
+            var run = new BotRunState(transform, speed, animator);
+            var death = new BotDeathState(dying);
+            var attack = new BotAttackState(transform, animator, onDisable);
+
             AddTransition(idle,
-                new FuncPredicate(() => !Level.Instance.LevelInProgress && health.Health > 0));
+                new FuncPredicate(() => !LevelManager.Instance.CurrentLevel.LevelInProgress && health.Health > 0));
 
             AddTransition(run,
-                new FuncPredicate(() => Level.Instance.LevelInProgress && health.Health > 0));
+                new FuncPredicate(() => LevelManager.Instance.CurrentLevel.LevelInProgress &&
+                                        health.Health > 0 && !run.OnFinish));
 
             AddTransition(death,
                 new FuncPredicate(() => health.Health <= 0 && !death.IsDead));
 
-            AddTransition(attack,
-                new FuncPredicate(() => Input.GetKeyDown(KeyCode.A)));
+            AddTransition(attack, new FuncPredicate(() => run.OnFinish));
 
             StateMachine.SetState(idle);
         }

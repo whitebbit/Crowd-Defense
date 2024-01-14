@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using _3._Scripts.Game.Main;
 using _3._Scripts.UI.Components;
 using DG.Tweening;
@@ -17,10 +18,10 @@ namespace _3._Scripts.UI.Manager.Panels
 
         [Header("Timer")] [SerializeField] private Image timerImage;
         [SerializeField] private TextMeshProUGUI timerText;
-
+        [Header("Goal")] [SerializeField] private TextMeshProUGUI goalText;
         [Header("Weapons")] [SerializeField] private WeaponSelector mainWeapon;
         [SerializeField] private WeaponSelector secondWeapon;
-
+        [Header("Other")] [SerializeField] private List<CanvasGroup> afterGoalObjects = new();
 
         private WeaponSelector _currentWeaponSelector;
         private Timer _timer;
@@ -28,26 +29,51 @@ namespace _3._Scripts.UI.Manager.Panels
         protected override void Awake()
         {
             base.Awake();
-            _timer = new Timer(timerImage, timerText, Level.Instance.CompleteLevel);
+            _timer = new Timer(timerImage, timerText);
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
-            SetWeapons();
-            _timer.StartTimer(10);
-
-            Level.Instance.OnKill += UpdateKillsCounter;
+            GameObjectsState(false);
             UpdateKillsCounter(0);
-            base.Open(onComplete, duration);
+            SetWeapons();
+            
+            LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
+            _timer.OnTime += LevelManager.Instance.CurrentLevel.CompleteLevel;
+
+            base.Open(() =>
+            {
+                OnLevelStart();
+                onComplete?.Invoke();
+            }, duration);
         }
 
         public override void Close(TweenCallback onComplete = null, float duration = 0.3f)
         {
-            Level.Instance.OnKill += UpdateKillsCounter;
+            LevelManager.Instance.CurrentLevel.OnKill -= UpdateKillsCounter;
+            _timer.OnTime -= LevelManager.Instance.CurrentLevel.CompleteLevel;
+
             _timer.StopTimer();
             base.Close(onComplete, duration);
         }
 
+        private void OnLevelStart()
+        {
+            goalText.DOFade(0, 0);
+            Transition.Instance.Open(0.3f).OnComplete(() =>
+            {
+                goalText.DOFade(1, 0.25f).OnComplete(() =>
+                {
+                    goalText.DOFade(0, 0.25f).SetDelay(1f).OnComplete(() =>
+                    {
+                        _timer.StartTimer(30);
+                        GameObjectsState(true);
+                        LevelManager.Instance.CurrentLevel.StartLevel();
+                    });
+                });
+            });
+        }
+        
         private void UpdateKillsCounter(int value) => killsCountText.text = $"{value}";
 
         private void SetWeapons()
@@ -70,6 +96,24 @@ namespace _3._Scripts.UI.Manager.Panels
                 _currentWeaponSelector.Unselect();
 
             _currentWeaponSelector = weaponSelector;
+        }
+
+        private void GameObjectsState(bool state)
+        {
+            if (state)
+            {
+                foreach (var obj in afterGoalObjects)
+                {
+                    obj.DOFade(1, .25f);
+                }
+            }
+            else
+            {
+                foreach (var obj in afterGoalObjects)
+                {
+                    obj.alpha = 0;
+                }
+            }
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿
+using System;
 using System.Collections.Generic;
-using UnityEngine.Serialization;
-
+using _3._Scripts.Game;
+using Random =UnityEngine.Random;
 namespace YG
 {
     [System.Serializable]
@@ -16,12 +17,15 @@ namespace YG
 
         // Ваши сохранения
         public int money;                       
-        public int health = 100;                       
+        public int health = 100;  
+        
         public string currentWeapon = "machine_gun";
         public string secondWeapon = "cannon";
-        public int currentLevel = 1;
-        public int completedLevelsCount = 0;
         public Dictionary<string, int> weaponsLevel = new ();
+        
+        public string currentBossName;
+        public int currentLevel = 1;
+        public int completedLevelsCount;
 
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
@@ -30,6 +34,8 @@ namespace YG
             return weaponsLevel.TryGetValue(id, out var level) ? level : 0;
         }
 
+        
+        
         // Вы можете выполнить какие то действия при загрузке сохранений
     }
 }

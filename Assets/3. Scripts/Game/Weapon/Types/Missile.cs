@@ -11,7 +11,7 @@ namespace _3._Scripts.Game.Weapon.Types
         [SerializeField] protected Collider collider;
         protected WeaponConfig Config;
         protected bool Exploded;
-        protected float Damage => Config.Get<int>("damage") * Config.Improvements.GetDamageImprovement(Config.Get<string>("id"));
+        protected float Damage => Config.Get<float>("damage") * Config.Improvements.GetDamageImprovement(Config.Get<string>("id"));
 
 
         public abstract void Launch(Transform fromPoint, WeaponConfig config);
