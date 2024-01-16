@@ -8,6 +8,7 @@ using DG.Tweening;
 using TMPro;
 using UI.Panels;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using YG;
 
@@ -21,7 +22,7 @@ namespace _3._Scripts.UI.Manager.Panels
         [Header("Additional")] [SerializeField]
         private ProgressTable progressTable;
 
-        [SerializeField] private MoneyEffect moneyEffect;
+        [SerializeField] private GetterEffect getterEffect;
 
         [SerializeField] private BonusReward bonusReward;
         [Header("Buttons")] [SerializeField] private Button getBonusButton;
@@ -63,7 +64,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private void SetKillsCount()
         {
             killsCount.text =
-                $"<sprite=0>{LevelManager.Instance.CurrentLevel.KillsCount}/{LevelManager.Instance.CurrentLevel.BotsCount}";
+                $"{LevelManager.Instance.CurrentLevel.KillsCount}/{LevelManager.Instance.CurrentLevel.BotsCount}";
         }
 
         private void Continue()
@@ -108,13 +109,14 @@ namespace _3._Scripts.UI.Manager.Panels
         private void OnReward(int id)
         {
             if (id != 1) return;
-
+            bonusReward.SetReward();
             GetReward();
         }
 
         private void GetReward()
         {
-            moneyEffect.DoMoneyEffect(10,
+            var count = bonusReward.Used ? 20 : 10;
+            getterEffect.DoMoneyEffect(count,
                 () =>
                 {
                     MoneyManager.MoneyCount += bonusReward.Used ? bonusReward.CurrentMultiplier.Multiplier * 50 : 50;

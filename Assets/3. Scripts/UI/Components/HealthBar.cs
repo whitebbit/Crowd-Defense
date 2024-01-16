@@ -7,7 +7,7 @@ namespace _3._Scripts.UI.Components
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] private Image fill;
+        [SerializeField] private Image bar;
 
         private void Awake()
         {
@@ -19,7 +19,7 @@ namespace _3._Scripts.UI.Components
         {
             var value = current / max;
             
-            fill.DOFillAmount(value, 0.1f).OnComplete(() =>
+            bar.DOFillAmount(value, 0.1f).OnComplete(() =>
             {
                 if (value <= 0)
                     gameObject.SetActive(false);

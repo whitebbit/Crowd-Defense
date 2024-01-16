@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace _3._Scripts.UI.Components
 {
-    public class MoneyEffect : MonoBehaviour
+    public class GetterEffect : MonoBehaviour
     {
         [Header("Movement")] [SerializeField] private RectTransform fromPoint;
         [SerializeField] private RectTransform toPoint;
@@ -27,17 +27,24 @@ namespace _3._Scripts.UI.Components
             StartCoroutine(DoEffect(count, onComplete));
         }
 
+        public void SetFinishPoint(RectTransform point) => toPoint = point;
+        
         private void SpawnObjectsWithExplosion(int count)
         {
             for (var i = 0; i < count; i++)
             {
                 var randomDirection = Random.insideUnitCircle.normalized;
-                var spawnPosition = fromPoint.position +
+                var position = fromPoint.position;
+                var spawnPosition = position +
                                     new Vector3(randomDirection.x, randomDirection.y, 0) * explosionRadius;
-                var obj = Instantiate(template, spawnPosition, Quaternion.identity, transform);
+                var obj = Instantiate(template, position, Quaternion.identity, transform);
 
                 _objects.Add(obj);
-                obj.transform.DOScale(Vector3.zero, explosionDuration)
+                
+                obj.DOMove(spawnPosition, explosionDuration)
+                    .SetEase(explosionEase);
+                
+                obj.DOScale(Vector3.zero, explosionDuration)
                     .From()
                     .SetEase(explosionEase);
             }
@@ -66,7 +73,8 @@ namespace _3._Scripts.UI.Components
             SpawnObjectsWithExplosion(count);
             yield return new WaitForSeconds(explosionDuration);
             AnimateObjectsToTarget();
-            yield return new WaitForSeconds(moveDuration + _objects.Count * 0.1f);
+            AnimateObjectsToTarget();
+            yield return new WaitForSeconds(moveDuration + (_objects.Count - 1) * 0.05f);
             _objects.Clear();
             onComplete?.Invoke();
         }

@@ -7,6 +7,9 @@ namespace _3._Scripts.UI.Components
 {
     public class LevelStars: MonoBehaviour
     {
+        [SerializeField] private Sprite emptySprite;
+        [SerializeField] private Sprite filledSprite;
+        [Space]
         [SerializeField] private Color emptyColor;
         [SerializeField] private Color filledColor;
 
@@ -22,11 +25,13 @@ namespace _3._Scripts.UI.Components
             foreach (var star in _stars)
             {
                 star.color = emptyColor;
+                star.sprite = emptySprite;
             }
 
             for (var i = 0; i < level; i++)
             {
                 _stars[i].color = filledColor;
+                _stars[i].sprite = filledSprite;
             }
         }
     }

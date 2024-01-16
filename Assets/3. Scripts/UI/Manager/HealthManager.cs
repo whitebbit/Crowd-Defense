@@ -13,7 +13,7 @@ namespace _3._Scripts.UI.Manager
             get => YandexGame.savesData.health;
             set
             {
-                var count = Mathf.Clamp(value, 0, 100);
+                var count = Mathf.Clamp(value, 0, 150);
                 OnChanged?.Invoke(YandexGame.savesData.health, count);
                 
                 YandexGame.savesData.health = count;

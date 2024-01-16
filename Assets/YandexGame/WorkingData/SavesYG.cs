@@ -21,14 +21,13 @@ namespace YG
         public int health = 100;  
         
         public string currentWeapon = "machine_gun";
-        public string secondWeapon = "cannon";
+        public string secondWeapon = "";
         public Dictionary<string, int> weaponsLevel = new ();
         public List<string> unlockedWeapons = new ()
         {
-            "machine_gun"
+            "machine_gun",
         };
         
-        public string currentBossName;
         public int currentLevel = 1;
         public int completedLevelsCount;
 

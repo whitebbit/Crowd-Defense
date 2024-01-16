@@ -5,14 +5,13 @@ using YG;
 
 namespace _3._Scripts.Game.Main
 {
-    public class LevelManager: Singleton<LevelManager>
+    public class LevelManager : Singleton<LevelManager>
     {
-        [Header("Defaults")]
-        [SerializeField] private List<Level> defaultLevels = new();
-        [Header("Boss")]
-        [SerializeField] private SerializableDictionary<string, Level> bossLevels;
-        
+        [Header("Defaults")] [SerializeField] private List<Level> defaultLevels = new();
+        [Header("Boss")] [SerializeField] private List<Level> bossLevels;
+
         public Level CurrentLevel { get; private set; }
+
         public Level CreateLevel(int number)
         {
             if (number > 8)
@@ -22,13 +21,9 @@ namespace _3._Scripts.Game.Main
                 YandexGame.SaveProgress();
             }
             
-            if (number == 8)
-                CurrentLevel = Instantiate(bossLevels[Configuration.Instance.GetBossName()], transform);
-            else
-            {
-                var level = Random.Range(0, defaultLevels.Count);
-                CurrentLevel = Instantiate(defaultLevels[level], transform);
-            }
+            var list = number == 8 ? bossLevels : defaultLevels;
+            var level = Random.Range(0, list.Count);
+            CurrentLevel = Instantiate(list[level], transform);
 
             return CurrentLevel;
         }

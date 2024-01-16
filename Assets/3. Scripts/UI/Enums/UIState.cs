@@ -5,6 +5,7 @@
         None,
         Main,
         Play,
-        Win
+        Win,
+        Roulette
     }
 }

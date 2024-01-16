@@ -20,7 +20,7 @@ namespace _3._Scripts.UI.Components
         {
             Text.DOCounter(oldValue, newValue, 0.15f).OnUpdate(() =>
             {
-                Text.text += "%";
+                Text.text += " / 150";
             });
         }
     }
