@@ -16,8 +16,7 @@ namespace _3._Scripts.UI.Manager.Panels
         [Header("Kills Counter")] [SerializeField]
         private TextMeshProUGUI killsCountText;
 
-        [Header("Timer")] [SerializeField] private Image timerImage;
-        [SerializeField] private TextMeshProUGUI timerText;
+        [Header("Timer")] [SerializeField] private TextMeshProUGUI timerText;
         [Header("Goal")] [SerializeField] private TextMeshProUGUI goalText;
         [Header("Weapons")] [SerializeField] private WeaponSelector mainWeapon;
         [SerializeField] private WeaponSelector secondWeapon;
@@ -29,7 +28,7 @@ namespace _3._Scripts.UI.Manager.Panels
         protected override void Awake()
         {
             base.Awake();
-            _timer = new Timer(timerImage, timerText);
+            _timer = new Timer(text: timerText);
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
@@ -37,7 +36,7 @@ namespace _3._Scripts.UI.Manager.Panels
             GameObjectsState(false);
             UpdateKillsCounter(0);
             SetWeapons();
-            
+
             LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
             _timer.OnTime += LevelManager.Instance.CurrentLevel.CompleteLevel;
 
@@ -54,6 +53,12 @@ namespace _3._Scripts.UI.Manager.Panels
             _timer.OnTime -= LevelManager.Instance.CurrentLevel.CompleteLevel;
 
             _timer.StopTimer();
+
+            mainWeapon.Unselect();
+            mainWeapon.ResetSelector();
+            secondWeapon.Unselect();
+            secondWeapon.ResetSelector();
+
             base.Close(onComplete, duration);
         }
 
@@ -73,7 +78,7 @@ namespace _3._Scripts.UI.Manager.Panels
                 });
             });
         }
-        
+
         private void UpdateKillsCounter(int value) => killsCountText.text = $"{value}";
 
         private void SetWeapons()

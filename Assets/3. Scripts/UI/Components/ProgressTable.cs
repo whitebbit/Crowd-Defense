@@ -6,33 +6,50 @@ namespace _3._Scripts.UI.Components
 {
     public class ProgressTable : MonoBehaviour
     {
-        [Header("Boss")] [SerializeField] private Image bossIcon;
-        [Header("Levels")]
-        [SerializeField] private List<ProgressSection> levels = new();
-        [Header("Colors")] [SerializeField] private Color emptyColor;
-        [SerializeField] private Color completedColor;
-        [SerializeField] private Color nextColor;
+        [Header("Boss")] [SerializeField] private Slider slider;
+        [Header("Levels")] [SerializeField] private List<ProgressSection> levels = new();
+        [Header("Images")] [SerializeField] private Sprite completeImage;
+        [SerializeField] private Sprite emptyImage;
+        [Header("Colors")] [SerializeField] private Color completeColor;
+        [SerializeField] private Color emptyColor;
 
-
-        public void SetBossIcon(Sprite icon) => bossIcon.sprite = icon;
-        
         public void SetLevel(int completedLevelNumber)
         {
-            if (completedLevelNumber >= levels.Count) return;
-
             foreach (var level in levels)
             {
-                level.SetColor(emptyColor);
+                level.SetImage(emptyImage);
+                level.SetTextColor(emptyColor);
             }
 
+            slider.value = (completedLevelNumber - 1f) * 1f / levels.Count;
+
+            switch (completedLevelNumber)
+            {
+                case 1:
+                    levels[0].SetImage(completeImage);
+                    levels[0].SetTextColor(completeColor);
+                    slider.value = 0;
+                    return;
+                case 8:
+                    slider.value = 1;
+                    break;
+            }
+
+            if (completedLevelNumber >= levels.Count)
+            {
+                foreach (var level in levels)
+                {
+                    level.SetImage(completeImage);
+                    level.SetTextColor(completeColor);
+                }
+                return;
+            }
+            
             for (var i = 0; i < completedLevelNumber; i++)
             {
-                levels[i].SetColor(completedColor);
+                levels[i].SetImage(completeImage);
+                levels[i].SetTextColor(completeColor);
             }
-
-            if (completedLevelNumber == levels.Count) return;
-
-            levels[completedLevelNumber].SetColor(nextColor);
         }
     }
 }

@@ -85,6 +85,13 @@ namespace _3._Scripts.UI.Components
             _selected = false;
         }
 
+        public void ResetSelector()
+        {
+            _button.image.fillAmount = 1;
+            _reloadTween.Kill();
+            _reloadTween = null;
+        }
+        
         private void SubscribeToWeapon(string id)
         {
             var weapon = LevelManager.Instance.CurrentLevel.Player.GetWeapon(id).WeaponFsm;

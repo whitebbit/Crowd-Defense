@@ -8,13 +8,9 @@ namespace _3._Scripts.UI.Components
 {
     public class MoneyWidget: TextWidget
     {
-        private void Start()
-        {
-            OnChange(MoneyManager.MoneyCount, MoneyManager.MoneyCount);
-        }
-
         private void OnEnable()
         {
+            OnChange(MoneyManager.MoneyCount, MoneyManager.MoneyCount);
             MoneyManager.OnChanged += OnChange;
         }
 

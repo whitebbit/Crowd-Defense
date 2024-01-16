@@ -21,12 +21,13 @@ namespace _3._Scripts.Game.Weapon
         {
             StateMachine.Update();
         }
-
-        public  void FixedUpdate()
+        
+        public void ResetActions()
         {
-            StateMachine.FixedUpdate();
+            onAttack = null;
+            onReloadStart = null;
         }
-
+        
         protected virtual void OnReloadStart(float time)
         {
             onReloadStart?.Invoke(time);

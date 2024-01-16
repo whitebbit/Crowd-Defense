@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using _3._Scripts.Game;
+using UnityEngine.Serialization;
 using Random =UnityEngine.Random;
 namespace YG
 {
@@ -22,6 +23,10 @@ namespace YG
         public string currentWeapon = "machine_gun";
         public string secondWeapon = "cannon";
         public Dictionary<string, int> weaponsLevel = new ();
+        public List<string> unlockedWeapons = new ()
+        {
+            "machine_gun"
+        };
         
         public string currentBossName;
         public int currentLevel = 1;

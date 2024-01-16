@@ -7,7 +7,7 @@ namespace _3._Scripts.UI.Components
 {
     public class BonusReward : MonoBehaviour
     {
-        [Header("Game")]
+        [Header("Game")] [SerializeField] private float moveSpeed;
         [SerializeField] private RectTransform indicator;
         [SerializeField] private Transform[] pathPoints;
         [Header("Visual")]
@@ -16,6 +16,7 @@ namespace _3._Scripts.UI.Components
 
         private int _pathIndex;
         public bool Blocked { get; set; }
+        public bool Used { get; set; }
         public UIBonusMultiplier CurrentMultiplier { get; private set; }
 
         private void Update()
@@ -23,6 +24,12 @@ namespace _3._Scripts.UI.Components
             MoveIndicator();
         }
 
+        public void ResetBonus()
+        {
+            Used = false;
+            Blocked = false;
+        }
+        
         private void MoveIndicator()
         {
             if (Blocked) return;
@@ -31,7 +38,7 @@ namespace _3._Scripts.UI.Components
 
             var distance = Vector3.Distance(pathPoints[0].position, pathPoints[1].position);
 
-            var deviceSpeed = YandexGame.EnvironmentData.isMobile ? 25 : 100;
+            var deviceSpeed = YandexGame.EnvironmentData.isMobile ? moveSpeed / 4 : moveSpeed;
             var speed = distance / deviceSpeed;
             indicator.position = Vector3.MoveTowards(indicator.position, position, speed);
 
@@ -49,9 +56,10 @@ namespace _3._Scripts.UI.Components
             var bonusMultiplier = UIRaycast.FindObject<UIBonusMultiplier>(indicator.position);
             if (bonusMultiplier == null) return;
 
-            multiplierText.additionalText = $"\n{bonusMultiplier.Multiplier}X";
-            rewardText.text = $"+{50 * bonusMultiplier.Multiplier}";
+            multiplierText.additionalText = $"{bonusMultiplier.Multiplier}X ";
+            //rewardText.text = $"+{50 * bonusMultiplier.Multiplier}";
             CurrentMultiplier = bonusMultiplier;
         }
+        
     }
 }

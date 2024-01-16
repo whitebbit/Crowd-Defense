@@ -60,7 +60,12 @@ namespace _3._Scripts.UI.Components
             _timerText.text = $"{time}";
             var tween =_timerText.DOCounter(time, 0, time)
                 .SetEase(Ease.Linear)
-                .OnComplete(OnComplete);
+                .OnComplete(OnComplete)
+                .OnUpdate(() =>
+                {
+                    var counter = _timerText.text;
+                    _timerText.text = $"00 : {counter}";
+                });
             
             _tweens.Add(tween);
         }

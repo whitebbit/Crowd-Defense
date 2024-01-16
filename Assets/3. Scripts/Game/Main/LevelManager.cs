@@ -15,6 +15,13 @@ namespace _3._Scripts.Game.Main
         public Level CurrentLevel { get; private set; }
         public Level CreateLevel(int number)
         {
+            if (number > 8)
+            {
+                number = 1;
+                YandexGame.savesData.currentLevel = number;
+                YandexGame.SaveProgress();
+            }
+            
             if (number == 8)
                 CurrentLevel = Instantiate(bossLevels[Configuration.Instance.GetBossName()], transform);
             else

@@ -1,13 +1,16 @@
 {
-    "idSave": 20,
+    "idSave": 116,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "money": 0,
-    "health": 82,
+    "money": 2600,
+    "health": 100,
     "currentWeapon": "machine_gun",
     "secondWeapon": "cannon",
-    "currentBossName": "pirate",
-    "currentLevel": 7,
-    "completedLevelsCount": 6
+    "unlockedWeapons": [
+        "machine_gun"
+    ],
+    "currentBossName": "mummy",
+    "currentLevel": 3,
+    "completedLevelsCount": 58
 }

@@ -24,10 +24,10 @@ namespace _3._Scripts.Game.AI.FSM.States
 
         public override void OnEnter()
         {
-            //_animator.PlayRandom("attack");
+            _animator.PlayRandom("attack");
             LevelManager.Instance.CurrentLevel.BotAttacked();
             AttackPlayer();
-            _transform.DOScale(Vector3.zero, 1f).SetDelay(1f).OnComplete(() => { OnDisable?.Invoke(); });
+            _transform.DOScale(Vector3.zero, 1.25f).SetDelay(1.25f).OnComplete(() => { OnDisable?.Invoke(); });
         }
 
         private void AttackPlayer()
