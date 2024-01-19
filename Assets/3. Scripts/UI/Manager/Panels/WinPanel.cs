@@ -4,6 +4,7 @@ using _3._Scripts.Game;
 using _3._Scripts.Game.Main;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
+using _3._Scripts.UI.Manager.Popups;
 using DG.Tweening;
 using TMPro;
 using UI.Panels;
@@ -23,6 +24,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private ProgressTable progressTable;
 
         [SerializeField] private GetterEffect getterEffect;
+        [SerializeField] private VictoryPopup victoryPopup;
 
         [SerializeField] private BonusReward bonusReward;
         [Header("Buttons")] [SerializeField] private Button getBonusButton;
@@ -42,6 +44,8 @@ namespace _3._Scripts.UI.Manager.Panels
             SetKillsCount();
             InitializeProgress();
             SetLevelNumber();
+            victoryPopup.Open();
+            
             YandexGame.RewardVideoEvent += OnReward;
 
             base.Open(onComplete, duration);
@@ -52,6 +56,7 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             YandexGame.RewardVideoEvent -= OnReward;
             bonusReward.ResetBonus();
+            victoryPopup.Close();
 
             base.Close(onComplete, duration);
         }
@@ -86,12 +91,12 @@ namespace _3._Scripts.UI.Manager.Panels
             //TODO: open ad
         }
 
-         private void GoToMenu()
+        private void GoToMenu()
         {
             if (bonusReward.Blocked) return;
-            
+
             var count = bonusReward.Used ? 20 : 10;
-            
+
             bonusReward.Blocked = true;
             getterEffect.DoMoneyEffect(count, () =>
             {
@@ -133,7 +138,15 @@ namespace _3._Scripts.UI.Manager.Panels
                     {
                         LevelManager.Instance.DeleteLevel();
                         LevelManager.Instance.CreateLevel(YandexGame.savesData.currentLevel);
-                        UIManager.Instance.CurrentState = UIState.Play;
+                        if (YandexGame.savesData.currentLevel % 4 == 0)
+                        {
+                            Transition.Instance.Open(0.3f).SetDelay(0.3f);
+                            UIManager.Instance.CurrentState = UIState.Roulette;
+                        }
+                        else
+                        {
+                            UIManager.Instance.CurrentState = UIState.Play;
+                        }
                     });
                 });
         }

@@ -7,6 +7,7 @@
         Play,
         Win,
         Roulette,
-        Shop
+        Shop,
+        Settings
     }
 }

@@ -13,12 +13,14 @@ namespace _3._Scripts.UI.Manager.Panels
     {
         [SerializeField] private Button startButton;
         [SerializeField] private Button shopButton;
+        [SerializeField] private Button settingsButton;
         private Tween _buttonTween;
 
         private void Start()
         {
             startButton.onClick.AddListener(StartGame);
-            shopButton.onClick.AddListener(()=> UIManager.Instance.CurrentState = UIState.Shop);
+            shopButton.onClick.AddListener(() => UIManager.Instance.CurrentState = UIState.Shop);
+            settingsButton.onClick.AddListener(() => UIManager.Instance.CurrentState = UIState.Settings);
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
@@ -37,11 +39,13 @@ namespace _3._Scripts.UI.Manager.Panels
             startButton.transform.localScale = Vector3.one;
             base.Close(onComplete, duration);
         }
+
         private void ButtonAnimation()
         {
             _buttonTween = startButton.transform.DOScale(Vector3.one * 1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo);
             _buttonTween.Play();
         }
+
         private void StartGame()
         {
             Transition.Instance.Close(0.3f).OnComplete(() =>
@@ -50,10 +54,18 @@ namespace _3._Scripts.UI.Manager.Panels
                 var level = LevelManager.Instance.CreateLevel(i);
 
                 MainMenuEnvironment.Instance.EnvironmentState(false);
-                
+
                 level.Player.SetCameraState(true);
 
-                UIManager.Instance.CurrentState = UIState.Play;
+                if (YandexGame.savesData.currentLevel % 4 == 0)
+                {
+                    Transition.Instance.Open(0.3f).SetDelay(0.3f);
+                    UIManager.Instance.CurrentState = UIState.Roulette;
+                }
+                else
+                {
+                    UIManager.Instance.CurrentState = UIState.Play;
+                }
             });
         }
     }

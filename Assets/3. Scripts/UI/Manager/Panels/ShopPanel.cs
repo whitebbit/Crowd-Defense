@@ -108,10 +108,8 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void Buy(bool byCoins)
         {
-            var price = byCoins ? buyPrice : 0;
-            if (MoneyManager.MoneyCount < price) return;
-
-            MoneyManager.MoneyCount -= price;
+            if (byCoins)
+                MoneyManager.MoneyCount -= buyPrice;
 
             _currentItem.Unlock();
 
@@ -123,9 +121,8 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             var currentLevel = YandexGame.savesData.GetWeaponLevel(_currentItem.ID);
             var price = upgradePrice[currentLevel];
-            if (MoneyManager.MoneyCount < price) return;
-            
-            MoneyManager.MoneyCount -= byCoins ? price : 0;
+            if (byCoins)
+                MoneyManager.MoneyCount -= price;
 
             _currentItem.Upgrade(currentLevel + 1);
             YandexGame.savesData.weaponsLevel[_currentItem.ID] = currentLevel + 1;

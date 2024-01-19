@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _3._Scripts.Game.Main;
 using _3._Scripts.UI.Components;
+using _3._Scripts.UI.Manager.Popups;
 using DG.Tweening;
 using TMPro;
 using UI.Panels;
@@ -21,6 +22,7 @@ namespace _3._Scripts.UI.Manager.Panels
         [Header("Weapons")] [SerializeField] private WeaponSelector mainWeapon;
         [SerializeField] private WeaponSelector secondWeapon;
         [Header("Other")] [SerializeField] private List<CanvasGroup> afterGoalObjects = new();
+        [SerializeField] private BossPopup bossPopup;
 
         private WeaponSelector _currentWeaponSelector;
         private Timer _timer;
@@ -36,7 +38,6 @@ namespace _3._Scripts.UI.Manager.Panels
             GameObjectsState(false);
             UpdateKillsCounter(0);
             SetWeapons();
-
             LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
             _timer.OnTime += LevelManager.Instance.CurrentLevel.CompleteLevel;
 
@@ -65,20 +66,42 @@ namespace _3._Scripts.UI.Manager.Panels
         private void OnLevelStart()
         {
             goalText.DOFade(0, 0);
-            Transition.Instance.Open(0.3f).OnComplete(() =>
+            Transition.Instance.Open(0.2f);
+            ViewLevelGoal();
+        }
+        
+        private void ViewLevelGoal()
+        {
+            if (YandexGame.savesData.currentLevel == 8)
+                ViewBossPopup();
+            else
+                ViewClassicPopup();
+        }
+
+        private void ViewClassicPopup()
+        {
+            goalText.DOFade(1, 0.25f).OnComplete(() =>
             {
-                goalText.DOFade(1, 0.25f).OnComplete(() =>
+                goalText.DOFade(0, 0.25f).SetDelay(1f).OnComplete(() =>
                 {
-                    goalText.DOFade(0, 0.25f).SetDelay(1f).OnComplete(() =>
-                    {
-                        _timer.StartTimer(30);
-                        GameObjectsState(true);
-                        LevelManager.Instance.CurrentLevel.StartLevel();
-                    });
+                    _timer.StartTimer(30);
+                    GameObjectsState(true);
+                    LevelManager.Instance.CurrentLevel.StartLevel();
                 });
             });
         }
-
+        private void ViewBossPopup()
+        {
+            bossPopup.Open();
+            goalText.DOFade(0, 3).OnComplete(() =>
+            {
+                _timer.StartTimer(30);
+                bossPopup.Close();
+                GameObjectsState(true);
+                LevelManager.Instance.CurrentLevel.StartLevel();
+            });
+        }
+        
         private void UpdateKillsCounter(int value) => killsCountText.text = $"{value}";
 
         private void SetWeapons()

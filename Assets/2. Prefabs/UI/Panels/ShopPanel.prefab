@@ -402,12 +402,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMPComponent: {fileID: 5974055054025476845}
+  textMPComponent: {fileID: 2104184731544252734}
   uniqueFontTMP: {fileID: 0}
   textLComponent: {fileID: 0}
   infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
   text: 
-  ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C"
+  ru: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C"
   en: Upgrade
   tr: 
   az: 
@@ -595,7 +595,7 @@ MonoBehaviour:
   textLComponent: {fileID: 0}
   infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
   text: 
-  ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C"
+  ru: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C"
   en: Upgrade
   tr: 
   az: 
@@ -2049,7 +2049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMPComponent: {fileID: 5551098541326776035}
+  textMPComponent: {fileID: 6086583025514230263}
   uniqueFontTMP: {fileID: 0}
   textLComponent: {fileID: 0}
   infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}

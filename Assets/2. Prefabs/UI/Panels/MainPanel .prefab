@@ -1060,6 +1060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 3622699334832783764}
   shopButton: {fileID: 6540769963086784698}
+  settingsButton: {fileID: 6986360370358214357}
 --- !u!1 &5743539112346246725
 GameObject:
   m_ObjectHideFlags: 0

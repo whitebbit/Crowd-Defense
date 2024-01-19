@@ -1,17 +1,19 @@
 {
-  "idSave": 100,
+  "idSave": 1536,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
-  "money": 450,
-  "health": 53,
-  "currentWeapon": "ballista",
+  "volume": -80.0,
+  "money": 2320,
+  "health": 79,
+  "currentWeapon": "cannon",
   "secondWeapon": "",
   "weaponsLevel": {},
   "unlockedWeapons": [
     "machine_gun",
-    "ballista"
+    "mortar",
+    "cannon"
   ],
-  "currentLevel": 5,
-  "completedLevelsCount": 20
+  "currentLevel": 7,
+  "completedLevelsCount": 30
 }

@@ -1,9 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using _3._Scripts.Game;
 using UnityEngine.Serialization;
-using Random =UnityEngine.Random;
+using Random = UnityEngine.Random;
+
 namespace YG
 {
     [System.Serializable]
@@ -17,14 +17,16 @@ namespace YG
 
 
         // Ваши сохранения
-        public int money;                       
-        public int health = 100;  
-        
+        public float volume;
+
+        public int money;
+        public int health = 100;
+
         public string currentWeapon = "machine_gun";
         public string secondWeapon = "";
-        public Dictionary<string, int> weaponsLevel = new ();
+        public Dictionary<string, int> weaponsLevel = new();
         public List<string> unlockedWeapons = new();
-        
+
         public int currentLevel = 1;
         public int completedLevelsCount;
 
@@ -34,9 +36,8 @@ namespace YG
         {
             return weaponsLevel.TryGetValue(id, out var level) ? level : 0;
         }
-        
-        
-        
+
+
         // Вы можете выполнить какие то действия при загрузке сохранений
     }
 }

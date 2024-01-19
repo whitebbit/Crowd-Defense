@@ -48,7 +48,7 @@ public class AudioYB : MonoBehaviour
         yield return new WaitForSeconds(0.02f);
 
         Clip clip = AudioStreamCash.Find(name);
-        if (clip == null) Debug.LogError($"Не найден клип {name}");
+        if (clip == null) Debug.LogError($"РќРµ РЅР°Р№РґРµРЅ РєР»РёРї {name}");
         load = false;
         play = true;
         StartCoroutine(clip.GetFile(LoadAfter));
@@ -84,7 +84,7 @@ public class AudioYB : MonoBehaviour
         var clip = AudioStreamCash.Find(clipName);
         if (clip == null)
         {
-            Debug.LogError("Нет такого клипа! Проверь название " + "Name:" + " " + name);
+            Debug.LogError("РќРµС‚ С‚Р°РєРѕРіРѕ РєР»РёРїР°! РџСЂРѕРІРµСЂСЊ РЅР°Р·РІР°РЅРёРµ " + "Name:" + " " + name);
             Debug.Break();
             return;
         }

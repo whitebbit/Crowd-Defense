@@ -50,6 +50,7 @@ namespace _3._Scripts.UI.Components
                 return;
             }
             
+            gameObject.SetActive(true);
             var level = YandexGame.savesData.GetWeaponLevel(id);
             var visual = _config.Visual;
 

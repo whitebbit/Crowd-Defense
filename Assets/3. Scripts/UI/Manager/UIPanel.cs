@@ -31,7 +31,8 @@ namespace UI.Panels
                 return;
 
             ClearTween();
-        
+            
+            gameObject.SetActive(true);
             var tween = CanvasGroup.DOFade(1, duration)
                 .OnComplete(() =>
                 {

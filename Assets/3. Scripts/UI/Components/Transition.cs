@@ -21,7 +21,7 @@ namespace _3._Scripts.UI.Components
 
         private RectTransform OpenerTransform => opener.transform as RectTransform;
         private RectTransform BackgroundTransform => background.transform as RectTransform;
-
+        
         private void Start()
         {
             OpenerTransform.sizeDelta = openedOnStart ? Size : Vector2.zero;

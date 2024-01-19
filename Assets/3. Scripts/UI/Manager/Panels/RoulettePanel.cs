@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 using Random = UnityEngine.Random;
+using Transition = _3._Scripts.UI.Components.Transition;
 
 namespace _3._Scripts.UI.Manager.Panels
 {
@@ -31,7 +32,11 @@ namespace _3._Scripts.UI.Manager.Panels
         private void Start()
         {
             getReward.onClick.AddListener(GetReward);
-            rotateAgain.onClick.AddListener(() => YandexGame.RewVideoShow(2));
+            rotateAgain.onClick.AddListener(() =>
+            {
+                if (_rotating) return;
+                YandexGame.RewVideoShow(2);
+            });
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
@@ -51,7 +56,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private void OnReward(int obj)
         {
             if (obj != 2) return;
-
+            
             Rotate();
             rotateAgain.gameObject.SetActive(false);
         }
@@ -130,7 +135,10 @@ namespace _3._Scripts.UI.Manager.Panels
         private IEnumerator DelayReward()
         {
             yield return new WaitForSeconds(0.5f);
-            UIManager.Instance.CurrentState = UIState.Main;
+            Transition.Instance.Close(0.3f).OnComplete(() =>
+            {
+                UIManager.Instance.CurrentState = UIState.Play;
+            });
         }
     }
 }
