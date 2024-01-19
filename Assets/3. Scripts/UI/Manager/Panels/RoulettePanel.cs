@@ -40,7 +40,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
             YandexGame.savesData.secondWeapon = "";
             YandexGame.SaveProgress();
-            
+
             TryAddWeaponsToRewards();
             AddOtherRewards();
 
@@ -97,7 +97,8 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             var unlocked = YandexGame.savesData.unlockedWeapons;
             var weapons = configs.Select(c => c as WeaponRouletteItemConfig)
-                .Where(weapon => unlocked.Exists(u => weapon != null && u == weapon.WeaponID)).ToList();
+                .Where(weapon => unlocked.Exists(u =>
+                    weapon != null && u != YandexGame.savesData.currentWeapon && u == weapon.WeaponID)).ToList();
             foreach (var weapon in weapons)
             {
                 items.Find(i => !i.Initialized).Initialize(weapon);

@@ -55,7 +55,7 @@ namespace _3._Scripts.UI.Components
 
             _weaponId = id;
             icon.sprite = visual.Icon;
-            bulletsCount.text = $"{_config.Get<int>("bulletCount")}";
+            bulletsCount.text = $"{BulletsCount}";
             levelStars.SetLevel(level);
             
             SubscribeToWeapon(id);

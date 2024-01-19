@@ -12,11 +12,13 @@ namespace _3._Scripts.UI.Manager.Panels
     public class MainPanel : UIPanel
     {
         [SerializeField] private Button startButton;
+        [SerializeField] private Button shopButton;
         private Tween _buttonTween;
 
         private void Start()
         {
             startButton.onClick.AddListener(StartGame);
+            shopButton.onClick.AddListener(()=> UIManager.Instance.CurrentState = UIState.Shop);
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)

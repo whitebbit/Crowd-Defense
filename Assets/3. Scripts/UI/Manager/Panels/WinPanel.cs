@@ -86,14 +86,23 @@ namespace _3._Scripts.UI.Manager.Panels
             //TODO: open ad
         }
 
-        private void GoToMenu()
+         private void GoToMenu()
         {
-            Transition.Instance.Close(0.3f).OnComplete(() =>
+            if (bonusReward.Blocked) return;
+            
+            var count = bonusReward.Used ? 20 : 10;
+            
+            bonusReward.Blocked = true;
+            getterEffect.DoMoneyEffect(count, () =>
             {
-                LevelManager.Instance.DeleteLevel();
-                MainMenuEnvironment.Instance.EnvironmentState(true);
-                UIManager.Instance.CurrentState = UIState.Main;
-                Transition.Instance.Open(0.3f).SetDelay(0.25f);
+                MoneyManager.MoneyCount += bonusReward.Used ? bonusReward.CurrentMultiplier.Multiplier * 50 : 50;
+                Transition.Instance.Close(0.3f).OnComplete(() =>
+                {
+                    LevelManager.Instance.DeleteLevel();
+                    MainMenuEnvironment.Instance.EnvironmentState(true);
+                    UIManager.Instance.CurrentState = UIState.Main;
+                    Transition.Instance.Open(0.3f).SetDelay(0.25f);
+                }).SetDelay(0.25f);
             });
         }
 

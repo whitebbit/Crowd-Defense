@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c378e05a5dc140718e22db7844f58fb4, type: 3}
   m_Name: Mortar
   m_EditorClassIdentifier: 
-  weaponVisual: {fileID: 11400000, guid: 837bb74198f56634a8208ae0921c9cb7, type: 2}
-  weaponImprovements: {fileID: 11400000, guid: b6b0c5944e0fbb24b9a6c3d0d9d2645b, type: 2}
+  weaponVisual: {fileID: 11400000, guid: b8b38d169d89f6f458edcc6306ef7d2a, type: 2}
+  weaponImprovements: {fileID: 11400000, guid: dc885ad1de10c054595ee9d6123a0f98, type: 2}
   floats:
     m_keys:
     - reloadTime
     - mortarForce
     - explosionRadius
     - damage
+    - mortarTorque
     m_values:
     - 5
     - 20
     - 10
     - 5
+    - 20
   integers:
     m_keys:
     - bulletCount

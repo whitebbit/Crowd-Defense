@@ -14,10 +14,11 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista
             var attack = new BallistaAttackState(config, arrow, weaponObject, OnAttack);
             var reload = new BallistaReloadState(config, attack.ResetBulletsCount, OnReloadStart);
 
-            AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
+            AddTransition(idle, new FuncPredicate(() =>
+                !Input.GetMouseButton(0) && !reload.Reloading && attack.CurrentBulletCount > 0));
             AddTransition(attack,
                 new FuncPredicate(() =>
-                    Input.GetMouseButton(0) && attack.CurrentBulletCount > 0 && !reload.Reloading));
+                    Input.GetMouseButtonDown(0) && attack.CurrentBulletCount > 0 && !reload.Reloading));
             AddTransition(reload, new FuncPredicate(() => attack.CurrentBulletCount <= 0 && !reload.Reloading));
 
             StateMachine.SetState(idle);

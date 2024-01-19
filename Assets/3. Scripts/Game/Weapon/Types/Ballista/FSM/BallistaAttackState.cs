@@ -23,8 +23,8 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
             _config = config;
             _arrow = arrow;
             _weaponObject = weaponObject;
-            
             CurrentBulletCount = BulletsCount;
+            OnAttack += onAttack;
         }
         
         public override void OnExit()
@@ -37,6 +37,7 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
         private void Shoot()
         {
             PerformShot();
+            _weaponObject.AnimatorState(true);
             CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, BulletsCount);
             OnAttack?.Invoke(CurrentBulletCount);
         }

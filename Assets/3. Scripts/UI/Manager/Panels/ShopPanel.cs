@@ -1,6 +1,7 @@
 ﻿using System;
 using _3._Scripts.Game;
 using _3._Scripts.UI.Components;
+using _3._Scripts.UI.Enums;
 using DG.Tweening;
 using TMPro;
 using UI.Panels;
@@ -14,28 +15,36 @@ namespace _3._Scripts.UI.Manager.Panels
     {
         [SerializeField] private ShopItem item;
         [SerializeField] private RectTransform container;
-        [Header("Buttons")] [SerializeField] private Button coinsBuy;
+        [SerializeField] private Button back;
+        [Header("Coins buy")] [SerializeField] private Button coinsBuy;
         [SerializeField] private TextMeshProUGUI coinsPrice;
         [SerializeField] private TextMeshProUGUI coinsBuyText;
         [SerializeField] private TextMeshProUGUI coinsUpgradeText;
-        [Space]
-        [SerializeField] private Button adBuy;
+        [Header("AD buy")] [SerializeField] private Button adBuy;
         [SerializeField] private TextMeshProUGUI adBuyText;
         [SerializeField] private TextMeshProUGUI adUpgradeText;
+        [Header("Select")] [SerializeField] private Image weaponIcon;
+        [Space] [SerializeField] private Button selectButton;
+        [SerializeField] private TextMeshProUGUI selectedText;
+        [SerializeField] private TextMeshProUGUI selectText;
+
         [Header("Price")] [SerializeField] private int buyPrice;
         [SerializeField] private SerializableDictionary<int, int> upgradePrice;
-        
+
         private ShopItem _currentItem;
-        
+
         private void Start()
         {
+            InitializeItems();
+
+            back.onClick.AddListener(() => UIManager.Instance.CurrentState = UIState.Main);
             coinsBuy.onClick.AddListener(CoinsBuy);
+            selectButton.onClick.AddListener(SelectWeapon);
             adBuy.onClick.AddListener(() => YandexGame.RewVideoShow(3));
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
-            InitializeItems();
             YandexGame.RewardVideoEvent += AdBuy;
             base.Open(onComplete, duration);
         }
@@ -57,12 +66,13 @@ namespace _3._Scripts.UI.Manager.Panels
                 var visual = config.Visual;
                 var id = config.Get<string>("id");
                 var level = YandexGame.savesData.GetWeaponLevel(id);
-                
+
                 obj.Initialize(id, visual.GetTitle(YandexGame.lang), visual.Icon, level);
+                obj.AddListener(SelectItem);
 
                 if (i == 0)
                     SelectItem(obj);
-                
+
                 i++;
             }
         }
@@ -70,6 +80,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private void SelectItem(ShopItem shopItem)
         {
             _currentItem = shopItem;
+            weaponIcon.sprite = _currentItem.Icon;
             UpdateButtons();
         }
 
@@ -79,26 +90,30 @@ namespace _3._Scripts.UI.Manager.Panels
                 Buy(true);
             else
                 Upgrade(true);
-            
+
             UpdateButtons();
         }
 
         private void AdBuy(int obj)
         {
             if (obj != 3) return;
-            
+
             if (!_currentItem.Unlocked)
                 Buy(false);
             else
                 Upgrade(false);
-            
+
             UpdateButtons();
         }
-        
+
         private void Buy(bool byCoins)
         {
-            if (byCoins)
-                MoneyManager.MoneyCount -= buyPrice;
+            var price = byCoins ? buyPrice : 0;
+            if (MoneyManager.MoneyCount < price) return;
+
+            MoneyManager.MoneyCount -= price;
+
+            _currentItem.Unlock();
 
             YandexGame.savesData.unlockedWeapons.Add(_currentItem.ID);
             YandexGame.SaveProgress();
@@ -108,32 +123,72 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             var currentLevel = YandexGame.savesData.GetWeaponLevel(_currentItem.ID);
             var price = upgradePrice[currentLevel];
+            if (MoneyManager.MoneyCount < price) return;
+            
+            MoneyManager.MoneyCount -= byCoins ? price : 0;
 
-            /*if (byCoins)
-                MoneyManager.MoneyCount -= price;*/
-
+            _currentItem.Upgrade(currentLevel + 1);
             YandexGame.savesData.weaponsLevel[_currentItem.ID] = currentLevel + 1;
             YandexGame.SaveProgress();
         }
-        
+
+        private void SelectWeapon()
+        {
+            YandexGame.savesData.currentWeapon = _currentItem.ID;
+            YandexGame.SaveProgress();
+
+            UpdateButtons();
+        }
+
         private void UpdateButtons()
         {
-            SetCoinButton();
-            
+            UpdateCoinButton();
+            UpdateSelectButton();
+            UpdateAdButton();
+        }
+
+        private void UpdateCoinButton()
+        {
+            var currentLevel = YandexGame.savesData.GetWeaponLevel(_currentItem.ID);
+            if (currentLevel >= 3)
+            {
+                coinsBuy.gameObject.SetActive(false);
+                return;
+            }
+
+            var price = _currentItem.Unlocked ? upgradePrice[currentLevel] : buyPrice;
+            coinsBuy.gameObject.SetActive(true);
+            coinsBuyText.gameObject.SetActive(!_currentItem.Unlocked);
+            coinsUpgradeText.gameObject.SetActive(_currentItem.Unlocked);
+            coinsPrice.text = $"<sprite=0>{price}";
+        }
+
+        private void UpdateAdButton()
+        {
+            var currentLevel = YandexGame.savesData.GetWeaponLevel(_currentItem.ID);
+            if (currentLevel >= 3)
+            {
+                adBuy.gameObject.SetActive(false);
+                return;
+            }
+
+            adBuy.gameObject.SetActive(true);
             adBuyText.gameObject.SetActive(!_currentItem.Unlocked);
             adUpgradeText.gameObject.SetActive(_currentItem.Unlocked);
         }
 
-        private void SetCoinButton()
+        private void UpdateSelectButton()
         {
-            var currentLevel = YandexGame.savesData.GetWeaponLevel(_currentItem.ID);
-            
-            var price = upgradePrice[currentLevel];
-            
-            coinsBuyText.gameObject.SetActive(!_currentItem.Unlocked);
-            coinsUpgradeText.gameObject.SetActive(_currentItem.Unlocked);
-            
-            coinsPrice.text = $"<sprite=0>{price}";
+            if (!_currentItem.Unlocked)
+            {
+                selectButton.gameObject.SetActive(false);
+                return;
+            }
+
+            var selected = YandexGame.savesData.currentWeapon == _currentItem.ID;
+            selectButton.gameObject.SetActive(true);
+            selectText.gameObject.SetActive(!selected);
+            selectedText.gameObject.SetActive(selected);
         }
     }
 }

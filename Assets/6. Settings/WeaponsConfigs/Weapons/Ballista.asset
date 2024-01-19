@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ballista
   m_EditorClassIdentifier: 
   weaponVisual: {fileID: 11400000, guid: 837bb74198f56634a8208ae0921c9cb7, type: 2}
-  weaponImprovements: {fileID: 11400000, guid: b6b0c5944e0fbb24b9a6c3d0d9d2645b, type: 2}
+  weaponImprovements: {fileID: 11400000, guid: d2738c4eef9ea104db8e857c642548e9, type: 2}
   floats:
     m_keys:
     - reloadTime
@@ -21,14 +21,14 @@ MonoBehaviour:
     - explosionRadius
     - damage
     m_values:
-    - 0.25
+    - 5
     - 100
     - 2.5
     - 5
   integers:
     m_keys:
     - bulletCount
-    m_values: 01000000
+    m_values: 03000000
   strings:
     m_keys:
     - id

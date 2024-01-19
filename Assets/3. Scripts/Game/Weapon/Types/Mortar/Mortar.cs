@@ -13,7 +13,8 @@ namespace _3._Scripts.Game.Weapon.Types.Mortar
             var attack = new MortarAttackState(config, explosiveShells, weaponObject, OnAttack);
             var reload = new MortarReloadState(config, attack.ResetBulletsCount, OnReloadStart);
 
-            AddTransition(idle, new FuncPredicate(() => !Input.GetMouseButton(0) && !reload.Reloading));
+            AddTransition(idle, new FuncPredicate(() =>
+                !Input.GetMouseButton(0) && !reload.Reloading && attack.CurrentBulletCount > 0));
             AddTransition(attack,
                 new FuncPredicate(() =>
                     Input.GetMouseButton(0) && attack.CurrentBulletCount > 0 && !reload.Reloading));

@@ -13,7 +13,7 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
         private float _attackTime;
         private readonly Camera _camera;
         private event Action<int> OnAttack;
-
+        private WeaponObject _weaponObject;
         private float Damage => _config.Get<float>("damage") *
                                 _config.Improvements.GetDamageImprovement(_config.Get<string>("id"));
 
@@ -22,12 +22,12 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
         
         public int CurrentBulletCount { get; private set; }
 
-        public MachineGunAttackState(WeaponConfig config, Action<int> onAttack)
+        public MachineGunAttackState(WeaponObject weaponObject,WeaponConfig config, Action<int> onAttack)
         {
             _camera = Camera.main;
             _config = config;
             CurrentBulletCount = BulletsCount;
-
+            _weaponObject = weaponObject;
             OnAttack += onAttack;
         }
 
@@ -40,11 +40,18 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
             Shoot();
         }
 
+        public override void OnExit()
+        {
+            _weaponObject.AnimatorState(false);
+        }
+
         public void ResetBulletsCount() => CurrentBulletCount = BulletsCount;
 
         private void Shoot()
         {
             PerformShot();
+            _weaponObject.SpawnDecals();
+            _weaponObject.AnimatorState(true);
 
             CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, BulletsCount);
             _attackTime = _config.Get<float>("attackTime");

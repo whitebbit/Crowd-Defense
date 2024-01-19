@@ -23,10 +23,7 @@ namespace YG
         public string currentWeapon = "machine_gun";
         public string secondWeapon = "";
         public Dictionary<string, int> weaponsLevel = new ();
-        public List<string> unlockedWeapons = new()
-        {
-            "machine_gun",
-        };
+        public List<string> unlockedWeapons = new();
         
         public int currentLevel = 1;
         public int completedLevelsCount;

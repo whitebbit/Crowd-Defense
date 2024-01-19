@@ -27,6 +27,7 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
         public override void OnEnter()
         {
             OnReloadStart?.Invoke(ReloadTime);
+            
             Reloading = true;
             _reloadTime = ReloadTime;
         }
