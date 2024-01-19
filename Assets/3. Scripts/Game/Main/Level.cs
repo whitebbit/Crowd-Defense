@@ -67,6 +67,13 @@ namespace _3._Scripts.Game.Main
         private IEnumerator DelayComplete()
         {
             LevelInProgress = false;
+            
+            if (YandexGame.savesData.currentLevel == 8)
+            {
+                YandexGame.savesData.secondWeapon = "";
+                YandexGame.SaveProgress();
+            }
+            
             yield return new WaitForSeconds(1f);
             UIManager.Instance.CurrentState = UIState.Win;
         }

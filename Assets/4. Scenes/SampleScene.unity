@@ -2647,6 +2647,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0b6ce944f84de3a4ead298ab27235a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1841222153
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 236.57738
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 316.30508
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 113.043594
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_Name
+      value: Stickman_Mixamo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e3b00992420ee57419957f96f4e45d94, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9e9b316235ea1e743a2771cae685a2d6, type: 3}
 --- !u!1001 &1845092505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3125,7 +3186,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1694231386729602051, guid: 8cc42b739b6dca041aec9a8a25775981, type: 3}
       propertyPath: m_Name
-      value: Settings
+      value: SettingsPanel
       objectReference: {fileID: 0}
     - target: {fileID: 2341034682630732713, guid: 8cc42b739b6dca041aec9a8a25775981, type: 3}
       propertyPath: m_Pivot.x
@@ -3459,3 +3520,4 @@ SceneRoots:
   - {fileID: 643843317}
   - {fileID: 1037196600}
   - {fileID: 1373651165}
+  - {fileID: 1841222153}

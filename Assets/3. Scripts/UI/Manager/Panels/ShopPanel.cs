@@ -59,7 +59,6 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void InitializeItems()
         {
-            var i = 0;
             foreach (var config in Configuration.Instance.WeaponConfigs)
             {
                 var obj = Instantiate(item, container);
@@ -70,10 +69,8 @@ namespace _3._Scripts.UI.Manager.Panels
                 obj.Initialize(id, visual.GetTitle(YandexGame.lang), visual.Icon, level);
                 obj.AddListener(SelectItem);
 
-                if (i == 0)
+                if (id == YandexGame.savesData.currentWeapon)
                     SelectItem(obj);
-
-                i++;
             }
         }
 

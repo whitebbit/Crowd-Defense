@@ -19,9 +19,9 @@ MonoBehaviour:
     m_keys: 00000000010000000200000003000000
     m_values:
     - 1
-    - 1.15
-    - 1.25
-    - 1.5
+    - 1.05
+    - 1.1
+    - 1.125
   reloadImprovements:
     m_keys: 00000000010000000200000003000000
     m_values:

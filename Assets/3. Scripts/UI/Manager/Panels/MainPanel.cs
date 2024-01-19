@@ -14,6 +14,7 @@ namespace _3._Scripts.UI.Manager.Panels
         [SerializeField] private Button startButton;
         [SerializeField] private Button shopButton;
         [SerializeField] private Button settingsButton;
+        [SerializeField] private LangYGAdditionalText additional;
         private Tween _buttonTween;
 
         private void Start()
@@ -27,7 +28,7 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             MainMenuEnvironment.Instance.EnvironmentState(true);
             ButtonAnimation();
-
+            additional.additionalText = $" {YandexGame.savesData.completedLevelsCount}";
             base.Open(onComplete, duration);
         }
 

@@ -28,7 +28,7 @@ namespace YG
         public List<string> unlockedWeapons = new();
 
         public int currentLevel = 1;
-        public int completedLevelsCount;
+        public int completedLevelsCount = 1;
 
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
