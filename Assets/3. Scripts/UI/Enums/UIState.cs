@@ -6,6 +6,7 @@
         Main,
         Play,
         Win,
-        Roulette
+        Roulette,
+        Shop
     }
 }

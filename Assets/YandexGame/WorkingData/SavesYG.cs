@@ -23,7 +23,7 @@ namespace YG
         public string currentWeapon = "machine_gun";
         public string secondWeapon = "";
         public Dictionary<string, int> weaponsLevel = new ();
-        public List<string> unlockedWeapons = new ()
+        public List<string> unlockedWeapons = new()
         {
             "machine_gun",
         };
@@ -37,7 +37,7 @@ namespace YG
         {
             return weaponsLevel.TryGetValue(id, out var level) ? level : 0;
         }
-
+        
         
         
         // Вы можете выполнить какие то действия при загрузке сохранений

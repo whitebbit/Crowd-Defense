@@ -12,22 +12,20 @@ namespace _3._Scripts.Game.AI.FSM.States
     public class BotAttackState : State
     {
         private readonly Transform _transform;
-        private readonly IAnimator _animator;
         private event Action OnDisable;
 
-        public BotAttackState(Transform transform, IAnimator animator, Action onDisable = null)
+        public BotAttackState(Transform transform, Action onDisable = null)
         {
             _transform = transform;
-            _animator = animator;
             OnDisable += onDisable;
         }
 
         public override void OnEnter()
         {
-            _animator.PlayRandom("attack");
             LevelManager.Instance.CurrentLevel.BotAttacked();
             AttackPlayer();
-            _transform.DOScale(Vector3.zero, 1.25f).SetDelay(1.25f).OnComplete(() => { OnDisable?.Invoke(); });
+            _transform.DOScale(Vector3.zero, 3).OnComplete(() => { OnDisable?.Invoke(); });;
+            _transform.DOLocalMove(_transform.forward, 3);
         }
 
         private void AttackPlayer()

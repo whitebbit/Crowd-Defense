@@ -18,6 +18,7 @@ namespace _3._Scripts.UI.Manager
         [SerializeField] private UIPanel playPanel;
         [SerializeField] private UIPanel winPanel;
         [SerializeField] private UIPanel roulettePanel;
+        [SerializeField] private UIPanel shopPanel;
         private bool _onTransition;
 
         public UIState CurrentState
@@ -58,6 +59,7 @@ namespace _3._Scripts.UI.Manager
             _panels.Add(UIState.Play, playPanel);
             _panels.Add(UIState.Win, winPanel);
             _panels.Add(UIState.Roulette, roulettePanel);
+            _panels.Add(UIState.Shop, shopPanel);
         }
 
         private void Start()

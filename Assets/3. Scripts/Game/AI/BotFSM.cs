@@ -16,18 +16,15 @@ namespace _3._Scripts.Game.AI
             var idle = new BotIdleState(animator);
             var run = new BotRunState(transform, speed, animator);
             var death = new BotDeathState(dying);
-            var attack = new BotAttackState(transform, animator, onDisable);
+            var attack = new BotAttackState(transform, onDisable);
 
             AddTransition(idle,
                 new FuncPredicate(() => !LevelManager.Instance.CurrentLevel.LevelInProgress && health.Health > 0));
-
             AddTransition(run,
                 new FuncPredicate(() => LevelManager.Instance.CurrentLevel.LevelInProgress &&
                                         health.Health > 0 && !run.OnFinish));
-
             AddTransition(death,
                 new FuncPredicate(() => health.Health <= 0 && !death.IsDead));
-
             AddTransition(attack, new FuncPredicate(() => run.OnFinish));
 
             StateMachine.SetState(idle);
