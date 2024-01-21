@@ -13,7 +13,7 @@ namespace _3._Scripts.Game.AI.FSM.States
     {
         private readonly Transform _transform;
         private event Action OnDisable;
-
+        private bool _attacked;
         public BotAttackState(Transform transform, Action onDisable = null)
         {
             _transform = transform;
@@ -22,10 +22,14 @@ namespace _3._Scripts.Game.AI.FSM.States
 
         public override void OnEnter()
         {
+            if (_attacked) return;
+            
             LevelManager.Instance.CurrentLevel.BotAttacked();
             AttackPlayer();
+            
             _transform.DOScale(Vector3.zero, 3).OnComplete(() => { OnDisable?.Invoke(); });;
             _transform.DOLocalMove(_transform.forward, 3);
+            _attacked = true;
         }
 
         private void AttackPlayer()

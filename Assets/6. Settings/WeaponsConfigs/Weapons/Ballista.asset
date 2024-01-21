@@ -24,7 +24,7 @@ MonoBehaviour:
     - 5
     - 100
     - 2.5
-    - 5
+    - 200
   integers:
     m_keys:
     - bulletCount

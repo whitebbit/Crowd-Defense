@@ -40,7 +40,7 @@ namespace _3._Scripts.UI.Manager.Panels
             GameObjectsState(false);
             UpdateKillsCounter(0);
             SetWeapons();
-            
+
             HealthManager.OnChanged += TryLoseLevel;
             LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
             _timer.OnTime += LevelManager.Instance.CurrentLevel.CompleteLevel;
@@ -56,7 +56,7 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             LevelManager.Instance.CurrentLevel.OnKill -= UpdateKillsCounter;
             HealthManager.OnChanged -= TryLoseLevel;
-            
+
             _timer.OnTime -= LevelManager.Instance.CurrentLevel.CompleteLevel;
             _timer.StopTimer();
 
@@ -64,6 +64,7 @@ namespace _3._Scripts.UI.Manager.Panels
             mainWeapon.ResetSelector();
             secondWeapon.Unselect();
             secondWeapon.ResetSelector();
+            losePopup.Close();
 
             base.Close(onComplete, duration);
         }
@@ -74,15 +75,19 @@ namespace _3._Scripts.UI.Manager.Panels
             Transition.Instance.Open(0.2f);
             ViewLevelGoal();
         }
-        
+
         private void TryLoseLevel(int _, int newValue)
         {
-            if(newValue > 0) return; 
-            
+            if (newValue > 0) return;
+
             LevelManager.Instance.CurrentLevel.LoseLevel();
+
+            losePopup.OnContinue += () => _timer.TimerState(true);
             losePopup.Open();
+            
+            _timer.TimerState(false);
         }
-        
+
         private void ViewLevelGoal()
         {
             if (YandexGame.savesData.currentLevel == 8)
@@ -103,7 +108,7 @@ namespace _3._Scripts.UI.Manager.Panels
                 });
             });
         }
-        
+
         private void ViewBossPopup()
         {
             bossPopup.Open();
@@ -115,7 +120,7 @@ namespace _3._Scripts.UI.Manager.Panels
                 LevelManager.Instance.CurrentLevel.StartLevel();
             });
         }
-        
+
         private void UpdateKillsCounter(int value) => killsCountText.text = $"{value}";
 
         private void SetWeapons()
@@ -139,7 +144,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
             _currentWeaponSelector = weaponSelector;
         }
-        
+
         private void GameObjectsState(bool state)
         {
             if (state)

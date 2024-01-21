@@ -31,6 +31,17 @@ namespace _3._Scripts.UI.Components
             TextTimer(time);
         }
 
+        public void TimerState(bool state)
+        {
+            foreach (var tween in _tweens)
+            {
+                if (!state)
+                    tween.Pause();
+                else
+                    tween.Play();
+            }
+        }
+        
         public void StopTimer()
         {
             foreach (var tween in _tweens)

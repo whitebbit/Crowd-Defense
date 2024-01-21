@@ -30,23 +30,22 @@ namespace _3._Scripts.Game.Main
             Bots = new List<Bot>(transform.GetComponentsInChildren<Bot>());
             BotsCount = Bots.Count;
         }
-
-        private void Start()
-        {
-        }
-
+        
         public void StartLevel()
         {
             Player.SelectAdditionalWeapon(YandexGame.savesData.secondWeapon);
             LevelInProgress = true;
+         
+            if (NoMoreBots())
+                CompleteLevel();
         }
 
         public void CompleteLevel()
         {
             if (!LevelInProgress) return;
-            
+
             if (HealthManager.HealthCount <= 0) return;
-            
+
             StartCoroutine(DelayComplete());
         }
 
@@ -54,7 +53,7 @@ namespace _3._Scripts.Game.Main
         {
             LevelInProgress = false;
         }
-        
+
         public void KillBot()
         {
             KillsCount += 1;
@@ -67,7 +66,7 @@ namespace _3._Scripts.Game.Main
         public void BotAttacked()
         {
             _attackedBotCount += 1;
-            
+
             if (NoMoreBots())
                 CompleteLevel();
         }
@@ -79,13 +78,9 @@ namespace _3._Scripts.Game.Main
 
         private IEnumerator DelayComplete()
         {
-            if (HealthManager.HealthCount <= 0) yield break;
-
             LevelInProgress = false;
-            
+
             yield return new WaitForSeconds(1f);
-            
-            if (HealthManager.HealthCount <= 0) yield break;
             
             UIManager.Instance.CurrentState = KeysManager.KeysCount != 3 ? UIState.Win : UIState.Chest;
         }

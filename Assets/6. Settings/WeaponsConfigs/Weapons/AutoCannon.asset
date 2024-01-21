@@ -23,8 +23,8 @@ MonoBehaviour:
     m_values:
     - 5
     - 15
-    - 2
-    - 100
+    - 3
+    - 250
   integers:
     m_keys:
     - bulletCount

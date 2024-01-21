@@ -6,6 +6,7 @@ using DG.Tweening;
 using UI.Panels;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace _3._Scripts.UI.Manager.Popups
 {
@@ -14,6 +15,8 @@ namespace _3._Scripts.UI.Manager.Popups
         [SerializeField] private UIPanel popup;
         [SerializeField] private Button menu;
         [SerializeField] private Button addHealth;
+
+        public event Action OnContinue;
         private void Start()
         {
             menu.onClick.AddListener(GoToMenu);
@@ -30,11 +33,13 @@ namespace _3._Scripts.UI.Manager.Popups
         public override void Close(TweenCallback onComplete = null, float duration = 0.3f)
         {
             popup.Close();
+            OnContinue = null;
             base.Close(onComplete, duration);
         }
 
         private void ContinueGame()
         {
+            OnContinue?.Invoke();
             HealthManager.HealthCount += 50;
             LevelManager.Instance.CurrentLevel.StartLevel();
             Close();
@@ -44,7 +49,8 @@ namespace _3._Scripts.UI.Manager.Popups
         {
             MoneyManager.MoneyCount += 25;
             HealthManager.HealthCount = 100;
-        
+            YandexGame.savesData.currentLevel = 1;
+            YandexGame.savesData.completedLevelsCount = 1;
             Transition.Instance.Close(0.3f).OnComplete(() =>
             {
                 LevelManager.Instance.DeleteLevel();
