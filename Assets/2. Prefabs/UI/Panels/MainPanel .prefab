@@ -942,7 +942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8214119787984743117
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1130,6 +1130,7 @@ MonoBehaviour:
   shopButton: {fileID: 6540769963086784698}
   settingsButton: {fileID: 6986360370358214357}
   additional: {fileID: 1903811927306495849}
+  notification: {fileID: 1607619179025353648}
 --- !u!1 &5743539112346246725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1607619179025353648
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1168,7 +1169,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -20.300003, y: -24.199997}
-  m_SizeDelta: {x: 64.43, y: 64}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6127654922130306749
 CanvasRenderer:

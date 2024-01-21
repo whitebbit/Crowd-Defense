@@ -16,7 +16,7 @@ namespace _3._Scripts.Game.AI.FSM.States
 
         public override void OnEnter()
         {
-            //_animator.Play("idle");
+            _animator.State(false);
         }
 
         public override void Update()

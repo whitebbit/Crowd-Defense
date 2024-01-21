@@ -33,21 +33,28 @@ namespace _3._Scripts.Game.Main
 
         private void Start()
         {
-            Player.SelectAdditionalWeapon(YandexGame.savesData.secondWeapon);
         }
 
         public void StartLevel()
         {
+            Player.SelectAdditionalWeapon(YandexGame.savesData.secondWeapon);
             LevelInProgress = true;
         }
 
         public void CompleteLevel()
         {
             if (!LevelInProgress) return;
-
+            
+            if (HealthManager.HealthCount <= 0) return;
+            
             StartCoroutine(DelayComplete());
         }
 
+        public void LoseLevel()
+        {
+            LevelInProgress = false;
+        }
+        
         public void KillBot()
         {
             KillsCount += 1;
@@ -72,9 +79,14 @@ namespace _3._Scripts.Game.Main
 
         private IEnumerator DelayComplete()
         {
+            if (HealthManager.HealthCount <= 0) yield break;
+
             LevelInProgress = false;
             
             yield return new WaitForSeconds(1f);
+            
+            if (HealthManager.HealthCount <= 0) yield break;
+            
             UIManager.Instance.CurrentState = KeysManager.KeysCount != 3 ? UIState.Win : UIState.Chest;
         }
     }

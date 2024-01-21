@@ -47,15 +47,19 @@ namespace _3._Scripts.UI.Manager.Popups
 
             var t3 = crown.DOFade(0, 1f).From();
             var t4 = crown.transform.DOLocalMoveY(0, 1).From().SetEase(Ease.InOutBack);
-            var t5 = effect.DOLocalRotate(new Vector3(0, 0, 360), 5, RotateMode.FastBeyond360)
-                .SetRelative(true)
-                .SetLoops(-1)
-                .SetEase(Ease.Linear);
-
+            
+            if (effect != null)
+            {
+                var t5 = effect.DOLocalRotate(new Vector3(0, 0, 360), 5, RotateMode.FastBeyond360)
+                    .SetRelative(true)
+                    .SetLoops(-1)
+                    .SetEase(Ease.Linear);
+                _tweens.Add(t5);
+            }
+            
             _tweens.Add(t1);
             _tweens.Add(t3);
             _tweens.Add(t4);
-            _tweens.Add(t5);
         }
     }
 }

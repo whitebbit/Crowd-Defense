@@ -6549,6 +6549,7 @@ MonoBehaviour:
   getterEffect: {fileID: 3070640008239868832}
   victoryPopup: {fileID: 5912836015090187877}
   bonusReward: {fileID: 271011932165505460}
+  notification: {fileID: 4819762700967126625}
   getBonusButton: {fileID: 2788645765109469423}
   continueButton: {fileID: 4868507819603511676}
   menuButton: {fileID: 8149296874306110723}

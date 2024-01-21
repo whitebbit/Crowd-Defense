@@ -15,6 +15,7 @@ namespace _3._Scripts.UI.Manager.Panels
         [SerializeField] private Button shopButton;
         [SerializeField] private Button settingsButton;
         [SerializeField] private LangYGAdditionalText additional;
+        [Space] [SerializeField] private RectTransform notification;
         private Tween _buttonTween;
 
         private void Start()
@@ -29,6 +30,8 @@ namespace _3._Scripts.UI.Manager.Panels
             MainMenuEnvironment.Instance.EnvironmentState(true);
             ButtonAnimation();
             additional.additionalText = $" {YandexGame.savesData.completedLevelsCount}";
+            notification.gameObject.SetActive(MoneyManager.MoneyCount >= 750);
+
             base.Open(onComplete, duration);
         }
 

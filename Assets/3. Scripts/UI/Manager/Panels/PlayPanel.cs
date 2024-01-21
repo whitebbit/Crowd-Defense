@@ -24,6 +24,7 @@ namespace _3._Scripts.UI.Manager.Panels
         [SerializeField] private WeaponSelector secondWeapon;
         [Header("Other")] [SerializeField] private List<CanvasGroup> afterGoalObjects = new();
         [SerializeField] private BossPopup bossPopup;
+        [SerializeField] private LosePopup losePopup;
 
         private WeaponSelector _currentWeaponSelector;
         private Timer _timer;
@@ -39,6 +40,8 @@ namespace _3._Scripts.UI.Manager.Panels
             GameObjectsState(false);
             UpdateKillsCounter(0);
             SetWeapons();
+            
+            HealthManager.OnChanged += TryLoseLevel;
             LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
             _timer.OnTime += LevelManager.Instance.CurrentLevel.CompleteLevel;
 
@@ -52,8 +55,9 @@ namespace _3._Scripts.UI.Manager.Panels
         public override void Close(TweenCallback onComplete = null, float duration = 0.3f)
         {
             LevelManager.Instance.CurrentLevel.OnKill -= UpdateKillsCounter;
+            HealthManager.OnChanged -= TryLoseLevel;
+            
             _timer.OnTime -= LevelManager.Instance.CurrentLevel.CompleteLevel;
-
             _timer.StopTimer();
 
             mainWeapon.Unselect();
@@ -69,6 +73,14 @@ namespace _3._Scripts.UI.Manager.Panels
             goalText.DOFade(0, 0);
             Transition.Instance.Open(0.2f);
             ViewLevelGoal();
+        }
+        
+        private void TryLoseLevel(int _, int newValue)
+        {
+            if(newValue > 0) return; 
+            
+            LevelManager.Instance.CurrentLevel.LoseLevel();
+            losePopup.Open();
         }
         
         private void ViewLevelGoal()
@@ -127,7 +139,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
             _currentWeaponSelector = weaponSelector;
         }
-
+        
         private void GameObjectsState(bool state)
         {
             if (state)

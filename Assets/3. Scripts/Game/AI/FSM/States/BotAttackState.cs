@@ -30,7 +30,7 @@ namespace _3._Scripts.Game.AI.FSM.States
 
         private void AttackPlayer()
         {
-            HealthManager.HealthCount -= 1 * (int)_transform.localScale.x;
+            HealthManager.HealthCount -= (int)_transform.localScale.x;
         }
     }
 }

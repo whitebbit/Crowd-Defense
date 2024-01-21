@@ -25,8 +25,8 @@ namespace _3._Scripts.UI.Manager.Panels
 
         [SerializeField] private GetterEffect getterEffect;
         [SerializeField] private VictoryPopup victoryPopup;
-
         [SerializeField] private BonusReward bonusReward;
+        [Space] [SerializeField] private RectTransform notification;
         [Header("Buttons")] [SerializeField] private Button getBonusButton;
         [SerializeField] private Button continueButton;
         [SerializeField] private Button menuButton;
@@ -45,7 +45,7 @@ namespace _3._Scripts.UI.Manager.Panels
             InitializeProgress();
             SetLevelNumber();
             victoryPopup.Open();
-            
+            notification.gameObject.SetActive(MoneyManager.MoneyCount >= 750);
             YandexGame.RewardVideoEvent += OnReward;
 
             base.Open(onComplete, duration);

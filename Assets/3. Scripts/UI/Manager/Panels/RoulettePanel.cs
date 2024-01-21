@@ -30,7 +30,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private RouletteItem _currentReward;
         private List<WeaponRouletteItemConfig> _existedWeapons = new();
         private bool _rotating;
-
+        private bool _rewardGot;
         private void Start()
         {
             getReward.onClick.AddListener(GetReward);
@@ -44,9 +44,10 @@ namespace _3._Scripts.UI.Manager.Panels
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
             YandexGame.RewardVideoEvent += OnReward;
-
             YandexGame.savesData.secondWeapon = "";
             YandexGame.SaveProgress();
+
+            _rewardGot = false;
             
             InitializeExistedWeapons();
             AddRandomItems();
@@ -104,7 +105,9 @@ namespace _3._Scripts.UI.Manager.Panels
         private void GetReward()
         {
             if (_rotating) return;
-
+            if(_rewardGot) return;
+            
+            _rewardGot = true;
             _currentReward.OnReward(() =>
             {
                 StopAllCoroutines();
