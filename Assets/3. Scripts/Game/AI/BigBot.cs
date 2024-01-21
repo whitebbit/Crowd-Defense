@@ -9,7 +9,8 @@ namespace _3._Scripts.Game.AI
     {
         [Header("Big bot Settings")] [SerializeField]
         private HealthBar healthBar;
-
+        [Header("Key setting")]
+        [SerializeField, Range(0, 100)] private float chance;
         [SerializeField] private Transform key;
 
         protected override void OnStart()
@@ -30,7 +31,9 @@ namespace _3._Scripts.Game.AI
 
         private void AddKey()
         {
-            if (10.DropChance())
+            key.gameObject.SetActive(false);
+            
+            if (chance.DropChance())
                 key.gameObject.SetActive(true);
         }
         

@@ -53,6 +53,7 @@ MonoBehaviour:
   animator: {fileID: 3116940615252026012}
   animations: {fileID: 11400000, guid: 65ee787e8fe70464fa3d919b13bcc208, type: 2}
   healthBar: {fileID: 3546599457006831201}
+  chance: 15
   key: {fileID: 3534535059440139485}
 --- !u!54 &6992836927367308943
 Rigidbody:
