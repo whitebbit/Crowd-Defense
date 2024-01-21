@@ -28,7 +28,7 @@ namespace _3._Scripts.UI.Components
         {
             Used = false;
             Blocked = false;
-            rewardText.text = $"+{50}";
+            rewardText.text = "+25";
         }
         
         private void MoveIndicator()
@@ -61,7 +61,7 @@ namespace _3._Scripts.UI.Components
             CurrentMultiplier = bonusMultiplier;
         }
         
-        public void SetReward() => rewardText.text = $"+{50 * CurrentMultiplier.Multiplier}";
+        public void SetReward() => rewardText.text = $"+{25 * CurrentMultiplier.Multiplier}";
 
     }
 }

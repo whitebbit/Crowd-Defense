@@ -70,7 +70,7 @@ namespace _3._Scripts.UI.Manager.Popups
 
             var tween2 = bossIcon.transform.DOScale(0, 1f)
                 .From()
-                .SetEase(Ease.InOutBack);
+                .SetEase(Ease.OutBack);
             _tweens.Add(tween1);
             _tweens.Add(tween2);
         }

@@ -20,6 +20,7 @@ namespace YG
         public float volume;
 
         public int money;
+        public int keys;
         public int health = 100;
 
         public string currentWeapon = "machine_gun";

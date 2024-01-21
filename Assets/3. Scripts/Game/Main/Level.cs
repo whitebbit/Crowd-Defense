@@ -21,13 +21,19 @@ namespace _3._Scripts.Game.Main
         private int _attackedBotCount;
 
         public event Action<int> OnKill;
-
+        public List<Bot> Bots { get; private set; }
         public Player Player { get; private set; }
 
         private void Awake()
         {
             Player = GetComponentInChildren<Player>();
-            BotsCount = new List<Bot>(transform.GetComponentsInChildren<Bot>()).Count;
+            Bots = new List<Bot>(transform.GetComponentsInChildren<Bot>());
+            BotsCount = Bots.Count;
+        }
+
+        private void Start()
+        {
+            Player.SelectAdditionalWeapon(YandexGame.savesData.secondWeapon);
         }
 
         public void StartLevel()
@@ -67,12 +73,6 @@ namespace _3._Scripts.Game.Main
         private IEnumerator DelayComplete()
         {
             LevelInProgress = false;
-            
-            if (YandexGame.savesData.currentLevel == 8)
-            {
-                YandexGame.savesData.secondWeapon = "";
-                YandexGame.SaveProgress();
-            }
             
             yield return new WaitForSeconds(1f);
             UIManager.Instance.CurrentState = UIState.Win;

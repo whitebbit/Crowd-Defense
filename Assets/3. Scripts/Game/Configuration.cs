@@ -12,8 +12,10 @@ namespace _3._Scripts.Game
     public class Configuration : Singleton<Configuration>
     {
         [SerializeField] private List<WeaponConfig> weaponConfigs;
+        [SerializeField] private List<WeaponConfig> additionalWeaponConfigs;
 
         public List<WeaponConfig> WeaponConfigs => weaponConfigs;
+        public List<WeaponConfig> AdditionalWeaponConfigs => additionalWeaponConfigs;
 
         private void Awake()
         {
@@ -24,7 +26,10 @@ namespace _3._Scripts.Game
         {
             var contains = YandexGame.savesData.unlockedWeapons.Contains(YandexGame.savesData.currentWeapon);
             if (!contains)
+            {
                 YandexGame.savesData.unlockedWeapons.Add(YandexGame.savesData.currentWeapon);
+                YandexGame.savesData.unlockedWeapons.Add("auto_cannon");
+            }
 
             YandexGame.SaveProgress();
         }

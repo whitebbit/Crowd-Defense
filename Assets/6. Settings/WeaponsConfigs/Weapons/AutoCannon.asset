@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c378e05a5dc140718e22db7844f58fb4, type: 3}
+  m_Name: AutoCannon
+  m_EditorClassIdentifier: 
+  weaponVisual: {fileID: 11400000, guid: 16343b150cd0f50498dc7c8a368a1671, type: 2}
+  weaponImprovements: {fileID: 11400000, guid: d922fafce5c63df4ba71890f38077928, type: 2}
+  floats:
+    m_keys:
+    - reloadTime
+    - cannonForce
+    - explosionRadius
+    - damage
+    m_values:
+    - 5
+    - 15
+    - 2
+    - 100
+  integers:
+    m_keys:
+    - bulletCount
+    m_values: 01000000
+  strings:
+    m_keys:
+    - id
+    m_values:
+    - auto_cannon
+  bools:
+    m_keys: []
+    m_values: 
+  layerMasks:
+    m_keys:
+    - explosionMask
+    m_values:
+    - serializedVersion: 2
+      m_Bits: 64

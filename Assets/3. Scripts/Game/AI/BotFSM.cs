@@ -25,7 +25,7 @@ namespace _3._Scripts.Game.AI
                                         health.Health > 0 && !run.OnFinish));
             AddTransition(death,
                 new FuncPredicate(() => health.Health <= 0 && !death.IsDead));
-            AddTransition(attack, new FuncPredicate(() => run.OnFinish));
+            AddTransition(attack, new FuncPredicate(() => run.OnFinish && !death.IsDead));
 
             StateMachine.SetState(idle);
         }

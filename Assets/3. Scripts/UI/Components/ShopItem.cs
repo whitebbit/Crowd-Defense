@@ -11,7 +11,7 @@ namespace _3._Scripts.UI.Components
     {
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private Image icon;
-        [SerializeField] private LevelStars stars;
+        [SerializeField] private ImageCounter stars;
         [Space] [SerializeField] private RectTransform locker;
 
         public string ID { get; private set; }
@@ -30,7 +30,7 @@ namespace _3._Scripts.UI.Components
             Icon = iconImage;
             title.text = titleText;
             icon.sprite = iconImage;
-            stars.SetLevel(level);
+            stars.SetCount(level);
             if (Unlocked)
                 Unlock();
         }
@@ -43,7 +43,7 @@ namespace _3._Scripts.UI.Components
 
         public void Upgrade(int level)
         {
-            stars.SetLevel(level);
+            stars.SetCount(level);
         }
     }
 }

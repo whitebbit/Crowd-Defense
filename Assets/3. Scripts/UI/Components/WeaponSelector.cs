@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using YG;
 
@@ -15,7 +16,7 @@ namespace _3._Scripts.UI.Components
     {
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI bulletsCount;
-        [Space] [SerializeField] private LevelStars levelStars;
+        [FormerlySerializedAs("levelStars")] [Space] [SerializeField] private ImageCounter imageCounter;
         [Header("Colors")]
         [SerializeField] private Color selectedColor;
         [SerializeField] private Color unselectedColor;
@@ -57,7 +58,7 @@ namespace _3._Scripts.UI.Components
             _weaponId = id;
             icon.sprite = visual.Icon;
             bulletsCount.text = $"{BulletsCount}";
-            levelStars.SetLevel(level);
+            imageCounter.SetCount(level);
             
             SubscribeToWeapon(id);
         }

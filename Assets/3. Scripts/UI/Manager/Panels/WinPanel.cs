@@ -133,7 +133,7 @@ namespace _3._Scripts.UI.Manager.Panels
             getterEffect.DoMoneyEffect(count,
                 () =>
                 {
-                    MoneyManager.MoneyCount += bonusReward.Used ? bonusReward.CurrentMultiplier.Multiplier * 50 : 50;
+                    MoneyManager.MoneyCount += bonusReward.Used ? bonusReward.CurrentMultiplier.Multiplier * 25 : 25;
                     Transition.Instance.Close(0.3f).SetDelay(0.75f).OnComplete(() =>
                     {
                         LevelManager.Instance.DeleteLevel();

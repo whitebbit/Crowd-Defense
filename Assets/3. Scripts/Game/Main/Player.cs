@@ -12,11 +12,9 @@ namespace _3._Scripts.Game.Main
 {
     public class Player : MonoBehaviour
     {
-        [Header("Camera")]
-        [SerializeField] private CinemachineVirtualCamera camera;
-        [Header("Weapons")]
-        [SerializeField] private List<WeaponBehaviour> weapons = new();
-        
+        [Header("Camera")] [SerializeField] private CinemachineVirtualCamera camera;
+        [Header("Weapons")] [SerializeField] private List<WeaponBehaviour> weapons = new();
+
         private WeaponBehaviour _currentWeapon;
 
         protected void Awake()
@@ -33,15 +31,24 @@ namespace _3._Scripts.Game.Main
                 _currentWeapon.SetState(false);
 
             _currentWeapon = weapons.Find(w => w.ID == id);
-            
+
             _currentWeapon.SetState(true);
+        }
+
+        public void SelectAdditionalWeapon(string id)
+        {
+            if (Configuration.Instance.AdditionalWeaponConfigs
+                    .Find(w => w.Get<string>("id") == id) == null) return;
+
+            var weapon = weapons.Find(w => w.ID == id);
+            weapon.SetState(true);
         }
 
         public void SetCameraState(bool state)
         {
             camera.Priority = state ? 100 : -1;
         }
-        
+
         public WeaponBehaviour GetWeapon(string id)
         {
             return weapons.Find(w => w.ID == id);

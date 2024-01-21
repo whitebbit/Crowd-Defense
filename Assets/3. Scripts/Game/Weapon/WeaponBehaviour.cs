@@ -15,9 +15,12 @@ namespace _3._Scripts.Game.Weapon
 
         public WeaponFSM WeaponFsm { get; private set; }
         private bool _active;
+
         private void Awake()
         {
             Config = Configuration.Instance.WeaponConfigs.Find(w => w.Get<string>("id") == id);
+            if (Config == null)
+                Config = Configuration.Instance.AdditionalWeaponConfigs.Find(w => w.Get<string>("id") == id);
             WeaponFsm = GetWeaponFSM();
         }
 
@@ -25,8 +28,8 @@ namespace _3._Scripts.Game.Weapon
         {
             if (!LevelManager.Instance.CurrentLevel.LevelInProgress) return;
 
-            if(!_active) return;
-            
+            if (!_active) return;
+
             WeaponFsm.Update();
         }
 

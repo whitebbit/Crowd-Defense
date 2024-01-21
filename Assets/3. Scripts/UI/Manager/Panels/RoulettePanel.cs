@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _3._Scripts.Extensions;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
 using _3._Scripts.UI.Extensions;
@@ -27,6 +28,7 @@ namespace _3._Scripts.UI.Manager.Panels
         [SerializeField] private Button rotateAgain;
 
         private RouletteItem _currentReward;
+        private List<WeaponRouletteItemConfig> _existedWeapons = new();
         private bool _rotating;
 
         private void Start()
@@ -45,29 +47,41 @@ namespace _3._Scripts.UI.Manager.Panels
 
             YandexGame.savesData.secondWeapon = "";
             YandexGame.SaveProgress();
-
-            TryAddWeaponsToRewards();
-            AddOtherRewards();
+            
+            InitializeExistedWeapons();
+            AddRandomItems();
 
             base.Open(onComplete, duration);
             Rotate();
         }
-
-        private void OnReward(int obj)
-        {
-            if (obj != 2) return;
-            
-            Rotate();
-            rotateAgain.gameObject.SetActive(false);
-        }
-
+        
         public override void Close(TweenCallback onComplete = null, float duration = 0.3f)
         {
             YandexGame.RewardVideoEvent -= OnReward;
 
             ResetPanels();
+            
             base.Close(onComplete, duration);
         }
+        
+        private void InitializeExistedWeapons()
+        {
+            var unlocked = YandexGame.savesData.unlockedWeapons;
+            _existedWeapons = configs
+                .Select(w => w as WeaponRouletteItemConfig)
+                .Where(w => w != null)
+                .Where(w => unlocked.Contains(w.WeaponID) && w.WeaponID != YandexGame.savesData.currentWeapon).ToList();
+        }
+
+        private void OnReward(int obj)
+        {
+            if (obj != 2) return;
+
+            Rotate();
+            rotateAgain.gameObject.SetActive(false);
+        }
+
+        
 
         private void Rotate()
         {
@@ -98,28 +112,33 @@ namespace _3._Scripts.UI.Manager.Panels
             });
         }
 
-        private void TryAddWeaponsToRewards()
+        private void AddRandomItems()
         {
-            var unlocked = YandexGame.savesData.unlockedWeapons;
-            var weapons = configs.Select(c => c as WeaponRouletteItemConfig)
-                .Where(weapon => unlocked.Exists(u =>
-                    weapon != null && u != YandexGame.savesData.currentWeapon && u == weapon.WeaponID)).ToList();
-            foreach (var weapon in weapons)
+            foreach (var item in items)
             {
-                items.Find(i => !i.Initialized).Initialize(weapon);
+                if (10f.DropChance() && _existedWeapons.Count > 0)
+                    AddWeaponsToRewards(item);
+                else
+                    AddOtherRewards(item);
             }
         }
 
-        private void AddOtherRewards()
+        private void AddWeaponsToRewards(RouletteItem item)
+        {
+            if (_existedWeapons.Count <= 0) return;
+
+            var randWeapon = _existedWeapons[Random.Range(0, _existedWeapons.Count)];
+
+            item.Initialize(randWeapon);
+            _existedWeapons.Remove(randWeapon);
+        }
+
+        private void AddOtherRewards(RouletteItem item)
         {
             var other = configs.Where(obj => obj is not WeaponRouletteItemConfig).ToList();
-            var notInitialized = items.Where(i => !i.Initialized).ToList();
+            var randomReward = other[Random.Range(0, other.Count)];
 
-            foreach (var item in notInitialized)
-            {
-                var randomReward = other[Random.Range(0, other.Count)];
-                item.Initialize(randomReward);
-            }
+            item.Initialize(randomReward);
         }
 
         private void ResetPanels()
@@ -130,15 +149,13 @@ namespace _3._Scripts.UI.Manager.Panels
             }
 
             rotateAgain.gameObject.SetActive(true);
+            _existedWeapons.Clear();
         }
-
+        
         private IEnumerator DelayReward()
         {
             yield return new WaitForSeconds(0.5f);
-            Transition.Instance.Close(0.3f).OnComplete(() =>
-            {
-                UIManager.Instance.CurrentState = UIState.Play;
-            });
+            Transition.Instance.Close(0.3f).OnComplete(() => { UIManager.Instance.CurrentState = UIState.Play; });
         }
     }
 }
