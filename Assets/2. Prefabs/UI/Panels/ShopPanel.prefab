@@ -1375,10 +1375,10 @@ MonoBehaviour:
   selectButton: {fileID: 4702556008365811835}
   selectedText: {fileID: 7359904339136981101}
   selectText: {fileID: 5900473740619607107}
-  buyPrice: 500
+  buyPrice: 750
   upgradePrice:
     m_keys: 000000000100000002000000
-    m_values: f4010000e8030000dc050000
+    m_values: e8030000e2040000dc050000
 --- !u!1 &3534467162566834197
 GameObject:
   m_ObjectHideFlags: 0

@@ -5029,7 +5029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: auto_cannon
   weaponObject: {fileID: 922616018215696522}
-  cannonball: {fileID: 7340848237032802858, guid: 1b3cf8cf1161b7e4995ec5e7d6e95eee, type: 3}
+  cannonball: {fileID: 7340848237032802858, guid: 3e416849bf98f914ba006a3954742464, type: 3}
 --- !u!1 &8688941022117507382
 GameObject:
   m_ObjectHideFlags: 0
