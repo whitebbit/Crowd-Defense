@@ -8,6 +8,7 @@
         Win,
         Roulette,
         Shop,
-        Settings
+        Settings,
+        Chest
     }
 }

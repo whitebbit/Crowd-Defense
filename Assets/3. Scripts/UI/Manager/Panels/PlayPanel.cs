@@ -7,6 +7,7 @@ using DG.Tweening;
 using TMPro;
 using UI.Panels;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using YG;
 
@@ -90,6 +91,7 @@ namespace _3._Scripts.UI.Manager.Panels
                 });
             });
         }
+        
         private void ViewBossPopup()
         {
             bossPopup.Open();

@@ -75,7 +75,7 @@ namespace _3._Scripts.Game.Main
             LevelInProgress = false;
             
             yield return new WaitForSeconds(1f);
-            UIManager.Instance.CurrentState = UIState.Win;
+            UIManager.Instance.CurrentState = KeysManager.KeysCount != 3 ? UIState.Win : UIState.Chest;
         }
     }
 }

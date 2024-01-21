@@ -1,12 +1,12 @@
 {
-  "idSave": 116,
+  "idSave": 177,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
   "volume": 0.0,
-  "money": 245,
-  "keys": 3,
-  "health": 139,
+  "money": 435,
+  "keys": 1,
+  "health": 150,
   "currentWeapon": "cannon",
   "secondWeapon": "",
   "weaponsLevel": {},
@@ -17,6 +17,6 @@
     "mortar",
     "cannon"
   ],
-  "currentLevel": 4,
-  "completedLevelsCount": 12
+  "currentLevel": 1,
+  "completedLevelsCount": 17
 }

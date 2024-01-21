@@ -30,7 +30,7 @@ namespace _3._Scripts.Game.AI
 
         private void AddKey()
         {
-            if (100.DropChance())
+            if (10.DropChance())
                 key.gameObject.SetActive(true);
         }
         

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1320179079930697005}
   - component: {fileID: 7850823131911102916}
   - component: {fileID: 42216213704791278}
+  - component: {fileID: 3943936743993084950}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -80,6 +81,18 @@ MonoBehaviour:
   filledSprite: {fileID: 21300000, guid: 35ff89372c4fe4fdd8ed886f7305d38f, type: 3}
   emptyColor: {r: 0, g: 0, b: 0, a: 1}
   filledColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &3943936743993084950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85812409757786416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b781185fcce746a3b0beb7d20a430ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &426084236437128648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2059,7 @@ GameObject:
   - component: {fileID: 1139164646339200672}
   - component: {fileID: 5447305341778486332}
   m_Layer: 5
-  m_Name: ChestPopup
+  m_Name: ChestPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2144,7 +2157,6 @@ MonoBehaviour:
   buttons: {fileID: 2394704386441974845}
   next: {fileID: 4116109342459005571}
   moreKeys: {fileID: 629816317941268410}
-  keys: {fileID: 42216213704791278}
   chests:
   - {fileID: 40480795804186076}
   - {fileID: 7134317425574659559}

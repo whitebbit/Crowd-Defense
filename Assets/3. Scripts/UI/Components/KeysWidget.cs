@@ -18,7 +18,6 @@ namespace _3._Scripts.UI.Components
             OnChange(KeysManager.KeysCount);
             KeysManager.OnChanged += OnChange;
         }
-
         
         private void OnDisable()
         {
@@ -27,6 +26,8 @@ namespace _3._Scripts.UI.Components
         
         private void OnChange(int newValue)
         {
+            if(!_imageCounter.CanSet()) return;
+            
             _imageCounter.SetCount(newValue);
         }
     }

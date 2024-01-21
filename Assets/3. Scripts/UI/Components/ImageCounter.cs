@@ -34,5 +34,7 @@ namespace _3._Scripts.UI.Components
                 _images[i].sprite = filledSprite;
             }
         }
+
+        public bool CanSet() => _images.Count > 0;
     }
 }
