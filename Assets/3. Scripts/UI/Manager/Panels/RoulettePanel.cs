@@ -114,9 +114,9 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void AddRandomItems()
         {
-            foreach (var item in items)
+            foreach (var item in items.Shuffle())
             {
-                if (10f.DropChance() && _existedWeapons.Count > 0)
+                if (50f.DropChance() && _existedWeapons.Count > 0)
                     AddWeaponsToRewards(item);
                 else
                     AddOtherRewards(item);

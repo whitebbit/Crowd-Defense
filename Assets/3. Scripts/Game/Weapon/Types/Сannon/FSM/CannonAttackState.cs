@@ -47,6 +47,7 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon.FSM
         {
             var cannonball = Object.Instantiate(_cannonball, _weaponObject.Point.position, _weaponObject.Point.rotation);
             cannonball.Launch(_weaponObject.Point, _config);
+            _weaponObject.SpawnDecals();
         }
     }
 }

@@ -6,6 +6,7 @@ namespace _3._Scripts.Game.Weapon
     public class WeaponObject : MonoBehaviour
     {
         [SerializeField] private Transform point;
+        [SerializeField] private Transform decalPoint;
         [SerializeField] private ParticleSystem explosion;
         [SerializeField] private WeaponAnimator animator;
         public Transform Point => point;
@@ -14,7 +15,7 @@ namespace _3._Scripts.Game.Weapon
 
         public void SpawnDecals()
         {
-            Instantiate(explosion, point.position, point.rotation, point);
+            Instantiate(explosion, decalPoint.position, decalPoint.rotation, decalPoint);
         }
 
         public void AnimatorState(bool state)

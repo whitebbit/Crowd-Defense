@@ -7,13 +7,14 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon
 {
     public class Cannonball : Missile
     {
-        
+        [SerializeField] private ParticleSystem explosion;
         public override void Launch(Transform fromPoint, WeaponConfig config)
         {
             var direction = fromPoint.up * 0.1f + fromPoint.forward;
             Config = config;
 
             rigidbody.AddForce(direction * Config.Get<float>("cannonForce"), ForceMode.Impulse);
+            Destroy(gameObject, 5);
         }
 
         protected override void OnCollision()
@@ -37,7 +38,7 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon
 
             collider.enabled = false;
             Exploded = true;
-
+            Instantiate(explosion, transform.position,Quaternion.identity);
             Destroy(gameObject);
         }
     }

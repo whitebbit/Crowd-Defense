@@ -46,6 +46,7 @@ namespace _3._Scripts.Game.Weapon.Types.Mortar.FSM
         {
             var arrow = Object.Instantiate(_explosiveShells, _weaponObject.Point.position, Quaternion.identity);
             arrow.Launch(_weaponObject.Point, _config);
+            _weaponObject.SpawnDecals();
         }
     }
 }

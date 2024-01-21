@@ -5,7 +5,8 @@ using UnityEngine;
 namespace _3._Scripts.Game.Weapon.Types.Mortar
 {
     public class ExplosiveShells : Missile
-    {
+    {        
+        [SerializeField] private ParticleSystem explosion;
         public override void Launch(Transform fromPoint, WeaponConfig config)
         {
             var forward = fromPoint.forward;
@@ -37,7 +38,8 @@ namespace _3._Scripts.Game.Weapon.Types.Mortar
 
             collider.enabled = false;
             Exploded = true;
-
+            
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

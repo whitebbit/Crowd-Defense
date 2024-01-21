@@ -5,6 +5,7 @@ using _3._Scripts.Extensions;
 using _3._Scripts.FSM.Base;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
+using _3._Scripts.UI.Extensions;
 using _3._Scripts.UI.Scriptable;
 using DG.Tweening;
 using UI.Panels;
@@ -90,7 +91,8 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void InitializeChests()
         {
-            foreach (var chest in chests)
+            var rand = chests.Shuffle();
+            foreach (var chest in rand)
             {
                 chest.Resetting();
                 chest.Initialize(GetReward());
