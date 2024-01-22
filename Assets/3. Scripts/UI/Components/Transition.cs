@@ -13,41 +13,35 @@ namespace _3._Scripts.UI.Components
         [SerializeField] private Image opener;
         [Space] [SerializeField] private CanvasScaler canvasScaler;
 
-        private float Height => Screen.height * canvasScaler.scaleFactor;
-        private float Width => Screen.width * canvasScaler.scaleFactor;
+        private Vector3 _sizeBackground;
+        private Vector3 _sizeOpener;
 
-        private Vector2 Size =>
-            Width > Height ? new Vector2(Width * 4, Width * 4) : new Vector2(Height * 2.5f, Height * 2.5f);
-
-        private RectTransform OpenerTransform => opener.transform as RectTransform;
-        private RectTransform BackgroundTransform => background.transform as RectTransform;
-        
         private void Start()
         {
-            OpenerTransform.sizeDelta = openedOnStart ? Size : Vector2.zero;
+            _sizeBackground = GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
+            _sizeOpener = Screen.height > Screen.width
+                ? new Vector2(_sizeBackground.y, _sizeBackground.y) * 3
+                : new Vector2(_sizeBackground.x, _sizeBackground.y) * 3;
+            
+            opener.rectTransform.sizeDelta = openedOnStart ? _sizeOpener : Vector2.zero;
+            background.rectTransform.sizeDelta = _sizeBackground;
         }
 
         private void OnEnable()
         {
-            SetBackgroundSize();
+            background.rectTransform.sizeDelta = _sizeBackground;
         }
 
         public Tween Open(float duration)
         {
-            OpenerTransform.sizeDelta = Vector2.zero;
-            return OpenerTransform.DOSizeDelta(Size, duration);
+            opener.rectTransform.sizeDelta = Vector2.zero;
+            return opener.rectTransform.DOSizeDelta(_sizeOpener, duration);
         }
 
         public Tween Close(float duration)
         {
-            OpenerTransform.sizeDelta = Size;
-            return OpenerTransform.DOSizeDelta(Vector2.zero, duration);
-        }
-
-        private void SetBackgroundSize()
-        {
-            var size = Width > Height ? 1.8f : 1f;
-            BackgroundTransform.sizeDelta = new Vector2(Width * size, Height * size);
+            opener.rectTransform.sizeDelta = _sizeOpener;
+            return opener.rectTransform.DOSizeDelta(Vector2.zero, duration);
         }
     }
 }
