@@ -46,7 +46,6 @@ namespace _3._Scripts.Game.Main
 
             if (HealthManager.HealthCount <= 0) return;
             
-            Debug.Log(HealthManager.HealthCount);
             StartCoroutine(DelayComplete());
         }
 

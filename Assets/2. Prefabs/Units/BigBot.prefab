@@ -50,7 +50,7 @@ MonoBehaviour:
   health: 1000
   speed: 1.25
   defaultBot: 0
-  animator: {fileID: 3116940615252026012}
+  animator: {fileID: 8787007964159191276}
   animations: {fileID: 11400000, guid: 65ee787e8fe70464fa3d919b13bcc208, type: 2}
   healthBar: {fileID: 3546599457006831201}
   chance: 15
@@ -379,6 +379,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b6ea72b4ff8c6aa4ca9f7a9ac9f8d59a, type: 2}
+    - target: {fileID: 6100332189725041294, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
+      propertyPath: meshRenderer
+      value: 
+      objectReference: {fileID: 4061705744116869513}
+    - target: {fileID: 6100332189725041294, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
+      propertyPath: currentAnimation
+      value: 
+      objectReference: {fileID: 11400000, guid: b5cd0c805ada123459e1f32936d4bce7, type: 2}
     - target: {fileID: 7888262452332332253, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
       propertyPath: m_Name
       value: Stickman_Mixamo_AnimatedMesh
@@ -453,17 +461,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8190786726165798785}
   m_SourcePrefab: {fileID: 100100000, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
---- !u!114 &3116940615252026012 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 439270320744442110, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
+--- !u!23 &4061705744116869513 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1515198648474035179, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
   m_PrefabInstance: {fileID: 3267646295288679010}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4621183695366098623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f48aa2d31090947a96e7b95bee577c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4621183695366098623 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7888262452332332253, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
@@ -510,6 +512,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9182452101614416090, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
   m_PrefabInstance: {fileID: 3267646295288679010}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8787007964159191276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6100332189725041294, guid: 12d33977990560447b0fbd15b1eeaa78, type: 3}
+  m_PrefabInstance: {fileID: 3267646295288679010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4621183695366098623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6cc279b0b49934980f1637ad388b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3929260475474942774
 PrefabInstance:
   m_ObjectHideFlags: 0
