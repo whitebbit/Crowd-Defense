@@ -20,12 +20,14 @@ namespace _3._Scripts.UI.Manager.Popups
         private void Start()
         {
             menu.onClick.AddListener(GoToMenu);
-            addHealth.onClick.AddListener(ContinueGame);
+            addHealth.onClick.AddListener(()=>YandexGame.RewVideoShow(5));
             Initialize();
         }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
+            YandexGame.RewardVideoEvent += ContinueGame;
+            
             base.Open(onComplete, duration);
             popup.Open();
         }
@@ -37,8 +39,10 @@ namespace _3._Scripts.UI.Manager.Popups
             base.Close(onComplete, duration);
         }
 
-        private void ContinueGame()
+        private void ContinueGame(int obj)
         {
+            if(obj != 5) return;
+            
             OnContinue?.Invoke();
             HealthManager.HealthCount += 50;
             LevelManager.Instance.CurrentLevel.StartLevel();

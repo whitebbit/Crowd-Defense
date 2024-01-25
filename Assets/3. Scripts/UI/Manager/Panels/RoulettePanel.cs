@@ -37,6 +37,7 @@ namespace _3._Scripts.UI.Manager.Panels
             rotateAgain.onClick.AddListener(() =>
             {
                 if (_rotating) return;
+                if(_rewardGot) return;
                 YandexGame.RewVideoShow(2);
             });
         }

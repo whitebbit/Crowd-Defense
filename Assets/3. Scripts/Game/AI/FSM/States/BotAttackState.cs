@@ -24,7 +24,6 @@ namespace _3._Scripts.Game.AI.FSM.States
         {
             if (_attacked) return;
             
-            LevelManager.Instance.CurrentLevel.BotAttacked();
             AttackPlayer();
             
             _transform.DOScale(Vector3.zero, 3).OnComplete(() => { OnDisable?.Invoke(); });;
@@ -35,6 +34,7 @@ namespace _3._Scripts.Game.AI.FSM.States
         private void AttackPlayer()
         {
             HealthManager.HealthCount -= (int)_transform.localScale.x;
+            LevelManager.Instance.CurrentLevel.BotAttacked();
         }
     }
 }
