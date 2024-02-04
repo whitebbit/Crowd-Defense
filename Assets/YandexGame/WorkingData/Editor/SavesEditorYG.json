@@ -1,19 +1,18 @@
 {
-  "idSave": 103,
-  "isFirstSession": false,
-  "language": "ru",
-  "promptDone": false,
-  "volume": 0.0,
-  "money": 195,
-  "keys": 1,
-  "health": 94,
-  "currentWeapon": "machine_gun",
-  "secondWeapon": "",
-  "weaponsLevel": {},
-  "unlockedWeapons": [
-    "machine_gun",
-    "auto_cannon"
-  ],
-  "currentLevel": 3,
-  "completedLevelsCount": 11
+    "idSave": 139,
+    "isFirstSession": false,
+    "language": "ru",
+    "promptDone": false,
+    "volume": 0.0,
+    "money": 195,
+    "keys": 1,
+    "health": 94,
+    "currentWeapon": "machine_gun",
+    "secondWeapon": "",
+    "unlockedWeapons": [
+        "machine_gun",
+        "auto_cannon"
+    ],
+    "currentLevel": 3,
+    "completedLevelsCount": 11
 }
