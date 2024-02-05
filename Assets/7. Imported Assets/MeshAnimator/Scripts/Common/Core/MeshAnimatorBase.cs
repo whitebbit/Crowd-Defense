@@ -555,7 +555,7 @@ namespace FSG.MeshAnimator
                 SetTimeNormalized(Mathf.Clamp01(normalizedTime));
             }
         }
-        
+
         /// <summary>
         /// Play an animation by index
         /// </summary>
@@ -579,7 +579,7 @@ namespace FSG.MeshAnimator
         /// Play a random animation
         /// </summary>
         /// <param name="animationNames">Animation names</param>
-        public void PlayRandom(string[] animationNames)
+        public void PlayRandom(params string[] animationNames)
         {
             int rand = UnityEngine.Random.Range(0, animationNames.Length);
             string randomAnim = animationNames[rand];

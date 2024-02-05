@@ -108,7 +108,7 @@ namespace FSG.MeshAnimator
                     }
                     catch (System.Exception e)
                     {
-                        //Debug.LogException(e);
+                        Debug.LogException(e);
                     }
                 }
             }
