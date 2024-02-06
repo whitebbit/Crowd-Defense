@@ -30,7 +30,23 @@ namespace _3._Scripts.Game.Main
             Bots = new List<Bot>(transform.GetComponentsInChildren<Bot>());
             BotsCount = Bots.Count;
         }
+
+        private void Update()
+        {
+            foreach (var bot in Bots)
+            {
+                bot.OnUpdate();
+            }
+        }
         
+        private void FixedUpdate()
+        {
+            foreach (var bot in  Bots)
+            {
+                bot.OnFixedUpdate();
+            }
+        }
+
         public void StartLevel()
         {
             Player.SelectAdditionalWeapon(YandexGame.savesData.secondWeapon);
@@ -76,6 +92,7 @@ namespace _3._Scripts.Game.Main
             return BotsCount - KillsCount - _attackedBotCount <= 0;
         }
 
+        
         private IEnumerator DelayComplete()
         {
             LevelInProgress = false;

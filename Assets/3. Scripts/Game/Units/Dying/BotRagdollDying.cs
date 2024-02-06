@@ -42,8 +42,8 @@ namespace _3._Scripts.Game.Units.Dying
             var randVector = new Vector3(Random.Range(-0.5f, 0.5f), 1, 0);
             var randTorqueVector = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
 
-            var randForce = Random.Range(10, 20);
-            var randTorqueForce = Random.Range(25, 50);
+            var randForce = Random.Range(10f, 20f);
+            var randTorqueForce = Random.Range(25f, 50f);
             
             rigidbody.AddForce(randVector * randForce, ForceMode.Impulse);
             rigidbody.AddTorque(randTorqueVector * randTorqueForce, ForceMode.Impulse);

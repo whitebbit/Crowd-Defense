@@ -1,4 +1,6 @@
-﻿using _3._Scripts.Game.Units;
+﻿using System.Collections;
+using _3._Scripts.Game.Main;
+using _3._Scripts.Game.Units;
 using _3._Scripts.Game.Units.Animations;
 using _3._Scripts.Game.Units.Damageable;
 using _3._Scripts.Game.Units.Dying;
@@ -29,22 +31,29 @@ namespace _3._Scripts.Game.AI
             _animator = new BotAnimations(animator, animations);
 
             var ragdoll = new Ragdoll(transform);
-            var dying = new BotRagdollDying(ragdoll, _animator, defaultBot, () => Destroy(gameObject, 3));
+            var dying = new BotRagdollDying(ragdoll, _animator, defaultBot, () => StartCoroutine(DelayDestroy()));
 
             Health = new UnitHealth(health);
             Damageable = new UnitDamageable(Health);
 
-            _botFsm = new BotFSM(transform, speed, _animator, Health, dying, () => Destroy(gameObject, 3));
+            _botFsm = new BotFSM(transform, speed, _animator, Health, dying, () => StartCoroutine(DelayDestroy()));
         }
 
-        private void Update()
+        public void OnUpdate()
         {
             _botFsm.Update();
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate()
         {
             _botFsm.FixedUpdate();
+        }
+
+        private IEnumerator DelayDestroy()
+        {
+            yield return new WaitForSeconds(3);
+            LevelManager.Instance.CurrentLevel.Bots.Remove(this);
+            Destroy(gameObject);
         }
     }
 }
