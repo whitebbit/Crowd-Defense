@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b800dc9a5cb04bdda7e4c4ef4e117503, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: fe9e2859664134c0fbae70e3d9d80cb5, type: 3}
+  icon: {fileID: 21300000, guid: 2878c754c912a8a45a03c8b54a97875f, type: 3}
   title: 
   weaponID: machine_gun

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5710549, g: 0.8531029, b: 0.94344306, a: 1}
+  m_IndirectSpecularColor: {r: 0.5714629, g: 0.8524589, b: 0.9422495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3137,15 +3137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultLevels:
   - {fileID: 6786537995697991440, guid: 5ecc8aec4c2fcf7448f3f62b705e1e82, type: 3}
-  - {fileID: 6786537995697991440, guid: c20e8b99513c15c41a07b115ec478222, type: 3}
-  - {fileID: 6786537995697991440, guid: 7cb222496019fd24ebb0a2b3ec2f4645, type: 3}
-  - {fileID: 6786537995697991440, guid: 30b2c967725244840923a9ea39bf046a, type: 3}
-  - {fileID: 6786537995697991440, guid: 02c740d6b8ec912478af87090612ff09, type: 3}
-  - {fileID: 6786537995697991440, guid: 940292893fef8b44880366193a389983, type: 3}
   bossLevels:
-  - {fileID: 6786537995697991440, guid: ae1c751162c854542a0fef63ea6143ee, type: 3}
-  - {fileID: 6786537995697991440, guid: f1162a15ba459674b8e569f17e811756, type: 3}
-  - {fileID: 6786537995697991440, guid: b322fd1621f8b0849acb9786e5a9f76c, type: 3}
+  - {fileID: 6786537995697991440, guid: 5ecc8aec4c2fcf7448f3f62b705e1e82, type: 3}
 --- !u!1001 &1267882329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6906,5 +6899,5 @@ SceneRoots:
   - {fileID: 942940169}
   - {fileID: 643843317}
   - {fileID: 1037196600}
-  - {fileID: 1267882329}
   - {fileID: 1382633593}
+  - {fileID: 1267882329}

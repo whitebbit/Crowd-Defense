@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b800dc9a5cb04bdda7e4c4ef4e117503, type: 3}
   m_Name: Ballista
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 18d1f805a31744f76828abd9aca707f5, type: 3}
+  icon: {fileID: 21300000, guid: acf736a10436720478d59599c3956658, type: 3}
   title: 
   weaponID: ballista

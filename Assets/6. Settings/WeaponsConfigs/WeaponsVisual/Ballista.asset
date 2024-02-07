@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927cf7fb1ae44652b41189386b3477b9, type: 3}
   m_Name: Ballista
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 18d1f805a31744f76828abd9aca707f5, type: 3}
+  icon: {fileID: 21300000, guid: acf736a10436720478d59599c3956658, type: 3}
   titles:
     m_keys:
     - ru

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927cf7fb1ae44652b41189386b3477b9, type: 3}
   m_Name: Mortar
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9231bd0d1cca3413594b3d3b96c6a0a7, type: 3}
+  icon: {fileID: 21300000, guid: bc20f31ddda450e47ae561960559c60d, type: 3}
   titles:
     m_keys:
     - ru

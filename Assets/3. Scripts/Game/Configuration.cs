@@ -19,8 +19,7 @@ namespace _3._Scripts.Game
 
         private void Awake()
         {
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 60;
+            //QualitySettings.vSyncCount = 0;
             SaveDefaultWeapon();
         }
 

@@ -1,12 +1,12 @@
 {
-  "idSave": 167,
+  "idSave": 568,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
   "volume": 0.0,
-  "money": 300,
+  "money": 730,
   "keys": 0,
-  "health": 45,
+  "health": 74,
   "currentWeapon": "machine_gun",
   "secondWeapon": "",
   "weaponsLevel": {},
@@ -14,6 +14,6 @@
     "machine_gun",
     "auto_cannon"
   ],
-  "currentLevel": 1,
-  "completedLevelsCount": 17
+  "currentLevel": 3,
+  "completedLevelsCount": 3
 }

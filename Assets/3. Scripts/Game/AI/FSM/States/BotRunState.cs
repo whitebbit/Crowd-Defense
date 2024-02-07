@@ -12,8 +12,7 @@ namespace _3._Scripts.Game.AI.FSM.States
         private readonly IAnimator _animator;
         private readonly float _speed;
 
-        public bool OnFinish => Vector3.Distance(_transform.position,
-            LevelManager.Instance.CurrentLevel.Player.transform.position) <= 12;
+        public bool OnFinish => _transform.position.z - LevelManager.Instance.CurrentLevel.Player.transform.position.z <= 10;
 
         public BotRunState(Transform transform, float speed, IAnimator animator)
         {
