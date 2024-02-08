@@ -32,13 +32,14 @@ namespace _3._Scripts.UI.Manager.Panels
         private List<WeaponRouletteItemConfig> _existedWeapons = new();
         private bool _rotating;
         private bool _rewardGot;
+
         private void Start()
         {
             getReward.onClick.AddListener(GetReward);
             rotateAgain.onClick.AddListener(() =>
             {
                 if (_rotating) return;
-                if(_rewardGot) return;
+                if (_rewardGot) return;
                 YandexGame.RewVideoShow(2);
             });
         }
@@ -50,23 +51,23 @@ namespace _3._Scripts.UI.Manager.Panels
             YandexGame.SaveProgress();
 
             _rewardGot = false;
-            
+
             InitializeExistedWeapons();
             AddRandomItems();
 
             base.Open(onComplete, duration);
             Rotate();
         }
-        
+
         public override void Close(TweenCallback onComplete = null, float duration = 0.3f)
         {
             YandexGame.RewardVideoEvent -= OnReward;
 
             ResetPanels();
-            
+
             base.Close(onComplete, duration);
         }
-        
+
         private void InitializeExistedWeapons()
         {
             var unlocked = YandexGame.savesData.unlockedWeapons;
@@ -85,7 +86,6 @@ namespace _3._Scripts.UI.Manager.Panels
             rotateAgain.gameObject.SetActive(false);
         }
 
-        
 
         private void Rotate()
         {
@@ -108,8 +108,8 @@ namespace _3._Scripts.UI.Manager.Panels
         private void GetReward()
         {
             if (_rotating) return;
-            if(_rewardGot) return;
-            
+            if (_rewardGot) return;
+
             _rewardGot = true;
             _currentReward.OnReward(() =>
             {
@@ -157,11 +157,14 @@ namespace _3._Scripts.UI.Manager.Panels
             rotateAgain.gameObject.SetActive(true);
             _existedWeapons.Clear();
         }
-        
+
         private IEnumerator DelayReward()
         {
             yield return new WaitForSeconds(0.5f);
-            Transition.Instance.Close(0.3f).OnComplete(() => { UIManager.Instance.CurrentState = UIState.Play; });
+            Transition.Instance.Close(0.3f).OnComplete(() =>
+            {
+                UIManager.Instance.CurrentState = UIState.Play;
+            });
         }
     }
 }

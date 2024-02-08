@@ -16,7 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -88,10 +89,15 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: mesh
+      parentName: stickman@T-Pose(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: body
       parentName: stickman@T-Pose(Clone)
-      position: {x: 0.018271374, y: 2.3696322, z: -0.051554102}
-      rotation: {x: -0, y: -1, z: -0, w: 0}
+      position: {x: -0.018271385, y: 2.3696322, z: -0.051554102}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: body2
       parentName: body
@@ -116,17 +122,17 @@ ModelImporter:
     - name: shoulder_l
       parentName: body3
       position: {x: 0.31315878, y: 0.35292387, z: 0}
-      rotation: {x: -0, y: -0, z: -0.10071894, w: 0.9949149}
+      rotation: {x: -0, y: -0, z: -0.9999998, w: 0.00056292297}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l_1
       parentName: shoulder_l
       position: {x: 0.26502553, y: -0.00029841316, z: 0}
-      rotation: {x: -0.0067638424, y: -0.020400105, z: 0.06513604, w: 0.9976449}
+      rotation: {x: -0.005334632, y: -0.018165482, z: 0.026783219, w: 0.999462}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l_2
       parentName: hand_l_1
       position: {x: 0.8402485, y: 0.0028124677, z: -0.033870757}
-      rotation: {x: -0.0013717274, y: 0.0027372374, z: -0.007253627, w: 0.999969}
+      rotation: {x: -0.0013491233, y: -0.027715487, z: -0.048601307, w: 0.99843276}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l_3
       parentName: hand_l_2
@@ -141,17 +147,17 @@ ModelImporter:
     - name: shoulder_r
       parentName: body3
       position: {x: -0.29569298, y: 0.35292387, z: 0}
-      rotation: {x: -0, y: -0, z: 0.08772771, w: 0.9961445}
+      rotation: {x: -0, y: -0, z: 0.9924688, w: 0.12249836}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_r_1
       parentName: shoulder_r
       position: {x: -0.2649275, y: -0.007214093, z: 0}
-      rotation: {x: -0.007176799, y: 0.02025851, z: -0.059362583, w: 0.99800515}
+      rotation: {x: 0, y: 0, z: -0.27513173, w: 0.9614065}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_r_2
       parentName: hand_r_1
       position: {x: -0.8402007, y: -0.009393378, z: -0.033870757}
-      rotation: {x: -0.0007386644, y: -0.030497126, z: 0.0076715513, w: 0.9995052}
+      rotation: {x: -0, y: 0, z: 0.04900246, w: 0.99879867}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_r_3
       parentName: hand_r_2
@@ -162,26 +168,6 @@ ModelImporter:
       parentName: hand_r_3
       position: {x: -0.8012699, y: -0.032142315, z: 0.06484865}
       rotation: {x: 0, y: 0, z: -1.9721523e-31, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: foot_l_1
-      parentName: body
-      position: {x: 0.45225272, y: -0.13708496, z: 0.01604974}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: foot_l_2
-      parentName: foot_l_1
-      position: {x: 0.0036504774, y: -0.9879783, z: 0.0023449622}
-      rotation: {x: 0.07196624, y: 0, z: -0, w: 0.9974071}
-      scale: {x: 1, y: 1, z: 1}
-    - name: foot_l_3
-      parentName: foot_l_2
-      position: {x: 2.1316282e-16, y: -1.0498198, z: -0.0041208947}
-      rotation: {x: -0.0039945655, y: 0.9864004, z: -0.11022855, w: 0.121851824}
-      scale: {x: 1, y: 1, z: 1}
-    - name: foot_l_4
-      parentName: foot_l_3
-      position: {x: -1.4210854e-16, y: 0.023438057, z: 0.84128326}
-      rotation: {x: -0.039247997, y: 0, z: -0, w: 0.9992295}
       scale: {x: 1, y: 1, z: 1}
     - name: foot_r_1
       parentName: body
@@ -196,17 +182,32 @@ ModelImporter:
     - name: foot_r_3
       parentName: foot_r_2
       position: {x: -1.4210854e-16, y: -1.0498198, z: -0.0041208947}
-      rotation: {x: -0.0039945655, y: -0.9864004, z: 0.11022855, w: 0.121851824}
+      rotation: {x: -0.032764558, y: 0, z: -0, w: 0.9994631}
       scale: {x: 1, y: 1, z: 1}
     - name: foot_r_4
       parentName: foot_r_3
       position: {x: -0, y: 0.023438057, z: 0.84128326}
       rotation: {x: -0.039247997, y: 0, z: -0, w: 0.9992295}
       scale: {x: 1, y: 1, z: 1}
-    - name: mesh
-      parentName: stickman@T-Pose(Clone)
-      position: {x: -0, y: 0, z: 0}
+    - name: foot_l_1
+      parentName: body
+      position: {x: 0.45225272, y: -0.13708496, z: 0.01604974}
       rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: foot_l_2
+      parentName: foot_l_1
+      position: {x: 0.0036504774, y: -0.9879783, z: 0.0023449622}
+      rotation: {x: 0.07196624, y: 0, z: -0, w: 0.9974071}
+      scale: {x: 1, y: 1, z: 1}
+    - name: foot_l_3
+      parentName: foot_l_2
+      position: {x: 2.1316282e-16, y: -1.0498198, z: -0.0041208947}
+      rotation: {x: -0.032764558, y: 0, z: -0, w: 0.9994631}
+      scale: {x: 1, y: 1, z: 1}
+    - name: foot_l_4
+      parentName: foot_l_3
+      position: {x: -1.4210854e-16, y: 0.023438057, z: 0.84128326}
+      rotation: {x: -0.039247997, y: 0, z: -0, w: 0.9992295}
       scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
