@@ -33,7 +33,7 @@ namespace _3._Scripts.Game.AI.FSM.States
 
         private void AttackPlayer()
         {
-            HealthManager.HealthCount -= (int)_transform.localScale.x;
+            HealthManager.HealthCount -= _transform.localScale.x * 0.1f;
             LevelManager.Instance.CurrentLevel.BotAttacked();
         }
     }

@@ -330,6 +330,7 @@ MonoBehaviour:
   decalPoint: {fileID: 7530477476939269421}
   explosion: {fileID: 1972898938308927569, guid: b662ca0a4bc4475489bf8fed32e3bf2e, type: 3}
   animator: {fileID: 0}
+  gunshotSoundId: cannon
 --- !u!1 &8174738449517906661
 GameObject:
   m_ObjectHideFlags: 0

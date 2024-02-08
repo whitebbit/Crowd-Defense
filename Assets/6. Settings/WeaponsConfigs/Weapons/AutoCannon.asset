@@ -22,7 +22,7 @@ MonoBehaviour:
     - damage
     m_values:
     - 5
-    - 15
+    - 40
     - 3
     - 250
   integers:

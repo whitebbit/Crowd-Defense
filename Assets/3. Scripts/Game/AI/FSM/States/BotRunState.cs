@@ -23,7 +23,6 @@ namespace _3._Scripts.Game.AI.FSM.States
 
         public override void OnEnter()
         {
-            _animator.State(true);
             _animator.Play("walk");
         }
 

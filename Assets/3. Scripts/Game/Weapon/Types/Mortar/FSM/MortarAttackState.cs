@@ -38,6 +38,7 @@ namespace _3._Scripts.Game.Weapon.Types.Mortar.FSM
         private void Shoot()
         {
             PerformShot();
+            _weaponObject.PlayGunshotSound();
             CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, BulletsCount);
             OnAttack?.Invoke(CurrentBulletCount);
         }

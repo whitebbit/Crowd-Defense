@@ -2170,6 +2170,7 @@ MonoBehaviour:
   commonRewards:
   - {fileID: 11400000, guid: 8c5c3c23ae6e567469f84e16e99c7739, type: 2}
   - {fileID: 11400000, guid: f2a86635592b33645a3264d585727af7, type: 2}
+  - {fileID: 11400000, guid: f90c704109e0d274b96a12a7dd39683d, type: 2}
   - {fileID: 11400000, guid: 1a11d0b92b5c64e49a2f66d15ffa4165, type: 2}
   - {fileID: 11400000, guid: 1af531f079d0a0f49bf30feb6ad960b3, type: 2}
   rareRewards:
@@ -5837,7 +5838,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 149.6252, y: 149.6252}
+  m_SizeDelta: {x: 241.33, y: 241.3283}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &804038246741694671
 CanvasRenderer:
@@ -5867,7 +5868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 53360fb3bcb52411a8050174e2aa4f7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: acf736a10436720478d59599c3956658, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

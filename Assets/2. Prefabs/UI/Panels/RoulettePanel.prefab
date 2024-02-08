@@ -249,6 +249,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 778fee0d939adc6459ac4dcf61314b90, type: 2}
   - {fileID: 11400000, guid: 8c5c3c23ae6e567469f84e16e99c7739, type: 2}
   - {fileID: 11400000, guid: f2a86635592b33645a3264d585727af7, type: 2}
+  - {fileID: 11400000, guid: f90c704109e0d274b96a12a7dd39683d, type: 2}
   detectObject: {fileID: 3250311338627513835}
   getReward: {fileID: 87847416925708203}
   rotateAgain: {fileID: 1491053228909794251}

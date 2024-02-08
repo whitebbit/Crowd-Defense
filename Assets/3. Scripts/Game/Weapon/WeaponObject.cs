@@ -6,9 +6,13 @@ namespace _3._Scripts.Game.Weapon
     public class WeaponObject : MonoBehaviour
     {
         [SerializeField] private Transform point;
+        [Space]
         [SerializeField] private Transform decalPoint;
         [SerializeField] private ParticleSystem explosion;
+        [Space]
         [SerializeField] private WeaponAnimator animator;
+
+        [Space] [SerializeField] private string gunshotSoundId;
         public Transform Point => point;
 
         public void SetState(bool state) => gameObject.SetActive(state);
@@ -18,6 +22,11 @@ namespace _3._Scripts.Game.Weapon
             Instantiate(explosion, decalPoint.position, decalPoint.rotation, decalPoint);
         }
 
+        public void PlayGunshotSound()
+        {
+            AudioManager.Instance.PlayOneShot(gunshotSoundId);
+        }
+        
         public void AnimatorState(bool state)
         {
             if (animator == null) return;
@@ -27,5 +36,6 @@ namespace _3._Scripts.Game.Weapon
             else
                 animator.Stop();
         }
+        
     }
 }

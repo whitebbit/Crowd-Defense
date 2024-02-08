@@ -21,7 +21,7 @@ namespace YG
 
         public int money;
         public int keys;
-        public int health = 100;
+        public float health = 100;
 
         public string currentWeapon = "machine_gun";
         public string secondWeapon = "";

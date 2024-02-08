@@ -16,9 +16,9 @@ namespace _3._Scripts.UI.Components
             HealthManager.OnChanged -= OnChange;
         }
 
-        protected override void OnChange(int oldValue, int newValue)
+        protected override void OnChange(float oldValue, float newValue)
         {
-            Text.DOCounter(oldValue, newValue, 0.15f).OnUpdate(() =>
+            Text.DOCounter((int)oldValue, (int)newValue, 0.15f).OnUpdate(() =>
             {
                 Text.text += " / 150";
             });

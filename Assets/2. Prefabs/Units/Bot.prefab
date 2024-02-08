@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speed: 5
+  speed: 4
   defaultBot: 1
   animator: {fileID: 5268207206303489915}
   animations: {fileID: 11400000, guid: 65ee787e8fe70464fa3d919b13bcc208, type: 2}
@@ -97,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 5121040953131799863, guid: c77f5b2d113c2a24893da73359037923, type: 3}
       propertyPath: currentAnimation
       value: 
-      objectReference: {fileID: 11400000, guid: 5801a2f58456b134f91df47b59690889, type: 2}
+      objectReference: {fileID: 11400000, guid: b5cd0c805ada123459e1f32936d4bce7, type: 2}
     - target: {fileID: 7492186862387263865, guid: c77f5b2d113c2a24893da73359037923, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.37

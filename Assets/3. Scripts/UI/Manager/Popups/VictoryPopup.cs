@@ -13,6 +13,7 @@ namespace _3._Scripts.UI.Manager.Popups
         [SerializeField] private RectTransform effect;
         [SerializeField] private List<RectTransform> trumpets = new();
         private readonly List<Tween> _tweens = new();
+        private bool _animationStarted;
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
@@ -22,22 +23,22 @@ namespace _3._Scripts.UI.Manager.Popups
 
         public override void Close(TweenCallback onComplete = null, float duration = 0.3f)
         {
-            base.Close(() =>
+            base.Close( onComplete, duration);
+            
+            foreach (var tween in _tweens)
             {
-                foreach (var tween in _tweens)
-                {
-                    tween?.Pause();
-                    tween?.Kill();
-                }
-
-                _tweens.Clear();
-
-                onComplete?.Invoke();
-            }, duration);
+                tween?.Pause();
+                tween?.Kill();
+            }
+            _tweens.Clear();
+            _animationStarted = false;
         }
 
         private void Animate()
         {
+            if(_animationStarted) return;
+            _animationStarted = true;
+            
             var t1 = transform.DOScale(Vector3.zero, .5f).From().SetEase(Ease.OutBack);
             foreach (var t2 in trumpets.Select(trumpet => trumpet.DOScale(Vector3.zero, 0.75f)
                          .From().SetEase(Ease.OutBack).SetDelay(0.25f)))

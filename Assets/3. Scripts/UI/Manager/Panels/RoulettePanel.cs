@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _3._Scripts.Extensions;
+using _3._Scripts.Game;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
 using _3._Scripts.UI.Extensions;
@@ -78,6 +79,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private void OnReward(int obj)
         {
             if (obj != 2) return;
+            AudioManager.Instance.PlayOneShot("reward");
 
             Rotate();
             rotateAgain.gameObject.SetActive(false);

@@ -94,6 +94,8 @@ namespace _3._Scripts.UI.Manager.Panels
         private void AdBuy(int obj)
         {
             if (obj != 3) return;
+            
+            AudioManager.Instance.PlayOneShot("reward");
 
             if (!_currentItem.Unlocked)
                 Buy(false);

@@ -6,7 +6,7 @@ namespace _3._Scripts.UI.Manager
 {
     public static class MoneyManager
     {
-        public static event Action<int, int> OnChanged;
+        public static event Action<float, float> OnChanged;
 
         public static int MoneyCount
         {

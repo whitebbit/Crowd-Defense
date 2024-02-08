@@ -76,7 +76,7 @@ namespace _3._Scripts.UI.Manager.Panels
             ViewLevelGoal();
         }
 
-        private void TryLoseLevel(int _, int newValue)
+        private void TryLoseLevel(float _, float newValue)
         {
             if (newValue > 0) return;
 

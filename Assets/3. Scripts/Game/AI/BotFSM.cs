@@ -11,20 +11,25 @@ namespace _3._Scripts.Game.AI
 {
     public class BotFSM : FSMHandler
     {
-        public BotFSM(Transform transform, float speed, IAnimator animator, UnitHealth health, IDying dying, Action onDisable = null)
+        public BotFSM(Transform transform, float speed, IAnimator animator, UnitHealth health, IDying dying,
+            Action onDisable = null)
         {
             var idle = new BotIdleState(animator);
             var run = new BotRunState(transform, speed, animator);
             var death = new BotDeathState(dying);
             var attack = new BotAttackState(transform, onDisable);
 
-            AddTransition(idle,
-                new FuncPredicate(() => !LevelManager.Instance.CurrentLevel.LevelInProgress && health.Health > 0));
+            AddTransition(run, idle,
+                new FuncPredicate(() =>
+                    !LevelManager.Instance.CurrentLevel.LevelInProgress ||
+                    LevelManager.Instance.CurrentLevel.LevelComplete));
             AddTransition(run,
                 new FuncPredicate(() => LevelManager.Instance.CurrentLevel.LevelInProgress &&
-                                        health.Health > 0 && !run.OnFinish));
+                                        health.Health > 0 && !run.OnFinish &&
+                                        !LevelManager.Instance.CurrentLevel.LevelComplete));
             AddTransition(death,
                 new FuncPredicate(() => health.Health <= 0 && !death.IsDead));
+
             AddTransition(attack, new FuncPredicate(() => run.OnFinish && !death.IsDead));
 
             StateMachine.SetState(idle);

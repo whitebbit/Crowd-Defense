@@ -35,8 +35,7 @@ namespace _3._Scripts.Game.Weapon.Types.AutoCannon.FSM
             if (_target == null) return;
 
             var position = _target.transform.position;
-            var targetPos = new Vector3(position.x, (_weaponObject.transform.position.y + position.y) * 0.5f,
-                position.z);
+            var targetPos = new Vector3(position.x, position.y, position.z);
             _weaponObject.transform.DOLookAt(targetPos, 1f).OnComplete(Shoot)
                 .SetDelay(1);
         }
@@ -46,7 +45,7 @@ namespace _3._Scripts.Game.Weapon.Types.AutoCannon.FSM
             var cannonball =
                 Object.Instantiate(_cannonball, _weaponObject.Point.position, _weaponObject.Point.rotation);
             cannonball.Launch(_weaponObject.Point, _config);
-
+            _weaponObject.PlayGunshotSound();
             _target = null;
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _3._Scripts.Extensions;
 using _3._Scripts.FSM.Base;
+using _3._Scripts.Game;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
 using _3._Scripts.UI.Extensions;
@@ -121,6 +122,7 @@ namespace _3._Scripts.UI.Manager.Panels
             if (obj != 4) return;
 
             KeysManager.KeysCount = 3;
+            AudioManager.Instance.PlayOneShot("reward");
 
             buttons.gameObject.SetActive(false);
             moreKeys.gameObject.SetActive(false);

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoImprovements:
     m_keys: 00000000010000000200000003000000
-    m_values: 00000000320000006400000096000000
+    m_values: 00000000190000003200000064000000
   damageImprovements:
     m_keys: 00000000010000000200000003000000
     m_values:
@@ -26,6 +26,6 @@ MonoBehaviour:
     m_keys: 00000000010000000200000003000000
     m_values:
     - 1
-    - 0.99
+    - 0.975
     - 0.95
     - 0.9

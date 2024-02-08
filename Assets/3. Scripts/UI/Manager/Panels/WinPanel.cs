@@ -48,7 +48,11 @@ namespace _3._Scripts.UI.Manager.Panels
             notification.gameObject.SetActive(MoneyManager.MoneyCount >= 750);
             YandexGame.RewardVideoEvent += OnReward;
 
-            base.Open(onComplete, duration);
+            base.Open(() =>
+            {
+                AudioManager.Instance.PlayOneShot("win");
+                onComplete?.Invoke();
+            }, duration);
         }
 
 
@@ -123,6 +127,8 @@ namespace _3._Scripts.UI.Manager.Panels
         private void OnReward(int id)
         {
             if (id != 1) return;
+            
+            AudioManager.Instance.PlayOneShot("reward");
             bonusReward.SetReward();
             GetReward();
         }

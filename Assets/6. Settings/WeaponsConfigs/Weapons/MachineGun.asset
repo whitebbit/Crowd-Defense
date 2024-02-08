@@ -21,10 +21,10 @@ MonoBehaviour:
     - reloadTime
     - damage
     m_values:
-    - 0.01
+    - 0.06
     - 25
-    - 5
-    - 0.25
+    - 3
+    - 0.5
   integers:
     m_keys:
     - bulletCount

@@ -15,15 +15,18 @@ namespace _3._Scripts.Game.Units.Animations
         private readonly MeshAnimatorBase _meshAnimator;
         private readonly MeshAnimationsHolder _animations;
         
-        public BotAnimations([NotNull] MeshAnimatorBase meshAnimator, MeshAnimationsHolder animations)
+        public BotAnimations(MeshAnimatorBase meshAnimator, MeshAnimationsHolder animations)
         {
-            _meshAnimator = meshAnimator ? meshAnimator : throw new ArgumentNullException(nameof(meshAnimator));
+            _meshAnimator = meshAnimator;
             _animations = animations;
         }
         
         public void State(bool state)
         {
-            _meshAnimator.enabled = state;
+            if(state)
+                _meshAnimator.Play();
+            else
+                _meshAnimator.Pause();
         }
 
         public void Play(string key)

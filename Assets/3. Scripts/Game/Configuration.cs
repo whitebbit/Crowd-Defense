@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _3._Scripts.Game.Units.Scriptable;
 using _3._Scripts.Game.Weapon.Scriptable;
+using _3._Scripts.UI.Manager;
 using net.krej.Singleton;
 using UnityEngine;
 using YG;
@@ -19,7 +20,13 @@ namespace _3._Scripts.Game
 
         private void Awake()
         {
-            //QualitySettings.vSyncCount = 0;
+            QualitySettings.vSyncCount = 0;
+
+            if (HealthManager.HealthCount <= 0)
+            {
+                YandexGame.savesData.currentLevel = 1;
+                HealthManager.HealthCount = 100;
+            }
             SaveDefaultWeapon();
         }
 

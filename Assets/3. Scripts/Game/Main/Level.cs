@@ -17,6 +17,7 @@ namespace _3._Scripts.Game.Main
     {
         public int KillsCount { get; private set; }
         public bool LevelInProgress { get; private set; }
+        public bool LevelComplete{ get; private set; }
         public int BotsCount { get; private set; }
         private int _attackedBotCount;
 
@@ -96,7 +97,7 @@ namespace _3._Scripts.Game.Main
         private IEnumerator DelayComplete()
         {
             LevelInProgress = false;
-
+            LevelComplete = true;
             yield return new WaitForSeconds(1f);
             
             UIManager.Instance.CurrentState = KeysManager.KeysCount != 3 ? UIState.Win : UIState.Chest;

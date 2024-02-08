@@ -37,6 +37,7 @@ namespace _3._Scripts.Game.Weapon.Types.Ballista.FSM
         private void Shoot()
         {
             PerformShot();
+            _weaponObject.PlayGunshotSound();
             _weaponObject.AnimatorState(true);
             CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, BulletsCount);
             OnAttack?.Invoke(CurrentBulletCount);

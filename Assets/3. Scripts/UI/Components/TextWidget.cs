@@ -15,6 +15,6 @@ namespace _3._Scripts.UI.Components
             Text = GetComponent<TextMeshProUGUI>();
         }
         
-        protected abstract void OnChange(int oldValue, int newValue);
+        protected abstract void OnChange(float oldValue, float newValue);
     }
 }

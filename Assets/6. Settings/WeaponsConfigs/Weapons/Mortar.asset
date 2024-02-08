@@ -22,7 +22,7 @@ MonoBehaviour:
     - damage
     - mortarTorque
     m_values:
-    - 5
+    - 2.5
     - 20
     - 10
     - 500

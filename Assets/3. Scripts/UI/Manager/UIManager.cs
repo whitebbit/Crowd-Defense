@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using _3._Scripts.Architecture;
+using _3._Scripts.Game;
 using _3._Scripts.UI.Enums;
 using DG.Tweening;
 using UI.Panels;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _3._Scripts.UI.Manager
 {
     public class UIManager : Singleton<UIManager>
     {
         [SerializeField] private UIState startState;
-        [Space] 
-        [SerializeField] private UIPanel mainPanel;
+        [Space] [SerializeField] private UIPanel mainPanel;
         [SerializeField] private UIPanel playPanel;
         [SerializeField] private UIPanel winPanel;
         [SerializeField] private UIPanel roulettePanel;
@@ -56,7 +57,7 @@ namespace _3._Scripts.UI.Manager
         protected override void OnAwake()
         {
             _currentState = UIState.None;
-            
+
             _panels.Add(UIState.Main, mainPanel);
             _panels.Add(UIState.Play, playPanel);
             _panels.Add(UIState.Win, winPanel);
@@ -64,16 +65,28 @@ namespace _3._Scripts.UI.Manager
             _panels.Add(UIState.Shop, shopPanel);
             _panels.Add(UIState.Settings, settingsPanel);
             _panels.Add(UIState.Chest, chestPanel);
+            
+            SetButtonSound();
+
         }
 
         private void Start()
         {
             Initialize();
         }
-        
+
+        private void SetButtonSound()
+        {
+            var buttons = FindObjectsOfType<Button>();
+            foreach (var button in buttons)
+            {
+                button.onClick.AddListener(() => AudioManager.Instance.PlayOneShot("click"));
+            }
+        }
+
         public T GetPanel<T>() where T : UIPanel
         {
-            return _panels.Values.First(p=> p is T) as T;
+            return _panels.Values.First(p => p is T) as T;
         }
 
         private void Initialize()

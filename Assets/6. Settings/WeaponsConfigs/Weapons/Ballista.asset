@@ -21,10 +21,10 @@ MonoBehaviour:
     - explosionRadius
     - damage
     m_values:
-    - 5
+    - 1.5
     - 100
     - 2.5
-    - 200
+    - 125
   integers:
     m_keys:
     - bulletCount

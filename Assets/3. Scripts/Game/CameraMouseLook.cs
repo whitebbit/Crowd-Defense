@@ -1,6 +1,7 @@
 ﻿using System;
 using _3._Scripts.Game.Main;
 using UnityEngine;
+using YG;
 
 namespace _3._Scripts.Game
 {
@@ -23,8 +24,9 @@ namespace _3._Scripts.Game
         {
             if (!Input.GetMouseButton(0)) return;
 
-            var mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-            var mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+            var speed = YandexGame.EnvironmentData.isMobile ? rotationSpeed * 0.25f : rotationSpeed;
+            var mouseX = Input.GetAxis("Mouse X") * speed * Time.deltaTime;
+            var mouseY = Input.GetAxis("Mouse Y") * speed * Time.deltaTime;
 
             _yRotation += mouseX;
             _xRotation -= mouseY;
@@ -34,6 +36,7 @@ namespace _3._Scripts.Game
 
             transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
         }
+
 
         private static void UnlockCursor()
         {

@@ -1440,6 +1440,7 @@ MonoBehaviour:
   decalPoint: {fileID: 1748446367827469583}
   explosion: {fileID: 6051632683619467447, guid: cdf9747339f880647a9ce8e243c9683b, type: 3}
   animator: {fileID: 1908754392569534056}
+  gunshotSoundId: machine_gun
 --- !u!114 &1908754392569534056
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,9 +19,9 @@ namespace _3._Scripts.UI.Components
             MoneyManager.OnChanged -= OnChange;
         }
 
-        protected override void OnChange(int oldValue, int newValue)
+        protected override void OnChange(float oldValue, float newValue)
         {
-            Text.DOCounter(oldValue, newValue, 0.15f);
+            Text.DOCounter((int)oldValue, (int)newValue, 0.15f);
         }
         
     }

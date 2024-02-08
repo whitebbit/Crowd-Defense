@@ -1,4 +1,5 @@
 ﻿using System;
+using _3._Scripts.Game;
 using _3._Scripts.Game.Main;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
@@ -28,7 +29,11 @@ namespace _3._Scripts.UI.Manager.Popups
         {
             YandexGame.RewardVideoEvent += ContinueGame;
             
-            base.Open(onComplete, duration);
+            base.Open(() =>
+            {
+                AudioManager.Instance.PlayOneShot("lose");
+                onComplete?.Invoke();
+            }, duration);
             popup.Open();
         }
 
@@ -43,8 +48,9 @@ namespace _3._Scripts.UI.Manager.Popups
         {
             if(obj != 5) return;
             
+            AudioManager.Instance.PlayOneShot("reward");
             OnContinue?.Invoke();
-            HealthManager.HealthCount += 50;
+            HealthManager.HealthCount += 100;
             LevelManager.Instance.CurrentLevel.StartLevel();
             Close();
         }
@@ -54,7 +60,6 @@ namespace _3._Scripts.UI.Manager.Popups
             MoneyManager.MoneyCount += 25;
             HealthManager.HealthCount = 100;
             YandexGame.savesData.currentLevel = 1;
-            YandexGame.savesData.completedLevelsCount = 1;
             Transition.Instance.Close(0.3f).OnComplete(() =>
             {
                 LevelManager.Instance.DeleteLevel();

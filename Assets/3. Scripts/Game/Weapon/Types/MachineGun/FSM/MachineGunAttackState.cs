@@ -51,6 +51,7 @@ namespace _3._Scripts.Game.Weapon.Types.MachineGun.FSM
         {
             PerformShot();
             _weaponObject.SpawnDecals();
+            _weaponObject.PlayGunshotSound();
             _weaponObject.AnimatorState(true);
 
             CurrentBulletCount = Mathf.Clamp(CurrentBulletCount - 1, 0, BulletsCount);
