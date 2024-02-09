@@ -38,6 +38,7 @@ namespace _3._Scripts.Game.Weapon.Types.Сannon
 
             collider.enabled = false;
             Exploded = true;
+            AudioManager.Instance.PlayOneShot("boom");
             Instantiate(explosion, transform.position,Quaternion.identity);
             Destroy(gameObject);
         }

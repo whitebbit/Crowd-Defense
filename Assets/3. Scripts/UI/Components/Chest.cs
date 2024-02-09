@@ -1,5 +1,6 @@
 ﻿using System;
 using _3._Scripts.FSM.Base;
+using _3._Scripts.Game;
 using _3._Scripts.UI.Scriptable;
 using DG.Tweening;
 using TMPro;
@@ -60,6 +61,8 @@ namespace _3._Scripts.UI.Components
             if (_unlocked) return;
             
             if(!_predicate.Evaluate()) return;
+            
+            AudioManager.Instance.PlayOneShot("reward");
             
             _unlocked = true;
             chestIcon.DOFade(0, 0.25f);

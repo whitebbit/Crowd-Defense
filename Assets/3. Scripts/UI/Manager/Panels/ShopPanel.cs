@@ -89,19 +89,20 @@ namespace _3._Scripts.UI.Manager.Panels
                 Upgrade(true);
 
             UpdateButtons();
+            AudioManager.Instance.PlayOneShot("buy");
         }
 
         private void AdBuy(int obj)
         {
             if (obj != 3) return;
             
-            AudioManager.Instance.PlayOneShot("reward");
 
             if (!_currentItem.Unlocked)
                 Buy(false);
             else
                 Upgrade(false);
-
+            
+            AudioManager.Instance.PlayOneShot("reward");
             UpdateButtons();
         }
 
@@ -168,7 +169,7 @@ namespace _3._Scripts.UI.Manager.Panels
                 return;
             }
 
-            adBuy.gameObject.SetActive(true);
+            //adBuy.gameObject.SetActive(true);
             adBuyText.gameObject.SetActive(!_currentItem.Unlocked);
             adUpgradeText.gameObject.SetActive(_currentItem.Unlocked);
         }

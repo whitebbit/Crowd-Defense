@@ -94,6 +94,7 @@ namespace _3._Scripts.UI.Manager.Panels
             var vector = new Vector3(0, 0, z - 720 - 720 - 720);
 
             _rotating = true;
+            AudioManager.Instance.PlayOneShot("roulette");
             roulette.DORotate(vector, 5, RotateMode.FastBeyond360)
                 .SetRelative(true)
                 .SetEase(ease)
@@ -102,6 +103,7 @@ namespace _3._Scripts.UI.Manager.Panels
                 {
                     _rotating = false;
                     _currentReward = UIRaycast.FindObject<RouletteItem>(detectObject.position);
+                    AudioManager.Instance.PlayOneShot("reward");
                 });
         }
 

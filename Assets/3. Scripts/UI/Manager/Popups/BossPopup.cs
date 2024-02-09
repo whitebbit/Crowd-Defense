@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _3._Scripts.Game;
 using DG.Tweening;
 using UI.Panels;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace _3._Scripts.UI.Manager.Popups
             AnimateFrame();
             AnimateText();
             AnimateIcon();
-
+            AudioManager.Instance.PlayOneShot("boss");
             base.Open(onComplete, duration);
         }
 

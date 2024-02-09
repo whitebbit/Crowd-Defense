@@ -684,6 +684,7 @@ MonoBehaviour:
   decalPoint: {fileID: 0}
   explosion: {fileID: 0}
   animator: {fileID: 7475915285242868828}
+  gunshotSoundId: ballista
 --- !u!114 &7475915285242868828
 MonoBehaviour:
   m_ObjectHideFlags: 0

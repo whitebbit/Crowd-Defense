@@ -38,6 +38,7 @@ namespace _3._Scripts.Game
         private void Start()
         {
             Volume = YandexGame.savesData.volume;
+            PlayMusic();
         }
 
         public void PlayOneShot(string key, float volume = 0.75f)
@@ -74,10 +75,9 @@ namespace _3._Scripts.Game
         public void PlayMusic()
         {
             music.loop = true;
-            music.volume = 0.25f;
-
+            
             if (music.isPlaying) return;
-            music.Play("background");
+            music.Play("music");
         }
     }
 }

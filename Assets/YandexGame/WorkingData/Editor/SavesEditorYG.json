@@ -1,19 +1,23 @@
 {
-  "idSave": 1535,
+  "idSave": 2167,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
-  "volume": -80.0,
-  "money": 575,
-  "keys": 3,
-  "health": 80.80029,
-  "currentWeapon": "machine_gun",
-  "secondWeapon": "",
-  "weaponsLevel": {},
+  "volume": 0.0,
+  "money": 660,
+  "keys": 2,
+  "health": 72.10087,
+  "currentWeapon": "cannon",
+  "secondWeapon": "auto_cannon",
+  "weaponsLevel": {
+    "ballista": 2
+  },
   "unlockedWeapons": [
     "machine_gun",
-    "auto_cannon"
+    "auto_cannon",
+    "ballista",
+    "cannon"
   ],
-  "currentLevel": 1,
-  "completedLevelsCount": 18
+  "currentLevel": 2,
+  "completedLevelsCount": 59
 }
