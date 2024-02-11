@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 400
-  speed: 4.5
+  speed: 5
   defaultBot: 0
   animator: {fileID: 2092166095104562856}
   animations: {fileID: 11400000, guid: 65ee787e8fe70464fa3d919b13bcc208, type: 2}

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _3._Scripts.Architecture;
 using _3._Scripts.Game.Units.Scriptable;
 using _3._Scripts.Game.Weapon.Scriptable;
 using _3._Scripts.UI.Manager;
-using net.krej.Singleton;
 using UnityEngine;
 using YG;
 
@@ -38,7 +38,6 @@ namespace _3._Scripts.Game
                 YandexGame.savesData.unlockedWeapons.Add(YandexGame.savesData.currentWeapon);
                 YandexGame.savesData.unlockedWeapons.Add("auto_cannon");
             }
-
             YandexGame.SaveProgress();
         }
     }
