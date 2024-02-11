@@ -1,4 +1,5 @@
 ﻿using System;
+using _3._Scripts.Game;
 using _3._Scripts.UI.Scriptable;
 using TMPro;
 using UnityEngine;
@@ -54,6 +55,7 @@ namespace _3._Scripts.UI.Components
                     _getterEffect.SetFinishPoint(heart);
                     break;
                 case CoinsRouletteItemConfig:
+                    AudioManager.Instance.PlayOneShot("coins");
                     _getterEffect.SetFinishPoint(money);
                     break;
             }

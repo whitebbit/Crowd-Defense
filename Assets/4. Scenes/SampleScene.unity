@@ -1764,7 +1764,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: NaN, z: 1e-45, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 5e-44, z: 6.1087e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -3312,6 +3312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultLevels:
   - {fileID: 6786537995697991440, guid: 5ecc8aec4c2fcf7448f3f62b705e1e82, type: 3}
+  - {fileID: 6786537995697991440, guid: 3bb6660ae4197874a8f3b6ff3aa2b4cd, type: 3}
+  - {fileID: 6786537995697991440, guid: fcb12d1b7d04b124f882ec9f3e3fa623, type: 3}
   bossLevels:
   - {fileID: 6786537995697991440, guid: 64684e5deda66cc4085b714fc8a7d62a, type: 3}
 --- !u!1001 &1267882329
@@ -6508,7 +6510,19 @@ MonoBehaviour:
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
+  - name: coins
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Ext: mp3
+    Type: 13
+    Cash: {fileID: 0}
+    Cashing: 1
   - name: lose
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Ext: mp3
+    Type: 13
+    Cash: {fileID: 0}
+    Cashing: 1
+  - name: lose_voice
     Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
@@ -6542,6 +6556,24 @@ MonoBehaviour:
     Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
+    Cash: {fileID: 0}
+    Cashing: 1
+  - name: win_voice
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Ext: mp3
+    Type: 13
+    Cash: {fileID: 0}
+    Cashing: 1
+  - name: click
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Ext: wav
+    Type: 20
+    Cash: {fileID: 0}
+    Cashing: 1
+  - name: lose
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Ext: wav
+    Type: 20
     Cash: {fileID: 0}
     Cashing: 1
 --- !u!1001 &3643537826810788052

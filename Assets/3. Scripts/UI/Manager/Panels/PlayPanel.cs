@@ -25,6 +25,8 @@ namespace _3._Scripts.UI.Manager.Panels
         [Header("Other")] [SerializeField] private List<CanvasGroup> afterGoalObjects = new();
         [SerializeField] private BossPopup bossPopup;
         [SerializeField] private LosePopup losePopup;
+        [SerializeField] private Tutorial tutorial;
+        [SerializeField] private Image crosshair;
 
         private WeaponSelector _currentWeaponSelector;
         private Timer _timer;
@@ -41,6 +43,10 @@ namespace _3._Scripts.UI.Manager.Panels
             UpdateKillsCounter(0);
             SetWeapons();
 
+            crosshair.DOFade(0, 0);
+            tutorial.StartTutorial();
+
+            tutorial.OnStop += ShowCrosshair;
             HealthManager.OnChanged += TryLoseLevel;
             LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
             _timer.OnTime += LevelManager.Instance.CurrentLevel.CompleteLevel;
@@ -56,7 +62,7 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             LevelManager.Instance.CurrentLevel.OnKill -= UpdateKillsCounter;
             HealthManager.OnChanged -= TryLoseLevel;
-
+            tutorial.OnStop -= ShowCrosshair;
             _timer.OnTime -= LevelManager.Instance.CurrentLevel.CompleteLevel;
             _timer.StopTimer();
 
@@ -68,6 +74,8 @@ namespace _3._Scripts.UI.Manager.Panels
 
             base.Close(onComplete, duration);
         }
+
+        private void ShowCrosshair() => crosshair.DOFade(1, 0.25f);
 
         private void OnLevelStart()
         {
@@ -84,7 +92,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
             losePopup.OnContinue += () => _timer.TimerState(true);
             losePopup.Open();
-            
+
             _timer.TimerState(false);
         }
 

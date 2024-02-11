@@ -47,10 +47,12 @@ namespace _3._Scripts.UI.Manager.Panels
             victoryPopup.Open();
             notification.gameObject.SetActive(MoneyManager.MoneyCount >= 750);
             YandexGame.RewardVideoEvent += OnReward;
-
+            
+            AudioManager.Instance.PlayOneShot("win_voice");
+            AudioManager.Instance.PlayOneShot("win");
+            
             base.Open(() =>
             {
-                AudioManager.Instance.PlayOneShot("win");
                 onComplete?.Invoke();
             }, duration);
         }
@@ -110,6 +112,8 @@ namespace _3._Scripts.UI.Manager.Panels
                     LevelManager.Instance.DeleteLevel();
                     MainMenuEnvironment.Instance.EnvironmentState(true);
                     UIManager.Instance.CurrentState = UIState.Main;
+                    if (YandexGame.savesData.completedLevelsCount >= 3)
+                        YandexGame.FullscreenShow();
                     Transition.Instance.Open(0.3f).SetDelay(0.25f);
                 }).SetDelay(0.25f);
             });
@@ -140,6 +144,7 @@ namespace _3._Scripts.UI.Manager.Panels
                 () =>
                 {
                     MoneyManager.MoneyCount += bonusReward.Used ? bonusReward.CurrentMultiplier.Multiplier * 25 : 25;
+                    AudioManager.Instance.PlayOneShot("coins");
                     Transition.Instance.Close(0.3f).SetDelay(0.75f).OnComplete(() =>
                     {
                         LevelManager.Instance.DeleteLevel();
@@ -153,6 +158,8 @@ namespace _3._Scripts.UI.Manager.Panels
                         {
                             UIManager.Instance.CurrentState = UIState.Play;
                         }
+                        if (YandexGame.savesData.completedLevelsCount >= 3)
+                            YandexGame.FullscreenShow();
                     });
                 });
         }

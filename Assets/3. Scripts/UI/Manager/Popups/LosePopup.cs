@@ -29,9 +29,11 @@ namespace _3._Scripts.UI.Manager.Popups
         {
             YandexGame.RewardVideoEvent += ContinueGame;
             
+            AudioManager.Instance.PlayOneShot("lose");
+            AudioManager.Instance.PlayOneShot("lose_voice");
+            
             base.Open(() =>
             {
-                AudioManager.Instance.PlayOneShot("lose");
                 onComplete?.Invoke();
             }, duration);
             popup.Open();
@@ -66,6 +68,8 @@ namespace _3._Scripts.UI.Manager.Popups
                 MainMenuEnvironment.Instance.EnvironmentState(true);
                 UIManager.Instance.CurrentState = UIState.Main;
                 Transition.Instance.Open(0.3f).SetDelay(0.25f);
+                if (YandexGame.savesData.completedLevelsCount >= 3)
+                                    YandexGame.FullscreenShow();
             }).SetDelay(0.25f);
         }
     }

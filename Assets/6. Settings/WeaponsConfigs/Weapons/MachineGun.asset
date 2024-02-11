@@ -29,7 +29,7 @@ MonoBehaviour:
     m_keys:
     - bulletCount
     - shoutCount
-    m_values: fa0000000a000000
+    m_values: 960000000a000000
   strings:
     m_keys:
     - id

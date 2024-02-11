@@ -34,17 +34,9 @@ namespace _3._Scripts.UI.Components
         public Tween Close(float duration)
         {
             opener.rectTransform.sizeDelta = _sizeOpener;
-
-            StartCoroutine(DelayAd(duration * 0.75f));
             
             return opener.rectTransform.DOSizeDelta(Vector2.zero, duration);
         }
-
-        private IEnumerator DelayAd(float duration)
-        {
-            yield return new WaitForSeconds(duration);
-            if (YandexGame.savesData.completedLevelsCount >= 3)
-                YandexGame.FullscreenShow();
-        }
+        
     }
 }

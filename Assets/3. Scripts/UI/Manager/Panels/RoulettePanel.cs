@@ -166,6 +166,8 @@ namespace _3._Scripts.UI.Manager.Panels
             Transition.Instance.Close(0.3f).OnComplete(() =>
             {
                 UIManager.Instance.CurrentState = UIState.Play;
+                if (YandexGame.savesData.completedLevelsCount >= 3)
+                    YandexGame.FullscreenShow();
             });
         }
     }

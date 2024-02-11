@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b800dc9a5cb04bdda7e4c4ef4e117503, type: 3}
   m_Name: AutoCannon
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3bc47353e5a3641b0afc1e095f939ffc, type: 3}
+  icon: {fileID: 21300000, guid: fe1378af95ad7d54db03322fb2263571, type: 3}
   title: 
   weaponID: auto_cannon

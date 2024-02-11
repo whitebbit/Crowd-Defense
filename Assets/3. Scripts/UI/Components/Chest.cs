@@ -87,6 +87,7 @@ namespace _3._Scripts.UI.Components
                     _getterEffect.SetFinishPoint(heart);
                     break;
                 case CoinsRouletteItemConfig:
+                    AudioManager.Instance.PlayOneShot("coins");
                     _getterEffect.SetFinishPoint(coins);
                     break;
             }
