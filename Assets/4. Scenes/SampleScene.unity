@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5714629, g: 0.8524589, b: 0.9422495, a: 1}
+  m_IndirectSpecularColor: {r: 0.5710549, g: 0.8531029, b: 0.94344306, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -467,6 +467,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23793407823314316, guid: ce3cce5cc08d86d4588c41d29dcd08a4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c717fb89e24ff384785039c0f1169eee, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1028,9 +1032,9 @@ Transform:
   m_GameObject: {fileID: 399531095}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: -2.2399998, z: 7.700001}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: -2.2399998, z: 31.4}
+  m_LocalScale: {x: 15, y: 15, z: 10}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 516839427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1764,7 +1768,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 5e-44, z: 6.1087e-41, w: 0}
+  m_BoundingSphereOverride: {x: NaN, y: NaN, z: NaN, w: NaN}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -6475,103 +6479,103 @@ MonoBehaviour:
   DinamicCash: 1
   infoList:
   - name: ballista
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: boom
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: boss
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: buy
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: cannon
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: click
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: coins
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: lose
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: lose_voice
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: machine_gun
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: music
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: reward
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: roulette
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: win
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: win_voice
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: click
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: wav
     Type: 20
     Cash: {fileID: 0}
     Cashing: 1
   - name: lose
-    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
     Ext: wav
     Type: 20
     Cash: {fileID: 0}
