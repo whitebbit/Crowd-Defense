@@ -90,6 +90,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stickman@T-Pose_AnimatedMesh
       objectReference: {fileID: 0}
+    - target: {fileID: 2342427975597368152, guid: c77f5b2d113c2a24893da73359037923, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5121040953131799863, guid: c77f5b2d113c2a24893da73359037923, type: 3}
       propertyPath: meshRenderer
       value: 
