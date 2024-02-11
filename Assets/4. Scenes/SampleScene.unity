@@ -3294,7 +3294,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultLevels:
   - {fileID: 6786537995697991440, guid: 8c205582955ca10428e2d8d4ebca29f3, type: 3}
-  bossLevels: []
+  - {fileID: 6786537995697991440, guid: 1a8f6ebf61d476d44bc584a82fbf64fa, type: 3}
+  - {fileID: 6786537995697991440, guid: 97767cee3b6897640bcc4943290a271f, type: 3}
+  - {fileID: 6786537995697991440, guid: 7ff3da3a0460bef4b8ccf541efb73e7e, type: 3}
+  bossLevels:
+  - {fileID: 6786537995697991440, guid: 64684e5deda66cc4085b714fc8a7d62a, type: 3}
+  - {fileID: 6786537995697991440, guid: 55a37f8b4217c214392220fbe58cf434, type: 3}
+  - {fileID: 6786537995697991440, guid: 29544ac354b435b46a027c8a17757492, type: 3}
+  - {fileID: 6786537995697991440, guid: c70a34bba824ed74e9e54937cc17832e, type: 3}
 --- !u!1001 &1267882329
 PrefabInstance:
   m_ObjectHideFlags: 0
