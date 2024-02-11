@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - {fileID: 5931039730546263218}
-  - {fileID: 0}
+  - {fileID: 4807493119211622548}
 --- !u!1 &1749568426480119849
 GameObject:
   m_ObjectHideFlags: 0
@@ -5279,6 +5279,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3fdc5b39a99d34bb74e3383a2dbe5f, type: 3}
+--- !u!114 &4807493119211622548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2530977743942771485, guid: ab3fdc5b39a99d34bb74e3383a2dbe5f, type: 3}
+  m_PrefabInstance: {fileID: 7037001258831360905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cec8c4a169441ca7f1bbebfe2edfa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5725830255734640582 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3377223750534691919, guid: ab3fdc5b39a99d34bb74e3383a2dbe5f, type: 3}
