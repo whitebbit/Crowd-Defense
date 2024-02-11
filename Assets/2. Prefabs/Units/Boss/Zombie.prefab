@@ -150,7 +150,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6770011643355687210, guid: 11048f197fd5de641a6b306480c1530c, type: 3}
       propertyPath: speed
-      value: 4
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: -6770011643355687210, guid: 11048f197fd5de641a6b306480c1530c, type: 3}
       propertyPath: chance

@@ -24,12 +24,12 @@ MonoBehaviour:
     - 0.1
     - 50
     - 3
-    - 0.5
+    - 3
   integers:
     m_keys:
     - bulletCount
     - shoutCount
-    m_values: 9600000005000000
+    m_values: 960000000a000000
   strings:
     m_keys:
     - id
