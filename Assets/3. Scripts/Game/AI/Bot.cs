@@ -52,7 +52,7 @@ namespace _3._Scripts.Game.AI
         private IEnumerator DelayDestroy()
         {
             yield return new WaitForSeconds(3);
-            LevelManager.Instance.CurrentLevel.Bots.Remove(this);
+            LevelManager.Instance.CurrentLevel.currentWave.Bots.Remove(this);
             Destroy(gameObject);
         }
     }

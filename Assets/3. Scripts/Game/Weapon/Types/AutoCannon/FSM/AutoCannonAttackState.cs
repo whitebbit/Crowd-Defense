@@ -30,7 +30,7 @@ namespace _3._Scripts.Game.Weapon.Types.AutoCannon.FSM
 
         private void SetTarget()
         {
-            _target = LevelManager.Instance.CurrentLevel.Bots.Find(b => b.Health.Health > 0);
+            _target = LevelManager.Instance.CurrentLevel.currentWave.Bots.Find(b => b.Health.Health > 0);
 
             if (_target == null) return;
 

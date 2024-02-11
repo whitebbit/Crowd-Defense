@@ -29,13 +29,6 @@ namespace _3._Scripts.UI.Manager.Panels
         [SerializeField] private Image crosshair;
 
         private WeaponSelector _currentWeaponSelector;
-        private Timer _timer;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            _timer = new Timer(text: timerText);
-        }
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
@@ -49,7 +42,6 @@ namespace _3._Scripts.UI.Manager.Panels
             tutorial.OnStop += ShowCrosshair;
             HealthManager.OnChanged += TryLoseLevel;
             LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
-            _timer.OnTime += LevelManager.Instance.CurrentLevel.CompleteLevel;
 
             base.Open(() =>
             {
@@ -63,9 +55,7 @@ namespace _3._Scripts.UI.Manager.Panels
             LevelManager.Instance.CurrentLevel.OnKill -= UpdateKillsCounter;
             HealthManager.OnChanged -= TryLoseLevel;
             tutorial.OnStop -= ShowCrosshair;
-            _timer.OnTime -= LevelManager.Instance.CurrentLevel.CompleteLevel;
-            _timer.StopTimer();
-
+            
             mainWeapon.Unselect();
             mainWeapon.ResetSelector();
             secondWeapon.Unselect();
@@ -89,11 +79,8 @@ namespace _3._Scripts.UI.Manager.Panels
             if (newValue > 0) return;
 
             LevelManager.Instance.CurrentLevel.LoseLevel();
-
-            losePopup.OnContinue += () => _timer.TimerState(true);
+            
             losePopup.Open();
-
-            _timer.TimerState(false);
         }
 
         private void ViewLevelGoal()
@@ -110,7 +97,6 @@ namespace _3._Scripts.UI.Manager.Panels
             {
                 goalText.DOFade(0, 0.25f).SetDelay(1f).OnComplete(() =>
                 {
-                    _timer.StartTimer(30);
                     GameObjectsState(true);
                     LevelManager.Instance.CurrentLevel.StartLevel();
                 });
@@ -122,7 +108,6 @@ namespace _3._Scripts.UI.Manager.Panels
             bossPopup.Open();
             goalText.DOFade(0, 3).OnComplete(() =>
             {
-                _timer.StartTimer(30);
                 bossPopup.Close();
                 GameObjectsState(true);
                 LevelManager.Instance.CurrentLevel.StartLevel();
