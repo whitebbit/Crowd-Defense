@@ -21,9 +21,7 @@ struct Attributes
 
 struct Varyings
 {
-    #if defined(_ALPHATEST_ON)
-        float2 uv       : TEXCOORD0;
-    #endif
+    float2 uv           : TEXCOORD0;
     float4 positionCS   : SV_POSITION;
     UNITY_VERTEX_INPUT_INSTANCE_ID
     UNITY_VERTEX_OUTPUT_STEREO
@@ -58,9 +56,7 @@ Varyings DepthOnlyVertex(Attributes input)
     
     // END GENERATED MESH ANIMATOR CODE
 
-    #if defined(_ALPHATEST_ON)
-        output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
-    #endif
+    output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
     output.positionCS = TransformObjectToHClip(input.position.xyz);
     return output;
 }
@@ -69,13 +65,11 @@ half DepthOnlyFragment(Varyings input) : SV_TARGET
 {
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-    #if defined(_ALPHATEST_ON)
-        Alpha(SampleAlbedoAlpha(input.uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap)).a, _BaseColor, _Cutoff);
-    #endif
+    Alpha(SampleAlbedoAlpha(input.uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap)).a, _BaseColor, _Cutoff);
 
-    #if defined(LOD_FADE_CROSSFADE)
-        LODFadeCrossFade(input.positionCS);
-    #endif
+#ifdef LOD_FADE_CROSSFADE
+    LODFadeCrossFade(input.positionCS);
+#endif
 
     return input.positionCS.z;
 }
