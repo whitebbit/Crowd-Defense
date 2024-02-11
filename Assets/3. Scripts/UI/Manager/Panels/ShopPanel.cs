@@ -76,7 +76,12 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void SelectItem(ShopItem shopItem)
         {
+            if(_currentItem != null)
+                _currentItem.SelectionState(false);
+            
             _currentItem = shopItem;
+            
+            _currentItem.SelectionState(true);
             weaponIcon.sprite = _currentItem.Icon;
             UpdateButtons();
         }

@@ -326,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 200
   xClamp: {x: -5, y: 30}
-  yClamp: {x: -25, y: 25}
+  yClamp: {x: -35, y: 35}
 --- !u!1 &5837691973982092412
 GameObject:
   m_ObjectHideFlags: 0

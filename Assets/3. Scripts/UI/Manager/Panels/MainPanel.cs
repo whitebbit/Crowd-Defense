@@ -61,7 +61,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
                 level.Player.SetCameraState(true);
 
-                if (YandexGame.savesData.currentLevel % 4 == 0)
+                if (YandexGame.savesData.currentLevel % 2 == 0)
                 {
                     Transition.Instance.Open(0.3f).SetDelay(0.3f);
                     UIManager.Instance.CurrentState = UIState.Roulette;

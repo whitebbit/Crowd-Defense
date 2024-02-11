@@ -27,7 +27,6 @@ namespace _3._Scripts.Game.AI.FSM.States
             AttackPlayer();
             
             _transform.DOScale(Vector3.zero, 3).OnComplete(() => { OnDisable?.Invoke(); }).SetLink(_transform.gameObject);
-            _transform.DOLocalMove(_transform.forward, 3).SetLink(_transform.gameObject);
             _attacked = true;
         }
 

@@ -41,6 +41,8 @@ namespace _3._Scripts.UI.Manager.Panels
 
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
+            _onContinue = false;
+
             SetKillsCount();
             InitializeProgress();
             SetLevelNumber();
@@ -78,13 +80,14 @@ namespace _3._Scripts.UI.Manager.Panels
                 $"{LevelManager.Instance.CurrentLevel.KillsCount}/{LevelManager.Instance.CurrentLevel.BotsCount}";
         }
 
+        private bool _onContinue;
         private void Continue()
         {
-            if (bonusReward.Blocked) return;
+            if (_onContinue) return;
 
+            _onContinue = true;
             bonusReward.Blocked = true;
             GetReward();
-            //TODO: open main scene
         }
 
         private void GetBonus()
@@ -94,7 +97,6 @@ namespace _3._Scripts.UI.Manager.Panels
             bonusReward.Used = true;
             bonusReward.Blocked = true;
             YandexGame.RewVideoShow(1);
-            //TODO: open ad
         }
 
         private void GoToMenu()
@@ -134,7 +136,6 @@ namespace _3._Scripts.UI.Manager.Panels
             
             AudioManager.Instance.PlayOneShot("reward");
             bonusReward.SetReward();
-            GetReward();
         }
 
         private void GetReward()
@@ -149,7 +150,7 @@ namespace _3._Scripts.UI.Manager.Panels
                     {
                         LevelManager.Instance.DeleteLevel();
                         LevelManager.Instance.CreateLevel(YandexGame.savesData.currentLevel);
-                        if (YandexGame.savesData.currentLevel % 4 == 0)
+                        if (YandexGame.savesData.currentLevel % 2 == 0)
                         {
                             Transition.Instance.Open(0.3f).SetDelay(0.3f);
                             UIManager.Instance.CurrentState = UIState.Roulette;

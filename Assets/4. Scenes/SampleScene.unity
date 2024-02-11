@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5710549, g: 0.8531029, b: 0.94344306, a: 1}
+  m_IndirectSpecularColor: {r: 0.5714629, g: 0.8524589, b: 0.9422495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1410,28 +1410,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f82856695ec18943a34f22f02ccd309, type: 3}
   m_PrefabInstance: {fileID: 533794142}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &597480192 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8662019644172790186, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
-  m_PrefabInstance: {fileID: 1397943330}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad9e1c02dca6d94884dc2b411fa3262, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &597480193 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3051053400401208177, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
-  m_PrefabInstance: {fileID: 1397943330}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &643843316
 GameObject:
   m_ObjectHideFlags: 0
@@ -3966,6 +3944,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3051053400401208177, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
+      propertyPath: m_text
+      value: Receive
+      objectReference: {fileID: 0}
     - target: {fileID: 3881632473918942037, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4174,22 +4156,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7683575531001516139, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
-      propertyPath: en
-      value: Receive
-      objectReference: {fileID: 0}
-    - target: {fileID: 7683575531001516139, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
-      propertyPath: ru
-      value: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7683575531001516139, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
-      propertyPath: additionalText
-      value: 
-      objectReference: {fileID: 597480192}
-    - target: {fileID: 7683575531001516139, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
-      propertyPath: textMPComponent
-      value: 
-      objectReference: {fileID: 597480193}
     - target: {fileID: 9004452948915903809, guid: 98b239711ad294f46acf8952b18195d2, type: 3}
       propertyPath: m_Name
       value: 'WinPanel  '
@@ -6476,103 +6442,103 @@ MonoBehaviour:
   DinamicCash: 1
   infoList:
   - name: ballista
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: boom
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: boss
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: buy
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: cannon
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: click
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: coins
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: lose
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: lose_voice
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: machine_gun
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: music
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: reward
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: roulette
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: win
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: win_voice
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: mp3
     Type: 13
     Cash: {fileID: 0}
     Cashing: 1
   - name: click
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: wav
     Type: 20
     Cash: {fileID: 0}
     Cashing: 1
   - name: lose
-    Path: D:/Archive/Projects/Crowd-Defense/Assets/StreamingAssets
+    Path: D:/Yang/projects/Crowd-Defense/Assets/StreamingAssets
     Ext: wav
     Type: 20
     Cash: {fileID: 0}

@@ -14,6 +14,7 @@ struct Attributes
     float3 normal       : NORMAL;
     float4 positionOS   : POSITION;
     float4 tangentOS    : TANGENT;
+    float2 texcoord     : TEXCOORD0;
     UNITY_VERTEX_INPUT_INSTANCE_ID
     // BEGIN GENERATED MESH ANIMATOR CODE
     uint vertexId        : SV_VertexID;
@@ -23,6 +24,9 @@ struct Attributes
 struct Varyings
 {
     float4 positionCS   : SV_POSITION;
+    #if defined(_ALPHATEST_ON)
+        float2 uv       : TEXCOORD0;
+    #endif
     float3 normalWS     : TEXCOORD1;
 
     UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -33,6 +37,7 @@ Varyings DepthNormalsVertex(Attributes input)
 {
     Varyings output = (Varyings)0;
     UNITY_SETUP_INSTANCE_ID(input);
+    UNITY_TRANSFER_INSTANCE_ID(input, output);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
     // BEGIN GENERATED MESH ANIMATOR CODE
@@ -58,6 +63,9 @@ Varyings DepthNormalsVertex(Attributes input)
     input.normal.xyz = animatedNormal;
     // END GENERATED MESH ANIMATOR CODE
 
+    #if defined(_ALPHATEST_ON)
+        output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
+    #endif
     output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
 
     VertexNormalInputs normalInput = GetVertexNormalInputs(input.normal, input.tangentOS);
@@ -74,9 +82,14 @@ void DepthNormalsFragment(
 #endif
 )
 {
+    UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-    #ifdef LOD_FADE_CROSSFADE
+    #if defined(_ALPHATEST_ON)
+        Alpha(SampleAlbedoAlpha(input.uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap)).a, _BaseColor, _Cutoff);
+    #endif
+
+    #if defined(LOD_FADE_CROSSFADE)
         LODFadeCrossFade(input.positionCS);
     #endif
 

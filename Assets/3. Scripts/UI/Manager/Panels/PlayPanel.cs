@@ -18,8 +18,10 @@ namespace _3._Scripts.UI.Manager.Panels
         [Header("Kills Counter")] [SerializeField]
         private TextMeshProUGUI killsCountText;
 
-        [Header("Timer")] [SerializeField] private TextMeshProUGUI timerText;
-        [Header("Goal")] [SerializeField] private TextMeshProUGUI goalText;
+        [Header("Waves")] [SerializeField] private TextMeshProUGUI wavesCounterText;
+        [Header("Goal")] 
+        [SerializeField] private TextMeshProUGUI wavesText;
+        [SerializeField] private LangYGAdditionalText wavesCountText;
         [Header("Weapons")] [SerializeField] private WeaponSelector mainWeapon;
         [SerializeField] private WeaponSelector secondWeapon;
         [Header("Other")] [SerializeField] private List<CanvasGroup> afterGoalObjects = new();
@@ -38,10 +40,13 @@ namespace _3._Scripts.UI.Manager.Panels
 
             crosshair.DOFade(0, 0);
             tutorial.StartTutorial();
-
             tutorial.OnStop += ShowCrosshair;
+            wavesCounterText.text = $"{1} / {LevelManager.Instance.CurrentLevel.WavesCount}";
+            wavesCountText.additionalText = " 1";
+
             HealthManager.OnChanged += TryLoseLevel;
             LevelManager.Instance.CurrentLevel.OnKill += UpdateKillsCounter;
+            LevelManager.Instance.CurrentLevel.OnWaveChange += ChangeWaveText;
 
             base.Open(() =>
             {
@@ -55,7 +60,7 @@ namespace _3._Scripts.UI.Manager.Panels
             LevelManager.Instance.CurrentLevel.OnKill -= UpdateKillsCounter;
             HealthManager.OnChanged -= TryLoseLevel;
             tutorial.OnStop -= ShowCrosshair;
-            
+
             mainWeapon.Unselect();
             mainWeapon.ResetSelector();
             secondWeapon.Unselect();
@@ -69,7 +74,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void OnLevelStart()
         {
-            goalText.DOFade(0, 0);
+            wavesText.DOFade(0, 0);
             Transition.Instance.Open(0.2f);
             ViewLevelGoal();
         }
@@ -79,7 +84,7 @@ namespace _3._Scripts.UI.Manager.Panels
             if (newValue > 0) return;
 
             LevelManager.Instance.CurrentLevel.LoseLevel();
-            
+
             losePopup.Open();
         }
 
@@ -93,9 +98,9 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void ViewClassicPopup()
         {
-            goalText.DOFade(1, 0.25f).OnComplete(() =>
+            wavesText.DOFade(1, 0.25f).OnComplete(() =>
             {
-                goalText.DOFade(0, 0.25f).SetDelay(1f).OnComplete(() =>
+                wavesText.DOFade(0, 0.25f).SetDelay(1f).OnComplete(() =>
                 {
                     GameObjectsState(true);
                     LevelManager.Instance.CurrentLevel.StartLevel();
@@ -106,7 +111,7 @@ namespace _3._Scripts.UI.Manager.Panels
         private void ViewBossPopup()
         {
             bossPopup.Open();
-            goalText.DOFade(0, 3).OnComplete(() =>
+            wavesText.DOFade(0, 3).OnComplete(() =>
             {
                 bossPopup.Close();
                 GameObjectsState(true);
@@ -154,6 +159,16 @@ namespace _3._Scripts.UI.Manager.Panels
                     obj.alpha = 0;
                 }
             }
+        }
+
+        private void ChangeWaveText(int number)
+        {
+            wavesCounterText.text = $"{number + 1} / {LevelManager.Instance.CurrentLevel.WavesCount}";
+            wavesCountText.additionalText = $" {number + 1}";
+            wavesText.DOFade(1, 0.25f).OnComplete(() =>
+            {
+                wavesText.DOFade(0, 0.25f).SetDelay(1);
+            });
         }
     }
 }

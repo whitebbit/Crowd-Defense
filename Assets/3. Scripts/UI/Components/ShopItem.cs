@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,7 @@ namespace _3._Scripts.UI.Components
     {
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private Image icon;
+        [SerializeField] private Image selectionBorder;
         [SerializeField] private ImageCounter stars;
         [Space] [SerializeField] private RectTransform locker;
 
@@ -41,6 +43,7 @@ namespace _3._Scripts.UI.Components
             locker.gameObject.SetActive(false);
         }
 
+        public void SelectionState(bool state) => selectionBorder.DOFade(state ? 1 : 0, 0.15f);
         public void Upgrade(int level)
         {
             stars.SetCount(level);

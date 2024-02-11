@@ -21,9 +21,11 @@ namespace _3._Scripts.Game.Main
         public bool LevelInProgress { get; private set; }
         public bool LevelComplete { get; private set; }
         public int BotsCount { get; private set; }
+        public int WavesCount => waves.Count;
         public Player Player { get; private set; }
         public Wave currentWave => waves[_currentWaveIndex];
         public event Action<int> OnKill;
+        public event Action<int> OnWaveChange;
 
         private int _attackedBotCount;
         private int _currentWaveIndex;
@@ -99,14 +101,14 @@ namespace _3._Scripts.Game.Main
 
         private void NextWave()
         {
-            _currentWaveIndex++;
-
-            if (_currentWaveIndex >= waves.Count)
+            if (_currentWaveIndex >= waves.Count - 1)
             {
                 CompleteLevel();
                 return;
             }
-
+            
+            _currentWaveIndex++;
+            OnWaveChange?.Invoke(_currentWaveIndex);
             currentWave.State(true);
         }
 
