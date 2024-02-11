@@ -112,7 +112,7 @@ Material:
     - _RampThreshold: 0.5
     - _ReceiveShadows: 1
     - _Shininess: 0.07
-    - _Smoothness: 0.5
+    - _Smoothness: 0.208
     - _SmoothnessTextureChannel: 0
     - _SpecSmooth: 1
     - _SpecularHighlights: 1
