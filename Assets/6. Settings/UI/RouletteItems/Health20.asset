@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb5f55d9336f43419d2825fc7f5ec314, type: 3}
-  m_Name: Health2
+  m_Name: Health20
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 8b3a9479f3f6e467c886d3a545048297, type: 3}
-  title: 2
-  count: 2
+  title: 20
+  count: 20

@@ -23,7 +23,7 @@ MonoBehaviour:
     m_values:
     - 2.5
     - 50
-    - 5
+    - 6
     - 150
   integers:
     m_keys:
