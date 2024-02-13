@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using _3._Scripts.UI.Manager;
+using UnityEditor;
 using UnityEngine;
 using YG;
 
@@ -12,6 +13,11 @@ namespace _3._Scripts.Architecture
         {
             YandexGame.ResetSaveProgress();
             YandexGame.SaveProgress();
+        }
+        [MenuItem("Tools/Add 10000")]
+        private static void AddMoney()
+        {
+            MoneyManager.MoneyCount += 10000;
         }
         
         [MenuItem("Tools/Time Scale/Default")]

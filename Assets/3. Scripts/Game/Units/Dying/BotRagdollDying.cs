@@ -47,7 +47,6 @@ namespace _3._Scripts.Game.Units.Dying
             
             rigidbody.AddForce(randVector * randForce, ForceMode.Impulse);
             rigidbody.AddTorque(randTorqueVector * randTorqueForce, ForceMode.Impulse);
-             
         }
     }
 }

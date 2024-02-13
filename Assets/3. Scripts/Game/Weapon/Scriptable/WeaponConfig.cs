@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using YG;
 
 namespace _3._Scripts.Game.Weapon.Scriptable
@@ -15,7 +16,9 @@ namespace _3._Scripts.Game.Weapon.Scriptable
         [Space]
         [SerializeField] private SerializableDictionary<string, string> strings;
         [SerializeField] private SerializableDictionary<string, bool> bools;
+        [FormerlySerializedAs("vector3s")]
         [Space]
+        [SerializeField] private SerializableDictionary<string, Vector3> vector3S;
         [SerializeField] private SerializableDictionary<string, LayerMask> layerMasks;
 
         public WeaponImprovements Improvements => weaponImprovements;
@@ -45,6 +48,11 @@ namespace _3._Scripts.Game.Weapon.Scriptable
             else if (typeof(T) == typeof(string))
             {
                 if (strings.TryGetValue(id, out var value))
+                    return (T)Convert.ChangeType(value, typeof(T));
+            }
+            else if (typeof(T) == typeof(Vector3))
+            {
+                if (vector3S.TryGetValue(id, out var value))
                     return (T)Convert.ChangeType(value, typeof(T));
             }
 

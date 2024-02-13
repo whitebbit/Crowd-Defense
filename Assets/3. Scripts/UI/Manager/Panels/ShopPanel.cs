@@ -14,7 +14,7 @@ namespace _3._Scripts.UI.Manager.Panels
     public class ShopPanel : UIPanel
     {
         [SerializeField] private ShopItem item;
-        [SerializeField] private RectTransform container;
+        [SerializeField] private GridLayoutGroup container;
         [SerializeField] private Button back;
         [Header("Coins buy")] [SerializeField] private Button coinsBuy;
         [SerializeField] private TextMeshProUGUI coinsPrice;
@@ -59,9 +59,10 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void InitializeItems()
         {
+            SetContainerSize();
             foreach (var config in Configuration.Instance.WeaponConfigs)
             {
-                var obj = Instantiate(item, container);
+                var obj = Instantiate(item, container.transform);
                 var visual = config.Visual;
                 var id = config.Get<string>("id");
                 var level = YandexGame.savesData.GetWeaponLevel(id);
@@ -83,11 +84,14 @@ namespace _3._Scripts.UI.Manager.Panels
             
             _currentItem.SelectionState(true);
             weaponIcon.sprite = _currentItem.Icon;
+            SelectWeapon();
             UpdateButtons();
         }
 
         private void CoinsBuy()
         {
+            if(MoneyManager.MoneyCount < buyPrice) return;
+            
             if (!_currentItem.Unlocked)
                 Buy(true);
             else
@@ -101,7 +105,7 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             if (obj != 3) return;
             
-
+        
             if (!_currentItem.Unlocked)
                 Buy(false);
             else
@@ -120,6 +124,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
             YandexGame.savesData.unlockedWeapons.Add(_currentItem.ID);
             YandexGame.SaveProgress();
+            SelectWeapon();
         }
 
         private void Upgrade(bool byCoins)
@@ -136,10 +141,10 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void SelectWeapon()
         {
+            if (!_currentItem.Unlocked) return;
+            
             YandexGame.savesData.currentWeapon = _currentItem.ID;
             YandexGame.SaveProgress();
-
-            UpdateButtons();
         }
 
         private void UpdateButtons()
@@ -191,6 +196,24 @@ namespace _3._Scripts.UI.Manager.Panels
             selectButton.gameObject.SetActive(true);
             selectText.gameObject.SetActive(!selected);
             selectedText.gameObject.SetActive(selected);
+        }
+        private void SetContainerSize()
+        {
+            var rect = container.transform as RectTransform;
+
+            if (rect == null) return;
+
+            rect.offsetMin =
+                new Vector2(0, -CalculateContainerSize());
+            rect.offsetMax = new Vector2(0, 0);
+        }
+        private float CalculateContainerSize()
+        {
+            var count = (float)Configuration.Instance.WeaponConfigs.Count;
+            var rows = Mathf.CeilToInt(count / 3f);
+            var containerHeight = rows * (container.cellSize.y + container.spacing.y) * 0.5f;
+
+            return containerHeight;
         }
     }
 }

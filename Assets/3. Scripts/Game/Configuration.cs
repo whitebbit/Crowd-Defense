@@ -20,7 +20,7 @@ namespace _3._Scripts.Game
 
         private void Awake()
         {
-            QualitySettings.vSyncCount = 0;
+            //QualitySettings.vSyncCount = 0;
 
             if (HealthManager.HealthCount <= 0)
             {

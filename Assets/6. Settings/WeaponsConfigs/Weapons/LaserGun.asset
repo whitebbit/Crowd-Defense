@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c378e05a5dc140718e22db7844f58fb4, type: 3}
+  m_Name: LaserGun
+  m_EditorClassIdentifier: 
+  weaponVisual: {fileID: 11400000, guid: e1d07105e7839574b851553a24379227, type: 2}
+  weaponImprovements: {fileID: 11400000, guid: 24105d7b1ab784948825533effa3b970, type: 2}
+  floats:
+    m_keys:
+    - attackTime
+    - spreadFactor
+    - reloadTime
+    - damage
+    m_values:
+    - 0.25
+    - 25
+    - 4
+    - 2
+  integers:
+    m_keys:
+    - bulletCount
+    - shoutCount
+    m_values: c800000019000000
+  strings:
+    m_keys:
+    - id
+    m_values:
+    - laser_gun
+  bools:
+    m_keys:
+    - useSpread
+    m_values: 01
+  vector3S:
+    m_keys: []
+    m_values: []
+  layerMasks:
+    m_keys:
+    - attackMask
+    m_values:
+    - serializedVersion: 2
+      m_Bits: 64

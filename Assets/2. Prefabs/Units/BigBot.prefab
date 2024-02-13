@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1adc5f635d43bd9cdc369ac171603f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 400
+  health: 300
   speed: 5
   defaultBot: 0
   animator: {fileID: 2092166095104562856}
@@ -571,10 +571,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.04
-  m_Height: 6.2090764
+  m_Radius: 1
+  m_Height: 6
   m_Direction: 1
-  m_Center: {x: 0.0039366484, y: 3.0891058, z: 0.0037885606}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!114 &6928615594044526553
 MonoBehaviour:
   m_ObjectHideFlags: 0

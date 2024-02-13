@@ -18,9 +18,9 @@ namespace _3._Scripts.Game.Weapon.Types
 
         private void OnCollisionEnter(Collision other)
         {
-            OnCollision();
+            OnCollision(other);
         }
 
-        protected abstract void OnCollision();
+        protected abstract void OnCollision(Collision other = null);
     }
 }
