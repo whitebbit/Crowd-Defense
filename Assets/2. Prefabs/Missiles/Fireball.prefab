@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireballMissileFire
       objectReference: {fileID: 0}
+    - target: {fileID: 166048, guid: 3b671081e44be1c4aa4355e8ba6e8a5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 460430, guid: 3b671081e44be1c4aa4355e8ba6e8a5e, type: 3}
       propertyPath: m_LocalScale.x
       value: 3

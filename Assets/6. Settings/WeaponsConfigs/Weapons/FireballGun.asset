@@ -22,8 +22,8 @@ MonoBehaviour:
     - damage
     m_values:
     - 2
-    - 100
-    - 4
+    - 150
+    - 3
     - 200
   integers:
     m_keys:
