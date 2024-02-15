@@ -22,14 +22,14 @@ MonoBehaviour:
     - damage
     m_values:
     - 0.25
-    - 25
+    - 35
     - 4
     - 2
   integers:
     m_keys:
     - bulletCount
     - shoutCount
-    m_values: c800000019000000
+    m_values: 3200000023000000
   strings:
     m_keys:
     - id

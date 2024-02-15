@@ -21,7 +21,7 @@ namespace _3._Scripts.Game.Main
         {
             foreach (var weapon in weapons)
             {
-                weapon.SetState(false);
+                weapon.SetGlobalState(false);
             }
         }
 
@@ -32,7 +32,7 @@ namespace _3._Scripts.Game.Main
 
             _currentWeapon = weapons.Find(w => w.ID == id);
 
-            _currentWeapon.SetState(true);
+            _currentWeapon.SetGlobalState(true);
         }
 
         public void SelectAdditionalWeapon(string id)
@@ -41,7 +41,7 @@ namespace _3._Scripts.Game.Main
                     .Find(w => w.Get<string>("id") == id) == null) return;
 
             var weapon = weapons.Find(w => w.ID == id);
-            weapon.SetState(true);
+            weapon.SetGlobalState(true);
         }
 
         public void SetCameraState(bool state)

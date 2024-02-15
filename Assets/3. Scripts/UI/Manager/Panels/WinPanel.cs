@@ -114,8 +114,7 @@ namespace _3._Scripts.UI.Manager.Panels
                     LevelManager.Instance.DeleteLevel();
                     MainMenuEnvironment.Instance.EnvironmentState(true);
                     UIManager.Instance.CurrentState = UIState.Main;
-                    if (YandexGame.savesData.completedLevelsCount >= 3)
-                        YandexGame.FullscreenShow();
+                    
                     Transition.Instance.Open(0.3f).SetDelay(0.25f);
                 }).SetDelay(0.25f);
             });
@@ -159,8 +158,6 @@ namespace _3._Scripts.UI.Manager.Panels
                         {
                             UIManager.Instance.CurrentState = UIState.Play;
                         }
-                        if (YandexGame.savesData.completedLevelsCount >= 3)
-                            YandexGame.FullscreenShow();
                     });
                 });
         }

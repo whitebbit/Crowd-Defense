@@ -8,7 +8,8 @@ namespace _3._Scripts.Game
     public class CameraMouseLook : MonoBehaviour
     {
         [SerializeField] private float rotationSpeed = 5.0f;
-        [SerializeField] private float direction = -1f;
+        [SerializeField] private float rotationSmoothness  = 5.0f;
+        //[SerializeField] private float direction = -1f;
         [SerializeField] private Vector2 xClamp;
         [SerializeField] private Vector2 yClamp;
 
@@ -30,23 +31,14 @@ namespace _3._Scripts.Game
 
         private void Update()
         {
-            if(YandexGame.EnvironmentData.isMobile) return;
             if (!LevelManager.Instance.CurrentLevel.LevelInProgress) return;
             Rotate();
-        }
-
-        private void FixedUpdate()
-        {
-            if(!YandexGame.EnvironmentData.isMobile) return;
-            if (!LevelManager.Instance.CurrentLevel.LevelInProgress) return;
-            MobileRotation();
         }
 
         private void Rotate()
         {
             if (!Input.GetMouseButton(0)) return;
-
-            var speed = YandexGame.EnvironmentData.isMobile ? rotationSpeed * 0.25f : rotationSpeed;
+            
             var mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
             var mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
 
@@ -56,7 +48,8 @@ namespace _3._Scripts.Game
             _yRotation = Mathf.Clamp(_yRotation, yClamp.x, yClamp.y);
             _xRotation = Mathf.Clamp(_xRotation, xClamp.x, xClamp.y);
 
-            transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+            var targetRotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSmoothness * Time.deltaTime);
         }
 
         private void MobileRotation()
@@ -73,8 +66,8 @@ namespace _3._Scripts.Game
                         var deltaX = _initialTouch.position.x - touch.position.x;
                         var deltaY = _initialTouch.position.y - touch.position.y;
 
-                        _xRotation -= deltaY * Time.deltaTime * rotationSpeed * direction;
-                        _yRotation += deltaX * Time.deltaTime * rotationSpeed * direction;
+                        //_xRotation -= deltaY * Time.deltaTime * rotationSpeed * direction;
+                        //_yRotation += deltaX * Time.deltaTime * rotationSpeed * direction;
 
                         _xRotation = Mathf.Clamp(_xRotation, xClamp.x, xClamp.y);
                         _yRotation = Mathf.Clamp(_yRotation, yClamp.x, yClamp.y);

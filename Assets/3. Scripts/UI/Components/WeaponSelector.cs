@@ -96,9 +96,11 @@ namespace _3._Scripts.UI.Components
         
         private void SubscribeToWeapon(string id)
         {
-            var weapon = LevelManager.Instance.CurrentLevel.Player.GetWeapon(id).WeaponFsm;
-            weapon.onAttack += UpdateBulletsCount;
-            weapon.onReloadStart += OnReload;
+            var weapon = LevelManager.Instance.CurrentLevel.Player.GetWeapon(id);
+            weapon.SetGlobalState(true);
+            weapon.WeaponFsm.onAttack += UpdateBulletsCount;
+            weapon.WeaponFsm.onReloadStart += OnReload;
+            weapon.SetGlobalState(false);
         }
 
         private void UpdateBulletsCount(int count)

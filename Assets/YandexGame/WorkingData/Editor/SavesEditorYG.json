@@ -1,14 +1,14 @@
 {
-  "idSave": 1260,
+  "idSave": 3436,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
   "volume": -21.885849,
-  "money": 8125,
-  "keys": 1,
-  "health": 79.90103,
-  "currentWeapon": "fireball_gun",
-  "secondWeapon": "",
+  "money": 38350,
+  "keys": 0,
+  "health": 52.60118,
+  "currentWeapon": "laser_gun",
+  "secondWeapon": "bren",
   "weaponsLevel": {
     "bren": 2
   },
@@ -23,6 +23,6 @@
     "laser_gun",
     "fireball_gun"
   ],
-  "currentLevel": 8,
-  "completedLevelsCount": 8
+  "currentLevel": 4,
+  "completedLevelsCount": 11
 }

@@ -34,7 +34,8 @@ namespace _3._Scripts.UI.Components
         public Tween Close(float duration)
         {
             opener.rectTransform.sizeDelta = _sizeOpener;
-            
+            if (YandexGame.savesData.completedLevelsCount >= 3)
+                YandexGame.FullscreenShow();
             return opener.rectTransform.DOSizeDelta(Vector2.zero, duration);
         }
         

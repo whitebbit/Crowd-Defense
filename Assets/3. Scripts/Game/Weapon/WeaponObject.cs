@@ -19,7 +19,7 @@ namespace _3._Scripts.Game.Weapon
 
         public void SpawnDecals()
         {
-            Instantiate(explosion, decalPoint.position, decalPoint.rotation, decalPoint);
+            Instantiate(explosion, decalPoint.position, decalPoint.rotation);
         }
 
         public void PlayGunshotSound()

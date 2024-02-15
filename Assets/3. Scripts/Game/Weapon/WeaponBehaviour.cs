@@ -38,7 +38,11 @@ namespace _3._Scripts.Game.Weapon
             _active = state;
             weaponObject.SetState(state);
         }
-
+        public void SetGlobalState(bool state)
+        {
+            gameObject.SetActive(state);
+            SetState(state);
+        }
 
         protected abstract WeaponFSM GetWeaponFSM();
     }

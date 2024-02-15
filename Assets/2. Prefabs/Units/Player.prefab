@@ -329,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c628848400d64dbda29fd978b5bfdac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 200
-  direction: -1
+  rotationSpeed: 150
+  rotationSmoothness: 10
   xClamp: {x: -5, y: 30}
   yClamp: {x: -35, y: 35}
 --- !u!1 &5837691973982092412

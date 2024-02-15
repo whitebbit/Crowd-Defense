@@ -46,6 +46,7 @@ namespace _3._Scripts.UI.Manager.Panels
         public override void Open(TweenCallback onComplete = null, float duration = 0.3f)
         {
             YandexGame.RewardVideoEvent += AdBuy;
+            MoneyManager.MoneyCount += 10000;
             base.Open(onComplete, duration);
         }
 
