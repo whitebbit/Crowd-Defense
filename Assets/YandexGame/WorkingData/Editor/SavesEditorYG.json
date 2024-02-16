@@ -1,10 +1,10 @@
 {
-  "idSave": 3520,
+  "idSave": 3539,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
   "volume": -21.885849,
-  "money": 48375,
+  "money": 48400,
   "keys": 0,
   "health": 45.3012924,
   "currentWeapon": "laser_gun",
@@ -23,6 +23,6 @@
     "laser_gun",
     "fireball_gun"
   ],
-  "currentLevel": 5,
-  "completedLevelsCount": 12
+  "currentLevel": 8,
+  "completedLevelsCount": 15
 }

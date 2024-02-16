@@ -126,7 +126,7 @@ namespace _3._Scripts.UI.Manager.Panels
             YandexGame.savesData.currentLevel += 1;
             YandexGame.SaveProgress();
 
-            levelNumberText.additionalText = $" {YandexGame.savesData.completedLevelsCount}";
+            levelNumberText.additionalText = $" {YandexGame.savesData.completedLevelsCount - 1}";
         }
 
         private void OnReward(int id)

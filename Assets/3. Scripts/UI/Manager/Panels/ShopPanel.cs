@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using _3._Scripts.Game;
 using _3._Scripts.UI.Components;
 using _3._Scripts.UI.Enums;
@@ -120,7 +121,13 @@ namespace _3._Scripts.UI.Manager.Panels
         {
             if (byCoins)
                 MoneyManager.MoneyCount -= buyPrice;
-
+            
+            var dict = new Dictionary<string, string>
+            {
+                { "weapon_id", $"{_currentItem.ID}" },
+            };
+            YandexMetrica.Send($"Buy weapon", dict);
+            
             _currentItem.Unlock();
 
             YandexGame.savesData.unlockedWeapons.Add(_currentItem.ID);
@@ -135,6 +142,12 @@ namespace _3._Scripts.UI.Manager.Panels
             if (byCoins)
                 MoneyManager.MoneyCount -= price;
 
+            var dict = new Dictionary<string, string>
+            {
+                { "weapon_id", $"{_currentItem.ID}" },
+            };
+            YandexMetrica.Send($"Upgrade weapon", dict);
+            
             _currentItem.Upgrade(currentLevel + 1);
             YandexGame.savesData.weaponsLevel[_currentItem.ID] = currentLevel + 1;
             YandexGame.SaveProgress();

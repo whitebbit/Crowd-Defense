@@ -79,6 +79,14 @@ namespace _3._Scripts.Game.Main
 
         public void LoseLevel()
         {
+            var dict = new Dictionary<string, string>
+            {
+                { "level_number", $"{YandexGame.savesData.completedLevelsCount}" },
+                { "level_name", $"{gameObject.name}" },
+                { "current_weapon", $"{YandexGame.savesData.currentWeapon}" },
+                { "second_weapon", $"{YandexGame.savesData.secondWeapon}" }
+            };
+            YandexMetrica.Send($"Level lose", dict);
             LevelInProgress = false;
         }
 
@@ -108,19 +116,27 @@ namespace _3._Scripts.Game.Main
                 CompleteLevel();
                 return;
             }
-            
+
             _currentWaveIndex++;
             OnWaveChange?.Invoke(_currentWaveIndex);
             currentWave.State(true);
         }
 
-        private bool NoMoreBots()
-        {
-            return BotsCount - KillsCount - _attackedBotCount <= 0;
-        }
-
         private IEnumerator DelayComplete()
         {
+            var dict = new Dictionary<string, string>
+            {
+                { "level_number", $"{YandexGame.savesData.completedLevelsCount}" },
+                { "level_name", $"{gameObject.name}" },
+                { "current_weapon", $"{YandexGame.savesData.currentWeapon}" },
+                { "second_weapon", $"{YandexGame.savesData.secondWeapon}" }
+            };
+            YandexMetrica.Send($"Level complete", dict);
+            
+            YandexGame.savesData.completedLevelsCount += 1;
+            YandexGame.savesData.currentLevel += 1;
+            YandexGame.SaveProgress();
+            
             LevelInProgress = false;
             LevelComplete = true;
             yield return new WaitForSeconds(1f);

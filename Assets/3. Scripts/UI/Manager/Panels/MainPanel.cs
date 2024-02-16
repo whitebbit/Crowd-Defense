@@ -52,6 +52,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void StartGame()
         {
+            YandexMetrica.Send("Start game from main menu");
             Transition.Instance.Close(0.3f).OnComplete(() =>
             {
                 var i = YandexGame.savesData.currentLevel;
@@ -70,9 +71,6 @@ namespace _3._Scripts.UI.Manager.Panels
                 {
                     UIManager.Instance.CurrentState = UIState.Play;
                 }
-                
-                if (YandexGame.savesData.completedLevelsCount >= 3)
-                    YandexGame.FullscreenShow();
             });
         }
     }

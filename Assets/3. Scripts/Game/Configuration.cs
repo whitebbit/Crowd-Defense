@@ -20,13 +20,14 @@ namespace _3._Scripts.Game
 
         private void Awake()
         {
-            //QualitySettings.vSyncCount = 0;
-
+            YandexGame.GameReadyAPI();
+            
             if (HealthManager.HealthCount <= 0)
             {
                 YandexGame.savesData.currentLevel = 1;
                 HealthManager.HealthCount = 100;
             }
+            
             SaveDefaultWeapon();
         }
 
