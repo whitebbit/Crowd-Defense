@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe26947880be499cad8f2f218aba0ffc, type: 3}
   m_Name: bren
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 62fb809820bd4834f8492a7bb91f51ea, type: 3}
+  icon: {fileID: 21300000, guid: e4573528864a3bb4b898bc92efd92473, type: 3}
   title: 
   weaponID: bren

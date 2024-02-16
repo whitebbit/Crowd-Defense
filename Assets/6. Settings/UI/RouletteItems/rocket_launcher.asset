@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b800dc9a5cb04bdda7e4c4ef4e117503, type: 3}
   m_Name: rocket_launcher
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 62fb809820bd4834f8492a7bb91f51ea, type: 3}
+  icon: {fileID: 21300000, guid: ffa0997a468867e45a2ed42beb31950f, type: 3}
   title: 
   weaponID: rocket_launcher

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927cf7fb1ae44652b41189386b3477b9, type: 3}
   m_Name: RocketLauncher
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 7c65498e8538d4d3686ffffebe9d8e3f, type: 3}
+  icon: {fileID: 21300000, guid: ffa0997a468867e45a2ed42beb31950f, type: 3}
   titles:
     m_keys:
     - ru
