@@ -19,8 +19,8 @@ namespace _3._Scripts.UI.Components
         {
             var sizeDelta = GetComponentInParent<Canvas>().GetComponent<RectTransform>().sizeDelta;
             _sizeOpener = Screen.height > Screen.width
-                ? new Vector2(sizeDelta.y, sizeDelta.y) * 3
-                : new Vector2(sizeDelta.x, sizeDelta.y) * 3;
+                ? new Vector2(sizeDelta.y, sizeDelta.y) * 4
+                : new Vector2(sizeDelta.x, sizeDelta.y) * 4;
 
             opener.rectTransform.sizeDelta = openedOnStart ? _sizeOpener : Vector2.zero;
         }

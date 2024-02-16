@@ -47,7 +47,7 @@ namespace _3._Scripts.UI.Manager.Panels
             InitializeProgress();
             SetLevelNumber();
             victoryPopup.Open();
-            notification.gameObject.SetActive(MoneyManager.MoneyCount >= 750);
+            notification.gameObject.SetActive(MoneyManager.MoneyCount >= 2000);
             YandexGame.RewardVideoEvent += OnReward;
             
             AudioManager.Instance.PlayOneShot("win_voice");

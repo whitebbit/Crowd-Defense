@@ -30,7 +30,7 @@ namespace _3._Scripts.UI.Manager.Panels
             MainMenuEnvironment.Instance.EnvironmentState(true);
             ButtonAnimation();
             additional.additionalText = $" {YandexGame.savesData.completedLevelsCount}";
-            notification.gameObject.SetActive(MoneyManager.MoneyCount >= 750);
+            notification.gameObject.SetActive(MoneyManager.MoneyCount >= 2000);
 
             base.Open(onComplete, duration);
         }
