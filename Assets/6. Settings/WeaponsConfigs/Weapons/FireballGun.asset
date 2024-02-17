@@ -23,12 +23,12 @@ MonoBehaviour:
     m_values:
     - 2
     - 150
-    - 4
+    - 5
     - 200
   integers:
     m_keys:
     - bulletCount
-    m_values: 02000000
+    m_values: 03000000
   strings:
     m_keys:
     - id

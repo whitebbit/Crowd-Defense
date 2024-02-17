@@ -71,7 +71,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void InitializeProgress()
         {
-            progressTable.SetLevel(YandexGame.savesData.currentLevel);
+            progressTable.SetLevel(YandexGame.savesData.currentLevel - 1);
         }
 
         private void SetKillsCount()
@@ -101,7 +101,7 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void GoToMenu()
         {
-            if (bonusReward.Blocked) return;
+            if (_onContinue) return;
 
             var count = bonusReward.Used ? 20 : 10;
 
@@ -122,10 +122,6 @@ namespace _3._Scripts.UI.Manager.Panels
 
         private void SetLevelNumber()
         {
-            YandexGame.savesData.completedLevelsCount += 1;
-            YandexGame.savesData.currentLevel += 1;
-            YandexGame.SaveProgress();
-
             levelNumberText.additionalText = $" {YandexGame.savesData.completedLevelsCount - 1}";
         }
 

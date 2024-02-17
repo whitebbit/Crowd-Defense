@@ -20,7 +20,8 @@ namespace _3._Scripts.Game
         
         private void Start()
         {
-            rotationSpeed = YandexGame.EnvironmentData.isMobile ? rotationSpeed * 0.25f : rotationSpeed;
+            rotationSpeed = YandexGame.EnvironmentData.isMobile ? rotationSpeed * 0.2f : rotationSpeed;
+            rotationSmoothness = YandexGame.EnvironmentData.isMobile ? rotationSmoothness * 0.8f : rotationSmoothness;
 
             if(!YandexGame.EnvironmentData.isMobile) return;
             

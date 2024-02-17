@@ -23,12 +23,12 @@ MonoBehaviour:
     m_values:
     - 1.5
     - 100
-    - 3
+    - 5
     - 125
   integers:
     m_keys:
     - bulletCount
-    m_values: 03000000
+    m_values: 04000000
   strings:
     m_keys:
     - id
@@ -37,6 +37,9 @@ MonoBehaviour:
   bools:
     m_keys: []
     m_values: 
+  vector3S:
+    m_keys: []
+    m_values: []
   layerMasks:
     m_keys:
     - explosionMask
