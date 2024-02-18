@@ -1864,6 +1864,9 @@ MonoBehaviour:
   - {fileID: 6786537995697991440, guid: 04d43aec849c9aa449d1ca8f4d6e8499, type: 3}
   bossLevels:
   - {fileID: 6786537995697991440, guid: 64684e5deda66cc4085b714fc8a7d62a, type: 3}
+  - {fileID: 6786537995697991440, guid: 55a37f8b4217c214392220fbe58cf434, type: 3}
+  - {fileID: 6786537995697991440, guid: 29544ac354b435b46a027c8a17757492, type: 3}
+  - {fileID: 6786537995697991440, guid: c70a34bba824ed74e9e54937cc17832e, type: 3}
 --- !u!1 &1288823204
 GameObject:
   m_ObjectHideFlags: 0
