@@ -30,7 +30,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 621895137068010980}
   - {fileID: 7597881371437557264}
   - {fileID: 7152260574151233295}
   - {fileID: 4766999454798790634}
@@ -192,7 +191,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 621895137068010980}
   m_Father: {fileID: 7798612472030316371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7057452969264890062
@@ -225,8 +225,8 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: e667e4cdb702a27478d9f46298c0f9bb, type: 2}
   - {fileID: 2100000, guid: c717fb89e24ff384785039c0f1169eee, type: 2}
-  - {fileID: 2100000, guid: cac915b778b988042991f00b5f3dc328, type: 2}
-  - {fileID: 2100000, guid: 8bf1194d44fe0d6458445f09a5da14b6, type: 2}
+  - {fileID: 2100000, guid: eb25a30c052643a40b42f778673de011, type: 2}
+  - {fileID: 2100000, guid: 9248598de05cc6f45ad3d288a1ada45e, type: 2}
   - {fileID: 2100000, guid: d45b08bf80e652f4cab1f61bd3b5f91d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -295,11 +295,11 @@ Transform:
   m_GameObject: {fileID: 5571237283595604714}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.52, z: 43.800003}
+  m_LocalPosition: {x: 0, y: 2.519989, z: 43.800003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7798612472030316371}
+  m_Father: {fileID: 8115873774390055087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5294361741448734132
 BoxCollider:
