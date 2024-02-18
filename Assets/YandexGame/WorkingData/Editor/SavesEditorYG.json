@@ -1,19 +1,26 @@
 {
-  "idSave": 252,
+  "idSave": 291,
   "isFirstSession": false,
   "language": "ru",
   "promptDone": false,
   "volume": -80.0,
-  "money": 200,
+  "money": 16200,
   "keys": 0,
   "health": 114.500313,
-  "currentWeapon": "machine_gun",
+  "currentWeapon": "fireball_gun",
   "secondWeapon": "",
   "weaponsLevel": {},
   "unlockedWeapons": [
     "machine_gun",
     "auto_cannon",
-    "mortar"
+    "mortar",
+    "bren",
+    "ballista",
+    "cannon",
+    "mine_thrower",
+    "rocket_launcher",
+    "laser_gun",
+    "fireball_gun"
   ],
   "currentLevel": 8,
   "completedLevelsCount": 8
